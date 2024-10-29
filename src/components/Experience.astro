@@ -1,0 +1,34 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+
+const EXPERIENCE = [
+  {
+    date: "Enero 2024",
+    employer: "NTT DATA",
+    jobRole: "QE Automation",
+    description:
+      "Referente técnico en el pool de automaitzación, logré la migración de más de 100 scripts a un framework open-source basado en python, creación de activos útiles para la compañía reduciendo significativamente el esfuerzo operativo.",
+  },
+  {
+    date: "Septiembre 2023",
+    jobRole: "QA Tester",
+    employer: "DMS Perú",
+    description:
+      "Validé funcionalmente servicos de proveedores para la construcción de software propio, haciendo uso de tecnologías RFID, NFC, Biometría",
+  },
+];
+---
+
+<ol
+  class="relative border-s border-gray-200 dark:border-gray-700 justify-center"
+>
+  {
+    EXPERIENCE.map((experience) => {
+      return (
+        <li class="mb-10 ms-6">
+          <ExperienceItem {...experience} />
+        </li>
+      );
+    })
+  }
+</ol>
