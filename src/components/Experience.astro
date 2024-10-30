@@ -19,13 +19,11 @@ const EXPERIENCE = [
 ];
 ---
 
-<ol
-  class="relative border-s border-gray-200 dark:border-gray-700 justify-center"
->
+<ol class="relative border-s border-gray-200 dark:border-gray-700">
   {
     EXPERIENCE.map((experience) => {
       return (
-        <li class="mb-10 ms-6">
+        <li class="mb-10 ms-4">
           <ExperienceItem {...experience} />
         </li>
       );
