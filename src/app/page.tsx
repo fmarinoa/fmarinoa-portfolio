@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import SectionTitle from "@/components/SectionTitle";
 import ProfileJPG from "../../public/franco.jpg";
 import Experience from "@/components/Experience";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
           <SectionTitle title="Proyectos Personales" />
         </section>
       </main>
+      <Footer />
     </>
   );
 }
