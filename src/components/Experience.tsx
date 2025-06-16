@@ -11,6 +11,7 @@ export default function Experience() {
         details={[
           "Desarrollo de pruebas automatizadas para microservicios con Playwright, TypeScript y Jest.",
         ]}
+        logo="/OKA-Emblem.png"
       />
       <JobExperience
         title="Test Automation Governance Specialist"
@@ -23,6 +24,7 @@ export default function Experience() {
           "Implementación de mejores prácticas y estándares de calidad.",
           "Mejora continua de procesos de calidad y pruebas.",
         ]}
+        logo="/banco-pichincha-logo.png"
       />
       <JobExperience
         title="QA Automation Engineer"
@@ -35,6 +37,7 @@ export default function Experience() {
           "Desarrollo de pruebas automatizadas para aplicaciones Web y Móviles.",
           "Implementación de marco de trabajo con GitFlow.",
         ]}
+        logo="/NTT-Data-Logo.png"
       />
     </div>
   );
