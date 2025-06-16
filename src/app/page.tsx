@@ -4,6 +4,7 @@ import SectionTitle from "@/components/SectionTitle";
 import ProfileJPG from "../../public/franco.jpg";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
+import Education from "@/components/Education";
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
 
         <section id="education">
           <SectionTitle title="Educación" />
+          <Education />
         </section>
 
         <section id="projects">
