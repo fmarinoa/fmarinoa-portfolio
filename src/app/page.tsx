@@ -1,10 +1,8 @@
+import Image from "next/image";
 import Header from "@/components/Header";
 import SectionTitle from "@/components/SectionTitle";
 import ProfileJPG from "@/public/franco.jpg";
 import Experience from "@/components/Experience";
-//import Education from "@/components/Education";
-//import Projects from "@/components/Projects";
-//import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -15,7 +13,7 @@ export default function Home() {
         <section id="about-me">
           <SectionTitle title="Sobre mí" />
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <img
+            <Image
               src={ProfileJPG.src}
               alt="Foto de Franco"
               className="rounded-full w-32 h-32 object-cover"
@@ -33,16 +31,12 @@ export default function Home() {
 
         <section id="education">
           <SectionTitle title="Educación" />
-          {/* <Education /> */}
         </section>
 
         <section id="projects">
           <SectionTitle title="Proyectos Personales" />
-          {/* <Projects /> */}
         </section>
       </main>
-
-      {/* <Footer /> */}
     </>
   );
 }
