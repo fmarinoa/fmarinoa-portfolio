@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Header from "@/components/Header";
 import SectionTitle from "@/components/SectionTitle";
 import ProfileJPG from "@/public/franco.jpg";
@@ -15,7 +16,7 @@ export default function Home() {
         <section id="about-me">
           <SectionTitle title="Sobre mí" />
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <img
+            <Image
               src={ProfileJPG.src}
               alt="Foto de Franco"
               className="rounded-full w-32 h-32 object-cover"
