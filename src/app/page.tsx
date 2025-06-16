@@ -3,9 +3,6 @@ import Header from "@/components/Header";
 import SectionTitle from "@/components/SectionTitle";
 import ProfileJPG from "@/public/franco.jpg";
 import Experience from "@/components/Experience";
-//import Education from "@/components/Education";
-//import Projects from "@/components/Projects";
-//import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -34,16 +31,12 @@ export default function Home() {
 
         <section id="education">
           <SectionTitle title="Educación" />
-          {/* <Education /> */}
         </section>
 
         <section id="projects">
           <SectionTitle title="Proyectos Personales" />
-          {/* <Projects /> */}
         </section>
       </main>
-
-      {/* <Footer /> */}
     </>
   );
 }
