@@ -1,20 +1,22 @@
 export const careers = [
     {
-        institution: "UPC: Universidad Peruana de Ciencias Aplicadas",
-        logo: "/UPC_logo.png",
+        institutionShort: "UPC",
+        institutionLong: "Universidad Peruana de Ciencias Aplicadas",
+        logo: "/education/upc.webp",
         title: "Ingeniería de Sistemas",
         period: "2025 - 2028",
-        details: ["Participación en proyectos de desarrollo de software ágil"]
+        details: ["Participación en proyectos de desarrollo de software ágiles."]
     },
     {
-        institution: "IDAT: Instituto de Investigación y Desarrollo de Administración y Tecnología",
-        logo: "/IDAT_logo.png",
+        institutionShort: "IDAT",
+        institutionLong: "Instituto de Investigación y Desarrollo de Administración y Tecnología",
+        logo: "/education/idat.webp",
         title: "Computación e Informática",
         period: "2022 - 2023",
         details: [
-            "Especialización en pruebas de software y automatización",
-            "Desarrollo de aplicaciones backend, web y móviles",
-            "Implementación de bases de datos y sistemas de gestión",
+            "Especialización en pruebas de software y automatización.",
+            "Desarrollo de aplicaciones backend, web y móviles.",
+            "Implementación de bases de datos y sistemas de gestión.",
         ]
     }
 ];
