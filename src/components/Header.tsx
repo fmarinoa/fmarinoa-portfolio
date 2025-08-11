@@ -8,7 +8,7 @@ export default function Header() {
     { href: "#about-me", label: "Sobre mí" },
     { href: "#experience", label: "Experiencia" },
     { href: "#education", label: "Educación" },
-    { href: "#projects", label: "Proyectos" },
+    // { href: "#projects", label: "Proyectos" },
   ];
 
   const closeMenu = () => setMenuOpen(false);

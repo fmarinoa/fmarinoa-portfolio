@@ -8,29 +8,40 @@ function Careers() {
     <div className="grid md:grid-cols-2 gap-6 mb-6">
       {careers.map((career) => (
         <div
-          key={`${career.institution}-${career.title}`}
-          className="flex items-start gap-4 bg-gray-700 rounded-lg shadow p-4 hover:shadow-lg transition-shadow"
+          key={`${career.institutionShort}-${career.title}`}
+          className="bg-gradient-to-br from-gray-800 to-gray-900 shadow-xl border border-gray-700 hover:border-indigo-400 transition-all duration-300 bg-gray-700 rounded-lg p-4 hover:shadow-lg"
         >
-          <div className="flex-shrink-0">
-            <Image
-              src={career.logo}
-              alt={career.institution}
-              width={60}
-              height={60}
-              className="rounded w-16 h-auto"
-            />
+          <div className="grid grid-cols-[auto_1fr] gap-4">
+            <div className="flex-shrink-0 flex items-center">
+              <Image
+                src={career.logo}
+                alt={career.institutionShort}
+                width={60}
+                height={60}
+                className="rounded w-16 h-auto"
+              />
+            </div>
+
+            <div>
+              <h3 className="font-bold text-lg mb-1">{career.title}</h3>
+              <p className="text-sm mb-1">
+                🏢{" "}
+                <span className="font-semibold text-gray-100">
+                  {career.institutionShort}
+                </span>
+                <span className="text-gray-300">
+                  : {career.institutionLong}
+                </span>
+              </p>
+              <p className="text-sm text-gray-300">📅 {career.period}</p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold text-lg">{career.title}</h3>
-            <span className="text-sm text-gray-300">
-              {career.institution} &middot; {career.period}
-            </span>
-            <ul className="list-disc pl-5 mt-1 text-sm text-gray-200">
-              {career.details.map((d) => (
-                <li key={d}>{d}</li>
-              ))}
-            </ul>
-          </div>
+
+          <ul className="list-disc pl-5 mt-2 text-sm text-gray-200">
+            {career.details.map((d) => (
+              <li key={d}>{d}</li>
+            ))}
+          </ul>
         </div>
       ))}
     </div>
@@ -53,8 +64,8 @@ function Courses() {
             </a>
           </span>
           <br />
-          <span className="text-gray-400">{institution}</span>{" "}
-          <span className="text-gray-500">({year})</span>
+          <span className="text-gray-300">{institution}</span>{" "}
+          <span className="text-gray-400">({year})</span>
         </li>
       ))}
     </ul>
@@ -63,7 +74,7 @@ function Courses() {
 
 export default function Education() {
   return (
-    <section id="education">
+    <section id="education" className="mb-12">
       <SectionTitle title="Educación" />
 
       <Careers />

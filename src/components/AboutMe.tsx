@@ -1,6 +1,6 @@
 import SectionTitle from "./SectionTitle";
 import Image from "next/image";
-import ProfileJPG from "../../public/franco.jpg";
+import ProfileJPG from "../../public/franco.webp";
 
 const toolIcons = [
   { src: "/tools/playwright.svg", alt: "Playwright" },
@@ -12,6 +12,7 @@ const toolIcons = [
   { src: "/tools/python.svg", alt: "Python" },
   { src: "/tools/java.svg", alt: "Java" },
   { src: "/tools/aws.svg", alt: "AWS" },
+  { src: "/tools/jenkins.svg", alt: "Jenkins" },
   { src: "/tools/git.svg", alt: "Git" },
   { src: "/tools/sonarqube.svg", alt: "SonarQube" },
   { src: "/tools/intellij-idea.svg", alt: "IntelliJ IDEA" },
