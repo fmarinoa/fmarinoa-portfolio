@@ -1,5 +1,5 @@
-import JobExperience from "./JobExperience";
-import SectionTitle from "./SectionTitle";
+import JobExperience from './JobExperience';
+import SectionTitle from './SectionTitle';
 
 export default function Experience() {
   return (
