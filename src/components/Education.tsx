@@ -1,7 +1,6 @@
-import Image from "next/image";
-import SectionTitle from "./SectionTitle";
-import { careers } from "@data/careers";
-import { courses } from "@data/courses";
+import SectionTitle from './SectionTitle';
+import { careers } from '@data/careers';
+import { courses } from '@data/courses';
 
 function Careers() {
   return (
@@ -13,7 +12,7 @@ function Careers() {
         >
           <div className="grid grid-cols-[auto_1fr] gap-4">
             <div className="flex-shrink-0 flex items-center">
-              <Image
+              <img
                 src={career.logo}
                 alt={career.institutionShort}
                 width={60}
@@ -25,13 +24,8 @@ function Careers() {
             <div>
               <h3 className="font-bold text-lg mb-1">{career.title}</h3>
               <p className="text-sm mb-1">
-                🏢{" "}
-                <span className="font-semibold text-gray-100">
-                  {career.institutionShort}
-                </span>
-                <span className="text-gray-300">
-                  : {career.institutionLong}
-                </span>
+                🏢 <span className="font-semibold text-gray-100">{career.institutionShort}</span>
+                <span className="text-gray-300">: {career.institutionLong}</span>
               </p>
               <p className="text-sm text-gray-300">📅 {career.period}</p>
             </div>
@@ -64,7 +58,7 @@ function Courses() {
             </a>
           </span>
           <br />
-          <span className="text-gray-300">{institution}</span>{" "}
+          <span className="text-gray-300">{institution}</span>{' '}
           <span className="text-gray-400">({year})</span>
         </li>
       ))}

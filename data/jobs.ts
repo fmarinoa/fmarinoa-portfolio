@@ -1,4 +1,4 @@
-import { capitalize } from "@/helpers/Strings";
+import { capitalize } from "@/helpers/stringsUtils";
 
 const currentMonth = capitalize(
   new Date().toLocaleDateString("es-PE", {

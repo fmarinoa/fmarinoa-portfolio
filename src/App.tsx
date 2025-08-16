@@ -1,8 +1,8 @@
-import Header from "@/components/Header";
-import Experience from "@/components/Experience";
-import Footer from "@/components/Footer";
-import Education from "@/components/Education";
-import AboutMe from "@/components/AboutMe";
+import Header from '@/components/Header';
+import Experience from '@/components/Experience';
+import Footer from '@/components/Footer';
+import Education from '@/components/Education';
+import AboutMe from '@/components/AboutMe';
 
 export default function Home() {
   return (

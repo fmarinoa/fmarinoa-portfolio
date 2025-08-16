@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 type IconsFooter = {
   url: string;
   label: string;
@@ -15,7 +13,7 @@ function IconsFooter({ url, label, urlMedia }: Readonly<IconsFooter>) {
       aria-label={label}
       className="hover:text-gray-400 text-2xl"
     >
-      <Image src={urlMedia} alt={label} width={32} height={32} />
+      <img src={urlMedia} alt={label} width={32} height={32} />
     </a>
   );
 }
@@ -39,7 +37,9 @@ export default function Footer() {
           />
         </div>
         <span className="w-full md:w-auto text-center md:text-right text-sm text-gray-400">
-          &copy; {year} Franco Mariño<br />Todos los derechos reservados
+          &copy; {year} Franco Mariño
+          <br />
+          Todos los derechos reservados
         </span>
       </div>
     </footer>

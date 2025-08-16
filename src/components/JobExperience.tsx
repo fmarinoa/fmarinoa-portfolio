@@ -1,4 +1,4 @@
-import { jobList } from "@data/jobs";
+import { jobList } from '@data/jobs';
 
 export default function JobExperience() {
   return (
@@ -9,7 +9,7 @@ export default function JobExperience() {
           className="relative group transition-all duration-300"
         >
           {/* Punto de la línea */}
-          <span className="absolute -left-3 top-6 w-5 h-5 rounded-full bg-indigo-500 border-4 border-white dark:border-gray-900 shadow-md group-hover:scale-110 transition-transform"></span>
+          <span className="absolute -left-3 top-6 w-5 h-5 rounded-3xl bg-indigo-500 border-2 shadow-md group-hover:scale-110 transition-transform"></span>
 
           <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl shadow-xl border border-gray-700 hover:border-indigo-400 hover:shadow-2xl transition-all duration-300 flex flex-col gap-2">
             <div className="flex items-center justify-between mb-2">
