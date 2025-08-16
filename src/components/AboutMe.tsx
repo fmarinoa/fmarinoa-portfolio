@@ -5,7 +5,7 @@ import ProfileJPG from "../../public/franco.webp";
 const toolIcons = [
   { src: "/tools/playwright.svg", alt: "Playwright" },
   { src: "/tools/selenium.svg", alt: "Selenium" },
-  { src: "/tools/cypress.svg", alt: "Cypress" },
+  { src: "/tools/appium.svg", alt: "Appium" },
   { src: "/tools/postman.svg", alt: "Postman" },
   { src: "/tools/jest.svg", alt: "Jest" },
   { src: "/tools/typescript.svg", alt: "TypeScript" },
