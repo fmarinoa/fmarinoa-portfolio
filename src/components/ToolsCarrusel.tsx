@@ -1,85 +1,60 @@
-'use client';
-import { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { toolsList } from '@data/tools';
 
-const toolIcons = [
-  { src: '/tools/appium.svg', alt: 'Appium' },
-  { src: '/tools/playwright.svg', alt: 'Playwright' },
-  { src: '/tools/selenium.svg', alt: 'Selenium' },
-  { src: '/tools/cypress.svg', alt: 'Cypress' },
-  { src: '/tools/postman.svg', alt: 'Postman' },
-  { src: '/tools/karatelabs.svg', alt: 'Karate' },
-  { src: '/tools/jest.svg', alt: 'Jest' },
-  { src: '/tools/jmeter.svg', alt: 'Jmeter' },
-  { src: '/tools/k6.svg', alt: 'K6' },
-  { src: '/tools/typescript.svg', alt: 'TypeScript' },
-  { src: '/tools/python.svg', alt: 'Python' },
-  { src: '/tools/java.svg', alt: 'Java' },
-  { src: '/tools/csharp.svg', alt: 'C#' },
-  { src: '/tools/aws.svg', alt: 'AWS' },
-  { src: '/tools/jenkins.svg', alt: 'Jenkins' },
-  { src: '/tools/githubactions.svg', alt: 'GitHub Actions' },
-  { src: '/tools/git.svg', alt: 'Git' },
-  { src: '/tools/github.svg', alt: 'GitHub' },
-  { src: '/tools/gitlab.svg', alt: 'GitLab' },
-  { src: '/tools/bitbucket.svg', alt: 'BitBucket' },
-  { src: '/tools/sonarqube.svg', alt: 'SonarQube' },
-  { src: '/tools/intellij-idea.svg', alt: 'IntelliJ IDEA' },
-  { src: '/tools/jetbrains-pycharm.svg', alt: 'PyCharm' },
-  { src: '/tools/webstorm.svg', alt: 'WebStorm' },
-  { src: '/tools/visualstudio.svg', alt: 'Visual Studio' },
-  { src: '/tools/vscode.svg', alt: 'VS Code' },
-];
+type Tool = { src: string; alt: string };
 
-const ToolIcon = ({ src, alt }: { src: string; alt: string }) => {
-  const [hasError, setHasError] = useState(false);
-
-  const handleError = () => {
-    setHasError(true);
-  };
-
-  if (hasError) {
-    return (
-      <div className="flex-shrink-0 w-16 h-16 bg-card border border-border rounded-xl flex items-center justify-center group hover:border-primary hover:shadow-lg transition-all duration-300">
-        <span className="text-xs font-medium text-muted-foreground group-hover:text-primary text-center px-2">
-          {alt}
-        </span>
-      </div>
-    );
-  }
+const ToolIcon = React.memo(function ToolIcon({ src, alt }: Tool) {
+  const [errored, setErrored] = useState(false);
 
   return (
-    <div className="flex-shrink-0 w-16 h-16 bg-card border border-border rounded-xl flex items-center justify-center p-3 group hover:border-primary hover:shadow-lg hover:scale-110 transition-all duration-300">
-      <img
-        src={src}
-        alt={alt}
-        className="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300"
-        onError={handleError}
-      />
+    <div
+      role="listitem"
+      tabIndex={0}
+      aria-label={alt}
+      className="flex-shrink-0 w-16 h-16 bg-card border border-border rounded-xl flex items-center justify-center p-3 group hover:border-primary hover:shadow-lg hover:scale-110 transition-all duration-300"
+    >
+      {!errored ? (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300"
+          onError={() => setErrored(true)}
+        />
+      ) : (
+        <span className="text-xs font-medium text-muted-foreground text-center px-2">{alt}</span>
+      )}
     </div>
   );
-};
+});
 
 export default function ToolsCarousel() {
-  const [isPaused, setIsPaused] = useState(false);
+  const [paused, setPaused] = useState(false);
 
-  const mid = Math.ceil(toolIcons.length / 2);
-  const firstRow = [...toolIcons.slice(0, mid), ...toolIcons.slice(0, mid)];
-  const secondRow = [...toolIcons.slice(mid), ...toolIcons.slice(mid)];
+  const rows: Tool[][] = useMemo((): Tool[][] => {
+    const mid: number = Math.ceil(toolsList.length / 2);
+    const first: Tool[] = [...toolsList.slice(0, mid), ...toolsList.slice(0, mid)];
+    const second: Tool[] = [...toolsList.slice(mid), ...toolsList.slice(mid)];
+    return [first, second];
+  }, []);
 
   return (
-    <div className="w-full max-w-lg mx-auto flex flex-col gap-6">
-      {[firstRow, secondRow].map((rowTools, row) => (
-        <div key={row} className="relative overflow-hidden w-full">
+    <div className="w-full max-w-xl mx-auto flex flex-col gap-6">
+      {rows.map((rowTools: Tool[], idx: number) => (
+        <div key={idx} className="relative overflow-hidden w-full" role="list">
+          <div className="edge-fade-left" aria-hidden="true"></div>
+          <div className="edge-fade-right" aria-hidden="true"></div>
+
           <div
-            className="flex gap-6 animate-scroll-right w-max"
-            style={{
-              animationPlayState: isPaused ? 'paused' : 'running',
-            }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            className="flex gap-6 w-max marquee"
+            style={{ animationPlayState: paused ? 'paused' : 'running' }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocus={() => setPaused(true)}
+            onBlur={() => setPaused(false)}
           >
-            {rowTools.map((tool, index) => (
-              <ToolIcon key={`${tool.alt}-${row}-${index}`} src={tool.src} alt={tool.alt} />
+            {rowTools.map((tool, i) => (
+              <ToolIcon key={`${tool.src}-${i}`} src={tool.src} alt={tool.alt} />
             ))}
           </div>
         </div>

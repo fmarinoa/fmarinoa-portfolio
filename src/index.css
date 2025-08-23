@@ -2,109 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
-All colors MUST be HSL.
-*/
-
 @layer base {
     html {
         scroll-behavior: smooth;
         scroll-padding-top: 4.5rem;
-        color-scheme: dark;
-    }
-
-    body {
-        background: var(--background);
-        color: var(--foreground);
-        font-family: Arial, Helvetica, sans-serif;
     }
 
     :root {
-        --card: 0 0% 100%;
-        --card-foreground: 220 26% 14%;
-
-        --popover: 0 0% 100%;
-        --popover-foreground: 220 26% 14%;
-
-        --muted: 214 32% 91%;
-        --muted-foreground: 220 13% 46%;
-
-        --accent: 206 100% 50%;
-        --accent-foreground: 0 0% 100%;
-
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
-
-        --border: 214 32% 91%;
-        --input: 214 32% 91%;
-        --ring: 217 91% 60%;
-
-        --radius: 0.75rem;
-
-        /* Tech gradients */
-        --gradient-tech: linear-gradient(135deg, hsl(217 91% 60%), hsl(206 100% 50%));
-        --gradient-subtle: linear-gradient(180deg, hsl(226 20% 96%), hsl(214 32% 91%));
-
-        /* Carousel animations */
-        --carousel-speed: 40s;
-
-        --sidebar-background: 0 0% 98%;
-
-        --sidebar-foreground: 240 5.3% 26.1%;
-
-        --sidebar-primary: 240 5.9% 10%;
-
-        --sidebar-primary-foreground: 0 0% 98%;
-
-        --sidebar-accent: 240 4.8% 95.9%;
-
-        --sidebar-accent-foreground: 240 5.9% 10%;
-
-        --sidebar-border: 220 13% 91%;
-
-        --sidebar-ring: 217.2 91.2% 59.8%;
-    }
-
-    .dark {
         --background: 220 27% 8%;
         --foreground: 226 20% 96%;
 
-        --card: 220 24% 12%;
-        --card-foreground: 226 20% 96%;
-
-        --popover: 220 24% 12%;
-        --popover-foreground: 226 20% 96%;
+        --card: 220 24% 87%;
+        --card-foreground: 220 20% 96%;
 
         --primary: 217 91% 60%;
         --primary-foreground: 220 27% 8%;
 
-        --secondary: 220 20% 16%;
-        --secondary-foreground: 226 20% 96%;
-
-        --muted: 220 20% 16%;
-        --muted-foreground: 220 13% 65%;
-
-        --accent: 206 100% 50%;
-        --accent-foreground: 220 27% 8%;
-
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 210 40% 98%;
-
-        --border: 220 20% 16%;
-        --input: 220 20% 16%;
+        --border: 214 32% 91%;
         --ring: 217 91% 60%;
 
-        /* Dark mode tech gradients */
-        --gradient-tech: linear-gradient(135deg, hsl(217 91% 60%), hsl(206 100% 50%));
-        --gradient-subtle: linear-gradient(180deg, hsl(220 27% 8%), hsl(220 24% 12%));
-        --sidebar-background: 240 5.9% 10%;
-        --sidebar-foreground: 240 4.8% 95.9%;
-        --sidebar-primary: 224.3 76.3% 48%;
-        --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent: 240 3.7% 15.9%;
-        --sidebar-accent-foreground: 240 4.8% 95.9%;
-        --sidebar-border: 240 3.7% 15.9%;
-        --sidebar-ring: 217.2 91.2% 59.8%;
+        --radius: 0.75rem;
+
+        /* Carousel */
+        --carousel-speed: 28s;
+    }
+
+    /* Use HSL variables properly */
+    body {
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* utility-ish mappings if no Tailwind token exists for them */
+    .bg-card {
+        background-color: hsl(var(--card));
+    }
+
+    .ring-primary {
+        box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--primary)) 20%, transparent);
+    }
+
+    .edge-fade-left,
+    .edge-fade-right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 2rem; /* 32px */
+        pointer-events: none;
+        z-index: 20;
+    }
+
+    .edge-fade-left {
+        left: 0;
+        background: linear-gradient(90deg, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
+    }
+
+    .edge-fade-right {
+        right: 0;
+        background: linear-gradient(270deg, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
+    }
+
+    .marquee {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        white-space: nowrap;
+        will-change: transform;
+        animation: scroll-left var(--carousel-speed) linear infinite;
+    }
+
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+        .marquee {
+            animation: none !important;
+        }
     }
 }
 
