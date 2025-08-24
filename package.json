@@ -1,13 +1,18 @@
 {
   "name": "fmarinoa-portfolio",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "author": {
+    "name": "Franco Mariño",
+    "url": "https://github.com/fmarinoa/"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --write .",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -28,9 +33,25 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "eslint": "^9.32.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^15.15.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.1.2",
     "prettier": "3.6.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
