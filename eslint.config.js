@@ -1,35 +1,18 @@
-import eslintPluginTs from '@typescript-eslint/eslint-plugin';
-import parserTs from '@typescript-eslint/parser';
-import pluginPrettier from 'eslint-plugin-prettier';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import js from '@eslint/js';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-export default [
+export default tseslint.config(
+  { ignores: ['dist'] },
   {
-    files: ['**/*.ts', '**/*.js', '**/*.tsx'],
-    ignores: ['dist/**', 'node_modules/**'],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: parserTs,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-      globals: {
-        ...globals.node,
-        ...globals.es2022,
-      },
-    },
-    plugins: {
-      '@typescript-eslint': eslintPluginTs,
-      'simple-import-sort': simpleImportSort,
-      prettier: pluginPrettier,
+      ecmaVersion: 2020,
+      globals: globals.browser,
     },
     rules: {
-      ...eslintPluginTs.configs.recommended.rules,
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
-
-      'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
     },
-  },
-];
+  }
+);
