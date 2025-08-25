@@ -28,18 +28,18 @@ export default function Footer() {
           <IconsFooter
             url="https://github.com/fmarinoa"
             label="GitHub"
-            urlMedia="src/assets/socialmedia/github.svg"
+            urlMedia="/socialmedia/github.svg"
           />
           <IconsFooter
             url="https://www.linkedin.com/in/fmarinoa/"
             label="LinkedIn"
-            urlMedia="src/assets/socialmedia/linkedin.svg"
+            urlMedia="/socialmedia/linkedin.svg"
           />
         </div>
         <span className="w-full md:w-auto text-center md:text-right text-sm text-gray-400">
           &copy; {year} Franco Mariño
           <br />
-          Todos los derechos reservados.
+          Todos los derechos reservados
         </span>
       </div>
     </footer>

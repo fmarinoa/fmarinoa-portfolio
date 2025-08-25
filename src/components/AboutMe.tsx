@@ -1,12 +1,7 @@
-import Carousel from '@/components/Carousel';
-import SectionTitle from '@/components/SectionTitle';
-import { toolsList } from '@/data/tools';
+import SectionTitle from './SectionTitle';
+import ToolsCarousel from './ToolsCarrusel';
 
 export default function AboutMe() {
-  const mid: number = Math.ceil(toolsList.length / 2);
-  const first = [...toolsList.slice(0, mid), ...toolsList.slice(0, mid)];
-  const second = [...toolsList.slice(mid), ...toolsList.slice(mid)];
-
   return (
     <section id="about-me" className="mb-12">
       <SectionTitle title="Sobre mí" />
@@ -30,10 +25,7 @@ export default function AboutMe() {
 
           <h3 className="text-lg font-semibold text-white mb-4">Herramientas y tecnologías:</h3>
 
-          <div className="w-full max-w-xl mx-auto flex flex-col gap-6">
-            <Carousel icons={first} />
-            <Carousel icons={second} />
-          </div>
+          <ToolsCarousel />
         </div>
       </div>
     </section>
