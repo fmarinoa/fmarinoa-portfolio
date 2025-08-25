@@ -29,11 +29,9 @@ export default function Footer() {
       <div className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
         <div className="flex gap-4 justify-center w-full md:w-auto">
           <IconsFooter url="https://github.com/fmarinoa" label="GitHub" urlMedia={github} />
-          <IconsFooter url="https://github.com/fmarinoa" label="GitHub" urlMedia={github} />
           <IconsFooter
             url="https://www.linkedin.com/in/fmarinoa/"
             label="LinkedIn"
-            urlMedia={linkedin}
             urlMedia={linkedin}
           />
         </div>
