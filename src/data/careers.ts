@@ -1,9 +1,12 @@
+import idat from '@/assets/education/idat.webp';
+import upc from '@/assets/education/upc.webp';
+
 export const careers = [
   {
     institutionShort: 'UPC',
     location: 'Lima, Perú',
     institutionLong: 'Universidad Peruana de Ciencias Aplicadas',
-    logo: 'src/assets/education/upc.webp',
+    logo: upc,
     title: 'Ingeniería de Sistemas',
     period: '2025 - 2028',
     details: ['Participación en proyectos de desarrollo de software ágiles.'],
@@ -12,7 +15,7 @@ export const careers = [
     institutionShort: 'IDAT',
     location: 'Lima, Perú',
     institutionLong: 'Instituto de Investigación y Desarrollo de Administración y Tecnología',
-    logo: 'src/assets/education/idat.webp',
+    logo: idat,
     title: 'Computación e Informática',
     period: '2022 - 2023',
     details: [

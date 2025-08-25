@@ -1,28 +1,55 @@
+import appium from '@/assets/tools/appium.svg';
+import aws from '@/assets/tools/aws.svg';
+import bitbucket from '@/assets/tools/bitbucket.svg';
+import csharp from '@/assets/tools/csharp.svg';
+import cypress from '@/assets/tools/cypress.svg';
+import git from '@/assets/tools/git.svg';
+import github from '@/assets/tools/github.svg';
+import githubactions from '@/assets/tools/githubactions.svg';
+import gitlab from '@/assets/tools/gitlab.svg';
+import intellij from '@/assets/tools/intellij-idea.svg';
+import java from '@/assets/tools/java.svg';
+import jenkins from '@/assets/tools/jenkins.svg';
+import jest from '@/assets/tools/jest.svg';
+import pycharm from '@/assets/tools/jetbrains-pycharm.svg';
+import jmeter from '@/assets/tools/jmeter.svg';
+import k6 from '@/assets/tools/k6.svg';
+import karatelabs from '@/assets/tools/karatelabs.svg';
+import playwright from '@/assets/tools/playwright.svg';
+import postman from '@/assets/tools/postman.svg';
+import python from '@/assets/tools/python.svg';
+import selenium from '@/assets/tools/selenium.svg';
+import sonarqube from '@/assets/tools/sonarqube.svg';
+import typescript from '@/assets/tools/typescript.svg';
+import visualstudio from '@/assets/tools/visualstudio.svg';
+import vscode from '@/assets/tools/vscode.svg';
+import webstorm from '@/assets/tools/webstorm.svg';
+
 export const toolsList = [
-  { src: 'src/assets/tools/jest.svg', alt: 'Jest' },
-  { src: 'src/assets/tools/appium.svg', alt: 'Appium' },
-  { src: 'src/assets/tools/playwright.svg', alt: 'Playwright' },
-  { src: 'src/assets/tools/selenium.svg', alt: 'Selenium' },
-  { src: 'src/assets/tools/cypress.svg', alt: 'Cypress' },
-  { src: 'src/assets/tools/postman.svg', alt: 'Postman' },
-  { src: 'src/assets/tools/karatelabs.svg', alt: 'Karate' },
-  { src: 'src/assets/tools/jmeter.svg', alt: 'JMeter' },
-  { src: 'src/assets/tools/typescript.svg', alt: 'TypeScript' },
-  { src: 'src/assets/tools/python.svg', alt: 'Python' },
-  { src: 'src/assets/tools/java.svg', alt: 'Java' },
-  { src: 'src/assets/tools/csharp.svg', alt: 'C#' },
-  { src: 'src/assets/tools/visualstudio.svg', alt: 'Visual Studio' },
-  { src: 'src/assets/tools/k6.svg', alt: 'K6' },
-  { src: 'src/assets/tools/aws.svg', alt: 'AWS' },
-  { src: 'src/assets/tools/jenkins.svg', alt: 'Jenkins' },
-  { src: 'src/assets/tools/githubactions.svg', alt: 'GitHub Actions' },
-  { src: 'src/assets/tools/git.svg', alt: 'Git' },
-  { src: 'src/assets/tools/github.svg', alt: 'GitHub' },
-  { src: 'src/assets/tools/gitlab.svg', alt: 'GitLab' },
-  { src: 'src/assets/tools/bitbucket.svg', alt: 'BitBucket' },
-  { src: 'src/assets/tools/sonarqube.svg', alt: 'SonarQube' },
-  { src: 'src/assets/tools/intellij-idea.svg', alt: 'IntelliJ IDEA' },
-  { src: 'src/assets/tools/jetbrains-pycharm.svg', alt: 'PyCharm' },
-  { src: 'src/assets/tools/webstorm.svg', alt: 'WebStorm' },
-  { src: 'src/assets/tools/vscode.svg', alt: 'VS Code' },
+  { src: jest, alt: 'Jest' },
+  { src: appium, alt: 'Appium' },
+  { src: playwright, alt: 'Playwright' },
+  { src: selenium, alt: 'Selenium' },
+  { src: cypress, alt: 'Cypress' },
+  { src: postman, alt: 'Postman' },
+  { src: karatelabs, alt: 'Karate' },
+  { src: jmeter, alt: 'JMeter' },
+  { src: typescript, alt: 'TypeScript' },
+  { src: python, alt: 'Python' },
+  { src: java, alt: 'Java' },
+  { src: csharp, alt: 'C#' },
+  { src: visualstudio, alt: 'Visual Studio' },
+  { src: k6, alt: 'K6' },
+  { src: aws, alt: 'AWS' },
+  { src: jenkins, alt: 'Jenkins' },
+  { src: githubactions, alt: 'GitHub Actions' },
+  { src: git, alt: 'Git' },
+  { src: github, alt: 'GitHub' },
+  { src: gitlab, alt: 'GitLab' },
+  { src: bitbucket, alt: 'BitBucket' },
+  { src: sonarqube, alt: 'SonarQube' },
+  { src: intellij, alt: 'IntelliJ IDEA' },
+  { src: pycharm, alt: 'PyCharm' },
+  { src: webstorm, alt: 'WebStorm' },
+  { src: vscode, alt: 'VS Code' },
 ];

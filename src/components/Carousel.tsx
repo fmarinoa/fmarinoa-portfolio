@@ -21,7 +21,9 @@ const Icon = React.memo(function Icon({ src, alt }: TIcon) {
           onError={() => setErrored(true)}
         />
       ) : (
-        <span className="text-xs font-medium text-muted-foreground text-center px-2">{alt}</span>
+        <span className="text-xs font-medium text-muted-foreground text-center px-2 text-black">
+          {alt}
+        </span>
       )}
     </div>
   );

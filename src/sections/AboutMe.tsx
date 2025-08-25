@@ -1,3 +1,4 @@
+import franco from '@/assets/photos/franco.webp';
 import Carousel from '@/components/Carousel';
 import SectionTitle from '@/components/SectionTitle';
 import { toolsList } from '@/data/tools';
@@ -13,7 +14,7 @@ export default function AboutMe() {
 
       <div className="flex flex-col md:flex-row gap-8 items-start md:items-stretch">
         <img
-          src="/franco.webp"
+          src={franco}
           alt="Franco — Ingeniero especializado en automatización de pruebas"
           width={256}
           height={256}
