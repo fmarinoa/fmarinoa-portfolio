@@ -1,22 +1,10 @@
 {
   "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@data/*": [
-        "./data/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "noImplicitAny": false,
     "noUnusedParameters": false,
@@ -25,10 +13,7 @@
     "noUnusedLocals": false,
     "strictNullChecks": false,
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-    ],
+    "lib": ["dom", "dom.iterable"],
     "strict": false,
     "noEmit": true,
     "incremental": true,
@@ -38,13 +23,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build"
-  ]
+  "include": ["src", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "build"]
 }
