@@ -34,21 +34,12 @@ interface Props {
 }
 
 export default function Carousel({ icons }: Props) {
-  const [paused, setPaused] = useState(false);
-
   return (
     <div className="relative overflow-hidden w-full" role="list">
       <div className="edge-fade-left" aria-hidden="true"></div>
       <div className="edge-fade-right" aria-hidden="true"></div>
 
-      <div
-        className="flex gap-6 w-max marquee"
-        style={{ animationPlayState: paused ? 'paused' : 'running' }}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
-      >
+      <div className="flex gap-6 w-max marquee py-1">
         {icons.map((tool, i) => (
           <Icon key={`${tool.src}-${i}`} src={tool.src} alt={tool.alt} />
         ))}
