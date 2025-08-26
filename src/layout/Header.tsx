@@ -9,8 +9,8 @@ type NavItem = {
 const navItems: NavItem[] = [
   { href: '#about-me', label: 'Sobre mí' },
   { href: '#experience', label: 'Experiencia' },
+  { href: '#projects', label: 'Proyectos' },
   { href: '#education', label: 'Educación' },
-  // { href: '#projects', label: 'Proyectos' },
 ];
 
 export default function Header() {
