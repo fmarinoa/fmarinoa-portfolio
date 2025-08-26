@@ -1,3 +1,5 @@
+import Link from './Link';
+
 interface Props {
   readonly title: string;
   readonly entity: string;
@@ -20,14 +22,7 @@ export default function InfoCard({
   logoAlt,
 }: Props) {
   const EntityInfo = linkEntity ? (
-    <a
-      href={linkEntity}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-blue-400 hover:underline hover:text-indigo-400 transition-colors"
-    >
-      {entity}
-    </a>
+    <Link href={linkEntity}>{entity}</Link>
   ) : (
     <span className="text-sm font-semibold text-gray-100">{entity}</span>
   );
