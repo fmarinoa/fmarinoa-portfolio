@@ -1,4 +1,5 @@
 import InfoCard from '@/components/InfoCard';
+import Link from '@/components/Link';
 import SectionTitle from '@/components/SectionTitle';
 import { careers } from '@/data/careers';
 import { courses } from '@/data/courses';
@@ -28,14 +29,9 @@ function Courses() {
       {courses.map(({ name, institution, year, url }) => (
         <li key={name} className="mb-2">
           <span className="font-medium">
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 underline underline-offset-4 hover:text-indigo-300 transition-colors cursor-pointer"
-            >
+            <Link className="underline underline-offset-4 cursor-pointer" href={url}>
               {name}
-            </a>
+            </Link>
           </span>
           <br />
           <span className="text-gray-300">{institution}</span>{' '}
