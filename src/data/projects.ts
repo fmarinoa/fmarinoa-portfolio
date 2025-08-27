@@ -1,3 +1,6 @@
+import franco from '@/assets/photos/franco.webp';
+import scrapper from '@/assets/projects/scrapper.webp';
+import whatismyip from '@/assets/projects/whatismyip.webp';
 import { Project } from '@/types';
 
 export const projects: Project[] = [
@@ -7,6 +10,7 @@ export const projects: Project[] = [
       'Script que extrae ofertas de LinkedIn a partir de 2 parámetros de búsqueda, las analiza con la IA Gemini en función de un perfil profesional preconfigurado y prioriza las coincidencias más relevantes. Finalmente, envía por correo un resumen con las mejores oportunidades y sus enlaces directos.',
     technologies: ['Python', 'Gemini (API)', 'Github Actions', 'Requests'],
     githubUrl: 'https://github.com/fmarinoa/search-job-linkedin',
+    imageUrl: scrapper,
   },
   {
     title: 'What is my public IP?',
@@ -15,6 +19,7 @@ export const projects: Project[] = [
     technologies: ['Fetch API', 'HTML', 'CSS'],
     githubUrl: 'https://github.com/fmarinoa/what-is-my-public-ip',
     demoUrl: 'https://fmarinoa.github.io/what-is-my-public-ip/',
+    imageUrl: whatismyip,
   },
   {
     title: 'Portfolio Personal',
@@ -23,5 +28,6 @@ export const projects: Project[] = [
     technologies: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
     githubUrl: 'https://github.com/fmarinoa/fmarinoa-portfolio',
     demoUrl: 'https://francomarino.vercel.app/',
+    imageUrl: franco,
   },
 ];
