@@ -12,7 +12,7 @@ export default function Projects() {
     <section id="projects" className="mb-12">
       <SectionTitle title="Proyectos personales" />
 
-      <div className="relative overflow-hidden w-full h-[420px]">
+      <div className="relative overflow-hidden w-full h-[520px]">
         <div className="edge-fade-left" aria-hidden="true" />
         <div className="edge-fade-right" aria-hidden="true" />
 
@@ -27,7 +27,7 @@ export default function Projects() {
           {projects.concat(projects).map((project: Project, index: number) => (
             <article
               key={`${project.title}-${index}`}
-              className="group flex flex-col w-[320px] h-full min-h-[400px] shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
+              className="group flex flex-col w-[320px] h-full shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
                 rounded-xl shadow-xl border border-gray-700 hover:border-indigo-400 hover:shadow-2xl 
                 p-6 transition-all duration-300 whitespace-normal"
             >
