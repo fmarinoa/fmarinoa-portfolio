@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 import downloadIcon from '@/assets/icons/download.svg';
+import { Constants } from '@/data/constants';
 
 type NavItem = {
   href: string;
@@ -50,7 +51,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <h1 className="text-lg md:text-xl font-bold text-white tracking-wide">Franco Mariño</h1>
           <a
-            href="https://drive.usercontent.google.com/uc?id=1qJnBX3SB0tUI7dfkMzjZR0MXQu6XGL-V&export=download"
+            href={Constants.CV_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3 py-1 bg-indigo-500 hover:bg-indigo-700 text-white rounded-lg transition-colors duration-200"
