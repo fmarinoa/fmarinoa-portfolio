@@ -23,6 +23,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["src", "vite.config.ts"],
+  "include": ["src", "vite.config.ts", "tests"],
   "exclude": ["node_modules", "dist", "build"]
 }
