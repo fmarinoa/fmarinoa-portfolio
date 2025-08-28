@@ -1,6 +1,7 @@
 import franco from '@/assets/photos/franco.webp';
 import Carousel from '@/components/Carousel';
 import SectionTitle from '@/components/SectionTitle';
+import { Constants } from '@/data/constants';
 import { toolsList } from '@/data/tools';
 
 export default function AboutMe() {
@@ -23,11 +24,7 @@ export default function AboutMe() {
         />
 
         <div className="flex flex-col w-full md:max-w-lg">
-          <p className="mb-6 text-center md:text-left">
-            Soy un Ingeniero especializado en automatización de pruebas, con experiencia liderando
-            iniciativas de calidad en entornos de telecomunicaciones, bancarios y financieros. Me
-            apasiona el uso de tecnologías modernas para asegurar productos robustos y eficientes.
-          </p>
+          <p className="mb-6 text-center md:text-left">{Constants.aboutMeParagraph}</p>
 
           <h3 className="text-lg font-semibold text-white mb-4">Herramientas y tecnologías:</h3>
 
