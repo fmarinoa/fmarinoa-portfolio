@@ -32,7 +32,7 @@ test('navigates to about me section', async ({ page, isMobile }) => {
 
   await page.click('a[href="#about-me"]');
   await expect(page).toHaveURL(/#about-me/);
-  await expect(page.locator('section[id="about-me"]')).toBeVisible();
+  await expect(page.locator('section[id="about-me"]')).toBeInViewport();
 });
 
 test('interacts with icons in carousel', async ({ page }) => {
