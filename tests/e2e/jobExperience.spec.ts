@@ -15,6 +15,7 @@ beforeEach(async ({ page }) => {
 test('navigates to job experience section', async ({ homePage, isMobile }) => {
   await homePage.openMenuIfMobile(isMobile);
   await homePage.goToSection('experience');
+  expect(await homePage.getSectionTitle('experience')).toBe('Experiencia laboral');
 });
 
 test('validate effects in card', async ({ homePage, isMobile }) => {
