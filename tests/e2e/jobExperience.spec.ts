@@ -25,7 +25,7 @@ test('validate effects in card', async ({ homePage, isMobile }) => {
   const groups = await homePage.getExperienceGroups();
 
   for (const group of await groups.all()) {
-    const card = group.locator('div.bg-gradient-to-br');
+    const card = group.locator('article.bg-gradient-to-br');
     await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)');
 
     const heading = group.locator('h3');
