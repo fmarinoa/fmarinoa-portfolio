@@ -1,5 +1,6 @@
 import github from '@/assets/socialmedia/github.svg';
 import linkedin from '@/assets/socialmedia/linkedin.svg';
+import { Constants } from '@/data/constants';
 
 type IconsFooter = {
   url: string;
@@ -35,6 +36,18 @@ export default function Footer() {
             urlMedia={linkedin}
           />
         </div>
+
+        <div className="w-full md:w-auto text-center md:text-left">
+          <a
+            href={Constants.TEST_RESULTS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-gray-400 hover:text-gray-200 transition-colors duration-200"
+          >
+            Ver reportes recientes de pruebas
+          </a>
+        </div>
+
         <span className="w-full md:w-auto text-center md:text-right text-sm text-gray-400">
           &copy; {year} Franco Mariño
           <br />
