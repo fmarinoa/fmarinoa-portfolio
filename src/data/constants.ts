@@ -4,4 +4,7 @@ export class Constants {
 
   static readonly aboutMeParagraph: string =
     'Soy un Ingeniero especializado en automatización de pruebas, con experiencia liderando iniciativas de calidad en entornos de telecomunicaciones, bancarios y financieros. Me apasiona el uso de tecnologías modernas para asegurar productos robustos y eficientes.';
+
+  static readonly TEST_RESULTS_URL: string =
+    'https://fmarinoa.github.io/fmarinoa-portfolio/test-results/';
 }
