@@ -11,5 +11,6 @@ export const test = base.extend<MyFixtures>({
   },
 });
 
+export type { Locator, Page } from '@playwright/test';
 export { expect } from '@playwright/test';
 export const beforeEach = test.beforeEach;

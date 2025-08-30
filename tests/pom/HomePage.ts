@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from 'tests/fixtures';
 
 type Section = 'experience' | 'about-me' | 'projects' | 'education';
 
