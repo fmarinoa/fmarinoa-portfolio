@@ -64,7 +64,7 @@ export default function Header() {
               onClick={handleCvClick}
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-3 py-1 bg-indigo-500 hover:bg-indigo-700 text-white rounded-lg transition-colors duration-200"
-              title="Abrir CV"
+              title="Download CV"
             >
               <img src={downloadIcon} alt="Download CV" className="h-5 w-5" />
               <span className="hidden sm:inline">CV</span>

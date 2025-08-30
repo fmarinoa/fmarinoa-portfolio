@@ -1,7 +1,5 @@
 import { beforeEach, expect, test } from 'tests/fixtures';
 
-import { Constants } from '@/data/constants';
-
 beforeEach(async ({ page }) => {
   await page.goto('/');
 });
@@ -10,7 +8,15 @@ test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Franco Mariño | Portfolio/);
 });
 
-test('CV link points to correct URL', async ({ page }) => {
-  const cvLink = page.locator('a[title="Download CV"]');
-  await expect(cvLink).toHaveAttribute('href', Constants.CV_URL);
+test('downloading CV shows thank-you alert and hides it after timeout', async ({
+  page,
+  homePage,
+}) => {
+  const [download] = await Promise.all([page.waitForEvent('download'), homePage.downloadCv()]);
+  const alert = page.locator('div.bg-green-500');
+  await expect(alert).toHaveText('¡Gracias por descargar mi CV!');
+
+  expect(download.suggestedFilename()).toBe('CV-FRANCO EDSON MARIÑO AQUISE.pdf');
+
+  await expect(alert).toBeHidden({ timeout: 4000 });
 });

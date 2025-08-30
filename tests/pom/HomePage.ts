@@ -24,4 +24,9 @@ export class HomePage {
   async getExperienceGroups(): Promise<Locator> {
     return this.page.locator('section#experience > div > div > div');
   }
+
+  async downloadCv(): Promise<void> {
+    this.page.locator('a[title="Download CV"]').click();
+    this.page.locator('button:has-text("De Acuerdo")').click();
+  }
 }
