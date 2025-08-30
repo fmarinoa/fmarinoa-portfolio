@@ -12,6 +12,7 @@ test('downloading CV shows thank-you alert and hides it after timeout', async ({
   page,
   homePage,
 }) => {
+  test.setTimeout(10 * 1000);
   const [download] = await Promise.all([page.waitForEvent('download'), homePage.downloadCv()]);
   const alert = page.locator('div.bg-green-500');
   await expect(alert).toHaveText('¡Gracias por descargar mi CV!');
