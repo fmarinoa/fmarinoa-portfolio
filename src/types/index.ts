@@ -6,3 +6,8 @@ export interface Project {
   demoUrl?: string;
   githubUrl?: string;
 }
+
+export type NavItem = {
+  href: string;
+  label: string;
+};
