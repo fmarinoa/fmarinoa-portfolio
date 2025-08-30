@@ -45,17 +45,21 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-          name: github-pages
           retention-days: 1
 
   deploy-results:
     needs: lint-test
+    runs-on: ubuntu-latest
 
     permissions:
       pages: write
       id-token: write
+      deployments: write
+      contents: read
 
-    runs-on: ubuntu-latest
+    environment:
+      name: test-results
+      url: https://fmarinoa.github.io/fmarinoa-portfolio/test-results/
 
     steps:
       - name: Deploy to GitHub Pages

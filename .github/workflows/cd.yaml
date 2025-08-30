@@ -54,4 +54,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: success
-          environment_url: https://tu-app.vercel.app
+          environment_url: https://francomarino.vercel.app
