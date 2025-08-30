@@ -1,0 +1,38 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ['CI Pipeline']
+    types:
+      - completed
+
+jobs:
+  deploy-vercel:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      NODE_ENV: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node (22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=$VERCEL_TOKEN
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
