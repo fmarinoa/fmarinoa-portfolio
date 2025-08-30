@@ -48,7 +48,7 @@ export default function InfoCard({
   );
 
   return (
-    <div
+    <article
       className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl shadow-xl border border-gray-700 
                   hover:border-indigo-400 hover:shadow-2xl transition-all duration-300 flex flex-col gap-2 group"
     >
@@ -76,6 +76,6 @@ export default function InfoCard({
           </li>
         ))}
       </ul>
-    </div>
+    </article>
   );
 }
