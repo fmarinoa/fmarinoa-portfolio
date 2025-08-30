@@ -16,41 +16,34 @@ jobs:
 
     permissions:
       contents: write
+      deployments: write
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Create GitHub Deployment
         uses: chrnorm/deployment-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: Production
-          description: 'Deploy to Vercel via CLI'
-          transient_environment: false
-          production_environment: true
+          description: Deploy to Vercel via CLI
+          transient-environment: false
+          production-environment: true
+          initial-status: pending
+          auto-merge: false
+          task: deploy
 
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node (22)
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'npm'
-
-      - name: Install Vercel CLI
-        run: npm install -g vercel@latest
-
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
-
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=$VERCEL_TOKEN
-
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+      - name: Deploy to Vercel
+        run: |
+          npm install -g vercel
+          vercel --token=$VERCEL_TOKEN --prod --yes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       - name: Update deployment status
         uses: chrnorm/deployment-status@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: success
-          environment_url: https://francomarino.vercel.app
+          environment-url: https://tusitio.vercel.app
