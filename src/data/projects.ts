@@ -1,7 +1,14 @@
-import franco from '@/assets/photos/franco.webp';
-import scrapper from '@/assets/projects/scrapper.webp';
-import whatismyip from '@/assets/projects/whatismyip.webp';
 import { Project } from '@/types';
+
+let franco = 'mock.webp';
+let scrapper = 'mock.webp';
+let whatismyip = 'mock.webp';
+
+if (typeof window !== 'undefined') {
+  franco = '/src/assets/photos/franco.webp';
+  scrapper = '/src/assets/projects/scrapper.webp';
+  whatismyip = '/src/assets/projects/whatismyip.webp';
+}
 
 export const projects: Project[] = [
   {
