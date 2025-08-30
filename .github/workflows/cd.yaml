@@ -14,7 +14,19 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       NODE_ENV: production
 
+    permissions:
+      contents: write
+
     steps:
+      - name: Create GitHub Deployment
+        uses: chrnorm/deployment-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: Production
+          description: 'Deploy to Vercel via CLI'
+          transient_environment: false
+          production_environment: true
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -35,3 +47,10 @@ jobs:
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+
+      - name: Update deployment status
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          state: success
+          environment_url: https://francomarino.vercel.app
