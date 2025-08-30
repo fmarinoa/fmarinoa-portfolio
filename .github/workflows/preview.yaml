@@ -35,6 +35,7 @@ jobs:
       - name: Deploy preview to Vercel
         id: vercel_deploy
         run: |
+          npm install -g vercel
           url=$(vercel --token=$VERCEL_TOKEN --prod=false --confirm | tail -n1)
           echo "preview_url=$url" >> $GITHUB_OUTPUT
         env:
