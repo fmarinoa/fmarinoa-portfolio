@@ -28,12 +28,12 @@ export default function InfoCard({
   );
 
   const Meta = (
-    <>
-      <p className="flex items-center gap-2 text-sm text-gray-300">
+    <div className="text-sm text-gray-300">
+      <div className="flex items-center gap-2">
         🏢 {EntityInfo} <span className="text-gray-500">|</span> 📍 {location}
-      </p>
-      <p className="text-sm text-gray-300">📅 {period}</p>
-    </>
+      </div>
+      <p>📅 {period}</p>
+    </div>
   );
 
   const Header = (
