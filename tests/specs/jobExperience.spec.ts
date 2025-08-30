@@ -1,4 +1,12 @@
-import { beforeEach, expect, test } from 'tests/fixtures';
+import { beforeEach, expect, Locator, test } from 'tests/fixtures';
+
+import { jobList } from '@/data/jobs';
+
+async function extractLocation(locator: Locator): Promise<string> {
+  const text = (await locator.textContent()) ?? '';
+  const match = /📍\s*(.+)$/.exec(text);
+  return match ? match[1].trim() : '';
+}
 
 beforeEach(async ({ page }) => {
   await page.goto('/');
@@ -31,5 +39,36 @@ test('validate effects in card', async ({ homePage, isMobile }) => {
 
 test('has correct number of job entries', async ({ homePage }) => {
   const jobEntries = await homePage.getExperienceGroups();
-  await expect(jobEntries).toHaveCount(3);
+  await expect(jobEntries).toHaveCount(jobList.length);
+});
+
+test('should display correct experience information for each job', async ({ homePage }) => {
+  const groups = await homePage.getExperienceGroups();
+  const allGroups = await groups.all();
+
+  for (const [index, job] of jobList.entries()) {
+    const group = allGroups[index];
+
+    // Title
+    await expect(group.locator('h3')).toHaveText(job.title);
+
+    // Company
+    const company = group.locator('a');
+    await expect(company).toHaveText(job.company);
+    await expect(company).toHaveAttribute('href', job.linkCompany);
+
+    // Location
+    const locationNode = group.locator('div.flex.items-center.gap-2');
+    const textLocation = await extractLocation(locationNode);
+    expect(textLocation).toBe(job.location);
+
+    // Period
+    await expect(group.locator('div.text-sm.text-gray-300 > p')).toHaveText(`📅 ${job.period}`);
+
+    // Details
+    const detailItems = await group.locator('ul li').all();
+    for (const [i, jobDetail] of job.details.entries()) {
+      await expect(detailItems[i]).toHaveText(jobDetail);
+    }
+  }
 });
