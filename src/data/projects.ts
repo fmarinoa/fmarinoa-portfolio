@@ -24,7 +24,7 @@ export const projects: Project[] = [
   {
     title: 'Portfolio Personal',
     description:
-      'Portafolio web personal con animaciones fluidas y diseño responsivo, desplegado en Vercel y optimizado en SEO y rendimiento. Incluye pruebas automatizadas visibles desde el footer y tres flujos de trabajo: entorno de preview por PR, validación de código con resultados de tests por push a master, y despliegue a producción solo si las validaciones son exitosas.',
+      'Portafolio web personal con animaciones fluidas y diseño responsivo, desplegado en Vercel y optimizado en SEO y rendimiento. Incluye pruebas automatizadas visibles y documentación desde el footer. Tres worflows: entorno de preview por PR, validación de código con resultados de tests por push a master, y despliegue a producción solo si las validaciones son exitosas.',
     technologies: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
     githubUrl: 'https://github.com/fmarinoa/fmarinoa-portfolio',
     demoUrl: 'https://francomarino.vercel.app/',

@@ -1,5 +1,6 @@
 import github from '@/assets/socialmedia/github.svg';
 import linkedin from '@/assets/socialmedia/linkedin.svg';
+import Link from '@/components/Link';
 import { Constants } from '@/data/constants';
 
 type IconsFooter = {
@@ -37,22 +38,26 @@ export default function Footer() {
           />
         </div>
 
-        <div className="w-full md:w-auto text-center md:text-left">
-          <a
-            href={Constants.TEST_RESULTS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-gray-400 hover:text-gray-200 transition-colors duration-200"
-          >
-            Ver reportes recientes de pruebas
-          </a>
-        </div>
-
         <span className="w-full md:w-auto text-center md:text-right text-sm text-gray-400">
           &copy; {year} Franco Mariño
           <br />
           Todos los derechos reservados.
         </span>
+      </div>
+
+      <div className="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-2 text-xs">
+        <Link
+          href={Constants.TEST_RESULTS_URL}
+          className="hover:text-gray-200 transition-colors duration-200 text-gray-400"
+        >
+          Reportes de pruebas
+        </Link>
+        <Link
+          href={Constants.DEEP_WIKI_URL}
+          className="hover:text-gray-200 transition-colors duration-200 text-gray-400"
+        >
+          Documentación del proyecto
+        </Link>
       </div>
     </footer>
   );
