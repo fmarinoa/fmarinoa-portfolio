@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      NODE_ENV: production
+      NODE_ENV: preview
 
     permissions:
       contents: write
