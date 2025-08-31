@@ -1,14 +1,11 @@
 name: CD Pipeline
 
 on:
-  workflow_run:
-    workflows: ['CI Pipeline']
-    types:
-      - completed
+  push:
+    branches: [master]
 
 jobs:
   deploy-vercel:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
