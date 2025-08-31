@@ -3,11 +3,12 @@ import Link from '@/components/Link';
 import SectionTitle from '@/components/SectionTitle';
 import { careers } from '@/data/careers';
 import { courses } from '@/data/courses';
+import { Career, Course } from '@/types';
 
 function Careers() {
   return (
     <div className="grid md:grid-cols-2 gap-6 mb-6">
-      {careers.map((career) => (
+      {careers.map((career: Career) => (
         <InfoCard
           key={`${career.institutionShort}-${career.title}`}
           title={career.title}
@@ -26,16 +27,16 @@ function Careers() {
 function Courses() {
   return (
     <ul className="pl-2">
-      {courses.map(({ name, institution, year, url }) => (
-        <li key={name} className="mb-2">
+      {courses.map((course: Course) => (
+        <li key={course.name} className="mb-2">
           <span className="font-medium">
-            <Link className="underline underline-offset-4 cursor-pointer" href={url}>
-              {name}
+            <Link className="underline underline-offset-4 cursor-pointer" href={course.url}>
+              {course.name}
             </Link>
           </span>
           <br />
-          <span className="text-gray-300">{institution}</span>{' '}
-          <span className="text-gray-400">({year})</span>
+          <span className="text-gray-300">{course.institution}</span>{' '}
+          <span className="text-gray-400">({course.year})</span>
         </li>
       ))}
     </ul>
