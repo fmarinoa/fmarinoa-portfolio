@@ -1,12 +1,7 @@
-import { beforeEach, expect, Locator, test } from 'tests/fixtures';
+import { beforeEach, expect, test } from 'tests/fixtures';
+import { extractLocation } from 'tests/utils/extractUtils';
 
 import { jobList } from '@/data/jobs';
-
-async function extractLocation(locator: Locator): Promise<string> {
-  const text = (await locator.textContent()) ?? '';
-  const match = /📍\s*(.+)$/.exec(text);
-  return match ? match[1].trim() : '';
-}
 
 beforeEach(async ({ page }) => {
   await page.goto('/');
