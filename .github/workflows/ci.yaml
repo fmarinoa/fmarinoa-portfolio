@@ -70,9 +70,15 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       NODE_ENV: preview
 
+    environment:
+      name: Preview
+      url: ${{ steps.vercel_deploy.outputs.preview_url }}
+
     permissions:
-      contents: write
+      pages: write
+      id-token: write
       deployments: write
+      contents: read
 
     steps:
       - name: Checkout code
@@ -95,10 +101,8 @@ jobs:
         id: vercel_deploy
         run: |
           npm install -g vercel
-          url=$(vercel --token=$VERCEL_TOKEN --prod=false --yes | tail -n1)
+          url=$(vercel --token=$VERCEL_TOKEN --yes | tail -n1)
           echo "preview_url=$url" >> $GITHUB_OUTPUT
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       - name: Update deployment preview status
         uses: chrnorm/deployment-status@v2

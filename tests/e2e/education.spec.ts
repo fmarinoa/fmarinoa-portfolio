@@ -15,13 +15,14 @@ test('navigates to education section and validate title', async ({ homePage, isM
   expect(await homePage.getSectionTitle('education')).toBe('Educación');
 });
 
-test('validate effects in cards', async ({ homePage, isMobile }) => {
+test('validate effects in cards', async ({ page, homePage, isMobile }) => {
   await homePage.openMenuIfMobile(isMobile);
   await homePage.goToSection('education');
 
   const cards = await homePage.getEducationCards();
 
   for (const card of await cards.all()) {
+    await card.scrollIntoViewIfNeeded();
     const heading = card.locator('h3');
 
     await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)');
@@ -32,6 +33,7 @@ test('validate effects in cards', async ({ homePage, isMobile }) => {
 
     await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', { timeout: 1000 });
     await expect(heading).toHaveCSS('color', 'rgb(129, 140, 248)');
+    await page.mouse.click(0, 0);
   }
 });
 
