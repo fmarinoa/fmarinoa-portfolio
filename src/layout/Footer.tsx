@@ -45,7 +45,7 @@ export default function Footer() {
         </span>
       </div>
 
-      <div className="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-2 text-xs">
+      <div className="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-2 text-xs pt-2">
         <Link
           href={Constants.TEST_RESULTS_URL}
           className="hover:text-gray-200 transition-colors duration-200 text-gray-400"
