@@ -1,14 +1,11 @@
 name: Preview environment
 
 on:
-  workflow_run:
-    workflows: ['CI Pipeline']
-    types:
-      - completed
+  pull_request:
+    branches: [master]
 
 jobs:
   deploy-preview-vercel:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -39,7 +36,7 @@ jobs:
         id: vercel_deploy
         run: |
           npm install -g vercel
-          url=$(vercel --token=$VERCEL_TOKEN --prod=false --confirm | tail -n1)
+          url=$(vercel --token=$VERCEL_TOKEN --prod=false --yes | tail -n1)
           echo "preview_url=$url" >> $GITHUB_OUTPUT
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
