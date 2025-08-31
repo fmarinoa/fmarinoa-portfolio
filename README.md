@@ -20,4 +20,6 @@ Use a modern frontend technology stack centered around React, TypeScript, and Vi
 | Code Quality | ESLint + Prettier | Linting and code formatting                    |
 | Git Hooks    | Husky             | Pre-commit quality checks                      |
 
+The application does not use complex state management or routing libraries, keeping the architecture simple and focused on content presentation.
+
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/fmarinoa/fmarinoa-portfolio)
