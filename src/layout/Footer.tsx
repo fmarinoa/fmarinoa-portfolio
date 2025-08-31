@@ -41,7 +41,7 @@ export default function Footer() {
         <span className="w-full md:w-auto text-center md:text-right text-sm text-gray-400">
           &copy; {year} Franco Mariño
           <br />
-          Todos los derechos reservados.
+          Todos los derechos reservados
         </span>
       </div>
 
