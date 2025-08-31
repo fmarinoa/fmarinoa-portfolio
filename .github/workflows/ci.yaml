@@ -35,13 +35,11 @@ jobs:
           retention-days: 30
 
       - name: Prepare test results for Pages
-        if: ${{ always() }}
         run: |
           mkdir -p dist/test-results
           cp -r playwright-report/* dist/test-results/
 
       - name: Upload Pages artifact (test results)
-        if: ${{ always() }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -57,11 +55,10 @@ jobs:
       contents: read
 
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: test-results
+      url: https://fmarinoa.github.io/fmarinoa-portfolio/test-results/
 
     steps:
       - name: Deploy to GitHub Pages
-        if: ${{ always() }}
         id: deployment
         uses: actions/deploy-pages@v4
