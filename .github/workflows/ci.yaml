@@ -47,7 +47,6 @@ jobs:
           path: dist
 
   deploy-results:
-    needs: lint-test
     runs-on: ubuntu-latest
 
     permissions:
