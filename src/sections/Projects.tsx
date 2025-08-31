@@ -59,7 +59,7 @@ export default function Projects() {
               <div className="flex justify-end w-full text-sm mt-auto">
                 <div className="flex gap-4">
                   {project.demoUrl && <Link href={project.demoUrl}>Demo 🛜</Link>}
-                  {project.githubUrl && <Link href={project.githubUrl}>GitHub</Link>}
+                  {project.githubUrl && <Link href={project.githubUrl}>{'< GitHub / >'}</Link>}
                 </div>
               </div>
             </article>
