@@ -97,7 +97,7 @@ jobs:
           auto-merge: false
           task: deploy
 
-      - name: Deploy preview to Vercel
+      - name: Deploy to Vercel (Preview)
         id: vercel_deploy
         run: |
           npm install -g vercel
