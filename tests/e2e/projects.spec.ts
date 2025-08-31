@@ -1,5 +1,6 @@
 import { projectsMock } from 'tests/__mocks__/projectsMock';
 import { beforeEach, expect, test } from 'tests/fixtures';
+import { sleep } from 'tests/utils/waits';
 
 beforeEach(async ({ page }) => {
   await page.goto('/');
@@ -26,8 +27,9 @@ test('validate effects in cards', async ({ homePage, isMobile }) => {
     await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)');
 
     await card.hover({ force: true });
+    sleep(200);
 
-    await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)');
+    await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', { timeout: 1000 });
     await expect(heading).toHaveCSS('color', 'rgb(129, 140, 248)');
   }
 });
