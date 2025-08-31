@@ -21,7 +21,6 @@ test('validate effects in cards', async ({ page, homePage, isMobile }) => {
   const cards = await cardsHandle.all();
 
   for (const card of cards.slice(0, Math.floor(count / 2))) {
-    await card.scrollIntoViewIfNeeded();
     const heading = card.locator('h3');
 
     await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)');
