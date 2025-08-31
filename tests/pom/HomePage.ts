@@ -29,6 +29,10 @@ export class HomePage {
     return this.page.locator('section#projects > div > div.marquee > article');
   }
 
+  async getEducationCards(): Promise<Locator> {
+    return this.page.locator('section#education > div > article');
+  }
+
   async downloadCv(): Promise<void> {
     this.page.locator('a[title="Download CV"]').click();
     this.page.locator('button:has-text("De Acuerdo")').click();
