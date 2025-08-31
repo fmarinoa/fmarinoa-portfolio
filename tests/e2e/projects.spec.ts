@@ -12,7 +12,7 @@ test('navigates to projects section and validate title', async ({ homePage, isMo
   expect(await homePage.getSectionTitle('projects')).toBe('Proyectos personales');
 });
 
-test('validate effects in cards', async ({ homePage, isMobile }) => {
+test('validate effects in cards', async ({ page, homePage, isMobile }) => {
   await homePage.openMenuIfMobile(isMobile);
   await homePage.goToSection('projects');
 
@@ -21,6 +21,7 @@ test('validate effects in cards', async ({ homePage, isMobile }) => {
   const cards = await cardsHandle.all();
 
   for (const card of cards.slice(0, Math.floor(count / 2))) {
+    await card.scrollIntoViewIfNeeded();
     const heading = card.locator('h3');
 
     await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)');
@@ -31,6 +32,7 @@ test('validate effects in cards', async ({ homePage, isMobile }) => {
 
     await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', { timeout: 1000 });
     await expect(heading).toHaveCSS('color', 'rgb(129, 140, 248)');
+    await page.mouse.click(0, 0);
   }
 });
 
