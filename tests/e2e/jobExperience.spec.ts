@@ -50,23 +50,18 @@ test('should display correct experience information for each job', async ({ home
   for (const [index, job] of jobList.entries()) {
     const group = allGroups[index];
 
-    // Title
     await expect(group.locator('h3')).toHaveText(job.title);
 
-    // Company
     const company = group.locator('a');
     await expect(company).toHaveText(job.company);
     await expect(company).toHaveAttribute('href', job.linkCompany);
 
-    // Location
     const locationNode = group.locator('div.flex.items-center.gap-2');
     const textLocation = await extractLocation(locationNode);
     expect(textLocation).toBe(job.location);
 
-    // Period
     await expect(group.locator('div.text-sm.text-gray-300 > p')).toHaveText(`📅 ${job.period}`);
 
-    // Details
     const detailItems = await group.locator('ul li').all();
     for (const [i, jobDetail] of job.details.entries()) {
       await expect(detailItems[i]).toHaveText(jobDetail);
