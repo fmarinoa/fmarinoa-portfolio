@@ -37,15 +37,14 @@ jobs:
       - name: Prepare test results for Pages
         if: ${{ always() }}
         run: |
-          mkdir -p dist/test-results
-          cp -r playwright-report/* dist/test-results/
+          mkdir -p dist
+          mv playwright-report dist/test-results
 
       - name: Upload Pages artifact (test results)
         if: ${{ always() }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-          retention-days: 1
 
   deploy-results:
     needs: lint-test
