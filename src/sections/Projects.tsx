@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Link from '@/components/Link';
 import SectionTitle from '@/components/SectionTitle';
@@ -19,10 +19,6 @@ export default function Projects() {
         <div
           className="flex gap-6 w-max h-full marquee py-4"
           style={{ animationPlayState: paused ? 'paused' : 'running' }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={() => setPaused(false)}
         >
           {projects.concat(projects).map((project: Project, index: number) => (
             <article
@@ -30,6 +26,8 @@ export default function Projects() {
               className="group flex flex-col w-[320px] h-full shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
                 rounded-xl shadow-xl border border-gray-700 hover:border-indigo-400 hover:shadow-2xl 
                 p-6 transition-all duration-300 whitespace-normal"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
             >
               {project.imageUrl && (
                 <div className="aspect-video w-full mb-4 rounded-lg overflow-hidden">
@@ -61,7 +59,7 @@ export default function Projects() {
               <div className="flex justify-end w-full text-sm mt-auto">
                 <div className="flex gap-4">
                   {project.demoUrl && <Link href={project.demoUrl}>Demo 🛜</Link>}
-                  {project.githubUrl && <Link href={project.githubUrl}>GitHub</Link>}
+                  {project.githubUrl && <Link href={project.githubUrl}>{'< GitHub / >'}</Link>}
                 </div>
               </div>
             </article>

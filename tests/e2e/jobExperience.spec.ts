@@ -1,12 +1,7 @@
-import { beforeEach, expect, Locator, test } from 'tests/fixtures';
+import { beforeEach, expect, test } from 'tests/fixtures';
+import { extractLocation } from 'tests/utils/extractUtils';
 
 import { jobList } from '@/data/jobs';
-
-async function extractLocation(locator: Locator): Promise<string> {
-  const text = (await locator.textContent()) ?? '';
-  const match = /📍\s*(.+)$/.exec(text);
-  return match ? match[1].trim() : '';
-}
 
 beforeEach(async ({ page }) => {
   await page.goto('/');
@@ -15,6 +10,7 @@ beforeEach(async ({ page }) => {
 test('navigates to job experience section', async ({ homePage, isMobile }) => {
   await homePage.openMenuIfMobile(isMobile);
   await homePage.goToSection('experience');
+  expect(await homePage.getSectionTitle('experience')).toBe('Experiencia laboral');
 });
 
 test('validate effects in card', async ({ homePage, isMobile }) => {
@@ -24,7 +20,7 @@ test('validate effects in card', async ({ homePage, isMobile }) => {
   const groups = await homePage.getExperienceGroups();
 
   for (const group of await groups.all()) {
-    const card = group.locator('div.bg-gradient-to-br');
+    const card = group.locator('article.bg-gradient-to-br');
     await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)');
 
     const heading = group.locator('h3');
@@ -49,23 +45,18 @@ test('should display correct experience information for each job', async ({ home
   for (const [index, job] of jobList.entries()) {
     const group = allGroups[index];
 
-    // Title
     await expect(group.locator('h3')).toHaveText(job.title);
 
-    // Company
     const company = group.locator('a');
     await expect(company).toHaveText(job.company);
     await expect(company).toHaveAttribute('href', job.linkCompany);
 
-    // Location
     const locationNode = group.locator('div.flex.items-center.gap-2');
     const textLocation = await extractLocation(locationNode);
     expect(textLocation).toBe(job.location);
 
-    // Period
     await expect(group.locator('div.text-sm.text-gray-300 > p')).toHaveText(`📅 ${job.period}`);
 
-    // Details
     const detailItems = await group.locator('ul li').all();
     for (const [i, jobDetail] of job.details.entries()) {
       await expect(detailItems[i]).toHaveText(jobDetail);

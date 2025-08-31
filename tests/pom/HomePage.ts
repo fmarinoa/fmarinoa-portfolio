@@ -24,4 +24,21 @@ export class HomePage {
   async getExperienceGroups(): Promise<Locator> {
     return this.page.locator('section#experience > div > div > div');
   }
+
+  async getProjectsCards(): Promise<Locator> {
+    return this.page.locator('section#projects > div > div.marquee > article');
+  }
+
+  async getEducationCards(): Promise<Locator> {
+    return this.page.locator('section#education > div > article');
+  }
+
+  async downloadCv(): Promise<void> {
+    this.page.locator('a[title="Download CV"]').click();
+    this.page.locator('button:has-text("De Acuerdo")').click();
+  }
+
+  async getSectionTitle(section: Section): Promise<string> {
+    return this.page.locator(`section[id="${section}"] > h2`).textContent();
+  }
 }

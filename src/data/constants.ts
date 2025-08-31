@@ -7,4 +7,6 @@ export class Constants {
 
   static readonly TEST_RESULTS_URL: string =
     'https://fmarinoa.github.io/fmarinoa-portfolio/test-results/';
+
+  static readonly DEEP_WIKI_URL: string = 'https://deepwiki.com/fmarinoa/fmarinoa-portfolio';
 }

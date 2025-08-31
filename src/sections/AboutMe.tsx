@@ -16,7 +16,7 @@ export default function AboutMe() {
       <div className="flex flex-col md:flex-row gap-8 items-start md:items-stretch">
         <img
           src={franco}
-          alt="Franco — Ingeniero especializado en automatización de pruebas"
+          alt="Ingeniero Franco Mariño"
           width={256}
           height={256}
           loading="eager"

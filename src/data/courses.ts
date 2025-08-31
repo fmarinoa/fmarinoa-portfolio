@@ -1,4 +1,6 @@
-export const courses = [
+import { Course } from '@/types';
+
+export const courses: Course[] = [
   {
     name: 'Accredited Software Testing Fundamentals Certification (AICS® ASTFC)',
     institution: 'AICS® - Asociación Internacional de Calidad de Software',

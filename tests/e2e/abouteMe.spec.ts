@@ -14,6 +14,7 @@ test('about me section contains correct text', async ({ page }) => {
 test('navigates to about me section', async ({ homePage, isMobile }) => {
   await homePage.openMenuIfMobile(isMobile);
   await homePage.goToSection('about-me');
+  expect(await homePage.getSectionTitle('about-me')).toBe('Sobre mí');
 });
 
 test('interacts with icons in carousel', async ({ page }) => {
