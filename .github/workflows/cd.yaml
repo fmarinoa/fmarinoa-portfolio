@@ -24,30 +24,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create GitHub Deployment
-        id: create_deployment
-        uses: chrnorm/deployment-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          environment: Production
-          description: Deploy to Vercel via CLI
-          transient-environment: false
-          production-environment: true
-          initial-status: pending
-          auto-merge: false
-          task: deploy
-
-      - name: Deploy to Vercel
+      - name: Deploy to Vercel (Production)
         run: |
           npm install -g vercel
-          vercel --token=$VERCEL_TOKEN --prod --yes
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-      - name: Update deployment status
-        uses: chrnorm/deployment-status@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          deployment-id: ${{ steps.create_deployment.outputs.deployment_id }}
-          state: success
-          environment-url: https://francomarino.vercel.app
+          vercel --prod --token=$VERCEL_TOKEN --yes
