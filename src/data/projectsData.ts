@@ -14,7 +14,7 @@ export const projectsData: Omit<Project, 'imageUrl'>[] = [
       'Aplicación web que muestra la dirección IP pública del usuario consumiendo la API de api.ipquery.io. Con esta información, además se obtiene el clima mediante la API de api.open-meteo.com y se muestra un pequeño mapa integrado desde Google Maps.',
     technologies: ['Fetch API', 'HTML', 'CSS'],
     githubUrl: 'https://github.com/fmarinoa/what-is-my-public-ip',
-    demoUrl: 'https://fmarinoa.github.io/what-is-my-public-ip/',
+    demoUrl: 'https://what-is-my-public-ip.francomarino.dev/',
   },
   {
     title: 'Portfolio Personal',
