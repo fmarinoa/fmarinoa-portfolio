@@ -9,4 +9,9 @@ export class Constants {
     'https://fmarinoa.github.io/fmarinoa-portfolio/test-results/';
 
   static readonly DEEP_WIKI_URL: string = 'https://deepwiki.com/fmarinoa/fmarinoa-portfolio';
+
+  static readonly PROFILE_GITHUB_URL: string = 'https://github.com/fmarinoa';
+
+  static readonly PROFILE_LINKEDIN_URL: string =
+    'https://pe.linkedin.com/in/fmarinoa?trk=profile-badge';
 }
