@@ -1,4 +1,5 @@
 import { beforeEach, expect, test } from 'tests/fixtures';
+import { waitForNewPageEvent } from 'tests/utils/waits';
 
 import { Constants } from '@/data/constants';
 
@@ -43,10 +44,7 @@ test('has footer tests link', async ({ page }) => {
 
   await expect(link).toHaveAttribute('href', Constants.TEST_RESULTS_URL);
 
-  const [newPage] = await Promise.all([
-    page.context().waitForEvent('page', { timeout: 3000 }),
-    link.click(),
-  ]);
+  const [newPage] = await waitForNewPageEvent(page, link, 3000);
   await expect(newPage).toHaveURL(Constants.TEST_RESULTS_URL);
 });
 
@@ -58,9 +56,6 @@ test('has footer doc link', async ({ page }) => {
 
   await expect(link).toHaveAttribute('href', Constants.DEEP_WIKI_URL);
 
-  const [newPage] = await Promise.all([
-    page.context().waitForEvent('page', { timeout: 3000 }),
-    link.click(),
-  ]);
+  const [newPage] = await waitForNewPageEvent(page, link, 3000);
   await expect(newPage).toHaveURL(Constants.DEEP_WIKI_URL);
 });
