@@ -43,7 +43,10 @@ test('has footer tests link', async ({ page }) => {
 
   await expect(link).toHaveAttribute('href', Constants.TEST_RESULTS_URL);
 
-  const [newPage] = await Promise.all([page.context().waitForEvent('page'), link.click()]);
+  const [newPage] = await Promise.all([
+    page.context().waitForEvent('page', { timeout: 3000 }),
+    link.click(),
+  ]);
   await expect(newPage).toHaveURL(Constants.TEST_RESULTS_URL);
 });
 
@@ -55,6 +58,9 @@ test('has footer doc link', async ({ page }) => {
 
   await expect(link).toHaveAttribute('href', Constants.DEEP_WIKI_URL);
 
-  const [newPage] = await Promise.all([page.context().waitForEvent('page'), link.click()]);
+  const [newPage] = await Promise.all([
+    page.context().waitForEvent('page', { timeout: 3000 }),
+    link.click(),
+  ]);
   await expect(newPage).toHaveURL(Constants.DEEP_WIKI_URL);
 });
