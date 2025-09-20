@@ -39,16 +39,22 @@ test('has footer tests link', async ({ page }) => {
   const footer = page.locator('footer');
   await footer.scrollIntoViewIfNeeded();
 
-  const links = footer.locator('div.flex-wrap > a:has-text("Reportes de pruebas")');
+  const link = footer.locator('div.flex-wrap > a:has-text("Reportes de pruebas")');
 
-  await expect(links).toHaveAttribute('href', Constants.TEST_RESULTS_URL);
+  await expect(link).toHaveAttribute('href', Constants.TEST_RESULTS_URL);
+
+  const [newPage] = await Promise.all([page.context().waitForEvent('page'), link.click()]);
+  await expect(newPage).toHaveURL(Constants.TEST_RESULTS_URL);
 });
 
 test('has footer doc link', async ({ page }) => {
   const footer = page.locator('footer');
   await footer.scrollIntoViewIfNeeded();
 
-  const links = footer.locator('div.flex-wrap > a:has-text("Documentación del proyecto")');
+  const link = footer.locator('div.flex-wrap > a:has-text("Documentación del proyecto")');
 
-  await expect(links).toHaveAttribute('href', Constants.DEEP_WIKI_URL);
+  await expect(link).toHaveAttribute('href', Constants.DEEP_WIKI_URL);
+
+  const [newPage] = await Promise.all([page.context().waitForEvent('page'), link.click()]);
+  await expect(newPage).toHaveURL(Constants.DEEP_WIKI_URL);
 });
