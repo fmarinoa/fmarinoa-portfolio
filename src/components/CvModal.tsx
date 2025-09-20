@@ -26,7 +26,7 @@ export function CvModal({ onAgree, onCancel }: CvModalProps) {
       onClick={onCancel}
     >
       <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-indigo-400 transition-all duration-300 p-4 rounded-lg shadow-md max-w-xs text-center">
-        <p className="text-white font-medium mb-3">Empezará la descarga de mi CV</p>
+        <p className="text-white font-medium mb-3">Será redirigido a la descarga de mi CV</p>
         <div className="flex justify-center gap-2">
           <Button onClick={onAgree} className="bg-indigo-500 text-white hover:bg-indigo-700">
             De acuerdo

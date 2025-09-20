@@ -44,7 +44,7 @@ export default function Header() {
 
   const handleAgree = () => {
     setShowModal(false);
-    window.location.href = Constants.CV_URL;
+    window.open(Constants.CV_URL, '_blank', 'noopener,noreferrer');
 
     setThanks(false);
     setTimeout(() => setThanks(true), 0);
@@ -102,7 +102,7 @@ export default function Header() {
       </header>
 
       {showModal && <CvModal onAgree={handleAgree} onCancel={() => setShowModal(false)} />}
-      {thanks && <Alert message="¡Gracias por descargar mi CV!" state="success" time={3000} />}
+      {thanks && <Alert message="¡Gracias por abrir mi CV!" state="success" time={3000} />}
     </>
   );
 }
