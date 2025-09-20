@@ -36,8 +36,8 @@ jobs:
 
       - name: Prepare test results for Pages
         run: |
-          mkdir -p dist
-          mv playwright-report dist/test-results
+          mkdir -p dist/test-results
+          cp -r playwright-report/* dist/test-results/
 
       - name: Upload Pages artifact (test results)
         uses: actions/upload-pages-artifact@v3
