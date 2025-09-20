@@ -30,12 +30,8 @@ export default function Footer() {
     <footer className="w-full bg-gray-800 text-white px-4 py-3 mt-6 shadow z-50">
       <div className="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
         <div className="flex gap-4 justify-center w-full md:w-auto">
-          <IconsFooter url="https://github.com/fmarinoa" label="GitHub" urlMedia={github} />
-          <IconsFooter
-            url="https://www.linkedin.com/in/fmarinoa/"
-            label="LinkedIn"
-            urlMedia={linkedin}
-          />
+          <IconsFooter url={Constants.PROFILE_GITHUB_URL} label="GitHub" urlMedia={github} />
+          <IconsFooter url={Constants.PROFILE_LINKEDIN_URL} label="LinkedIn" urlMedia={linkedin} />
         </div>
 
         <span className="w-full md:w-auto text-center md:text-right text-sm text-gray-400">
