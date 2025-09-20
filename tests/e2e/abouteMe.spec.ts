@@ -1,4 +1,5 @@
 import { beforeEach, expect, test } from 'tests/fixtures';
+import { sleep } from 'tests/utils/waits';
 
 import { Constants } from '@/data/constants';
 
@@ -7,7 +8,7 @@ beforeEach(async ({ page }) => {
 });
 
 test('about me section contains correct text', async ({ page }) => {
-  const locator = page.locator('#about-me p');
+  const locator = page.locator('section#about-me p');
   await expect(locator).toHaveText(Constants.aboutMeParagraph);
 });
 
@@ -21,8 +22,9 @@ test('interacts with icons in carousel', async ({ page }) => {
   const card = page.locator('div[role="listitem"]:visible').first();
 
   await card.hover({ force: true });
+  sleep(200);
 
-  await expect(card).toHaveCSS('border-color', 'rgb(60, 131, 246)');
+  await expect(card).toHaveCSS('border-color', 'rgb(60, 131, 246)', { timeout: 1000 });
 
   const boxShadow = await card.evaluate((el) => getComputedStyle(el).boxShadow);
   expect(boxShadow).not.toBe('none');

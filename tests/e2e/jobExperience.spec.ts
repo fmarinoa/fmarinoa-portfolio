@@ -1,5 +1,6 @@
 import { beforeEach, expect, test } from 'tests/fixtures';
 import { extractLocation } from 'tests/utils/extractUtils';
+import { sleep } from 'tests/utils/waits';
 
 import { jobList } from '@/data/jobs';
 
@@ -13,7 +14,7 @@ test('navigates to job experience section', async ({ homePage, isMobile }) => {
   expect(await homePage.getSectionTitle('experience')).toBe('Experiencia laboral');
 });
 
-test('validate effects in card', async ({ homePage, isMobile }) => {
+test('validate effects in card', async ({ page, homePage, isMobile }) => {
   await homePage.openMenuIfMobile(isMobile);
   await homePage.goToSection('experience');
 
@@ -21,15 +22,18 @@ test('validate effects in card', async ({ homePage, isMobile }) => {
 
   for (const group of await groups.all()) {
     const card = group.locator('article.bg-gradient-to-br');
+    await card.scrollIntoViewIfNeeded();
     await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)');
 
     const heading = group.locator('h3');
     await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)');
 
-    await group.hover();
+    await card.hover({ force: true });
+    sleep(200);
 
-    await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)');
+    await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', { timeout: 1000 });
     await expect(heading).toHaveCSS('color', 'rgb(129, 140, 248)');
+    await page.mouse.click(0, 0);
   }
 });
 

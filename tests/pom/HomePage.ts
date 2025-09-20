@@ -19,6 +19,7 @@ export class HomePage {
     await this.page.locator(`a[href="#${section}"]`).click();
     await expect(this.page).toHaveURL(new RegExp(`#${section}`));
     await expect(this.page.locator(`section[id="${section}"]`)).toBeInViewport();
+    await this.page.mouse.click(0, 0);
   }
 
   async getExperienceGroups(): Promise<Locator> {
