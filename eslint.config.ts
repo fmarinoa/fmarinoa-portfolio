@@ -1,35 +1,40 @@
-import eslintPluginTs from '@typescript-eslint/eslint-plugin';
-import parserTs from '@typescript-eslint/parser';
-import pluginPrettier from 'eslint-plugin-prettier';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import globals from 'globals';
+import neostandard from 'neostandard';
+import astroParser from 'astro-eslint-parser';
+import eslintPluginAstro from 'eslint-plugin-astro';
 
 export default [
+  ...neostandard({
+    ts: true, // Habilitar soporte para TypeScript
+    noStyle: true, // Deshabilitar reglas de estilo para usar Prettier
+  }),
+  // Configuración específica para archivos .astro
   {
-    files: ['**/*.ts', '**/*.js', '**/*.tsx'],
-    ignores: ['dist/**', 'node_modules/**'],
+    files: ['**/*.astro'],
     languageOptions: {
-      parser: parserTs,
+      parser: astroParser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-      globals: {
-        ...globals.node,
-        ...globals.es2022,
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.astro'],
       },
     },
     plugins: {
-      '@typescript-eslint': eslintPluginTs,
-      'simple-import-sort': simpleImportSort,
-      prettier: pluginPrettier,
+      astro: eslintPluginAstro,
     },
     rules: {
-      ...eslintPluginTs.configs.recommended.rules,
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
-
-      'prettier/prettier': 'error',
+      // Reglas recomendadas para Astro
+      ...eslintPluginAstro.configs.recommended.rules,
+      // Ajustes específicos si es necesario
+      'astro/no-conflict-set-directives': 'error',
+      'astro/no-unused-define-vars-in-style': 'error',
+      // Deshabilitar reglas de React que no aplican a Astro
+      'react/jsx-key': 'off',
+      'react/self-closing-comp': 'off',
+      'react/jsx-no-undef': 'off',
     },
+  },
+
+  // Ignores
+  {
+    ignores: ['dist/**/*', '.astro/**/*', 'node_modules/**/*', '.vercel/**/*'],
   },
 ];
