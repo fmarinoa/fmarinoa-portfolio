@@ -34,7 +34,7 @@ export class HomePage {
     return this.page.locator('section#education > div > article');
   }
 
-  async downloadCv(): Promise<void> {
+  async openCv(): Promise<void> {
     this.page.locator('a[title="Download CV"]').click();
     this.page.locator('button:has-text("De Acuerdo")').click();
   }

@@ -1,5 +1,7 @@
 import { beforeEach, expect, test } from 'tests/fixtures';
 
+import { Constants } from '@/data/constants';
+
 beforeEach(async ({ page }) => {
   await page.goto('/');
 });
@@ -14,11 +16,13 @@ test('downloading CV shows thank-you alert and hides it after timeout', async ({
   homePage,
 }) => {
   test.setTimeout(10 * 1000);
-  const [download] = await Promise.all([page.waitForEvent('download'), homePage.downloadCv()]);
-  const alert = page.locator('div.bg-green-500');
-  await expect(alert).toHaveText('¡Gracias por descargar mi CV!');
 
-  expect(download.suggestedFilename()).toBe('CV-FRANCO EDSON MARIÑO AQUISE.pdf');
+  const [newPage] = await Promise.all([page.context().waitForEvent('page'), homePage.openCv()]);
+  await expect(newPage).toHaveURL(Constants.CV_URL);
+
+  const alert = page.locator('div.bg-green-500');
+  await expect(alert).toBeVisible();
+  await expect(alert).toHaveText('¡Gracias por abrir mi CV!');
 
   await expect(alert).toBeHidden({ timeout: 4000 });
 });
