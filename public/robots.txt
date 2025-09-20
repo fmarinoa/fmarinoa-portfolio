@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://francomarino.vercel.app/sitemap.xml
+Sitemap: https://portfolio.francomarino.dev/sitemap.xml
