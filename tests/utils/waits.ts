@@ -13,17 +13,15 @@ export async function sleep(ms: number): Promise<void> {
  *
  * @param currentPage - The current Playwright Page instance from which the context is derived.
  * @param link - The Playwright Locator representing the link to be clicked.
- * @param timeoutMs - The maximum time to wait for the new page event, in milliseconds.
+ * @param timeoutMs - (Optional) The maximum time to wait for the new page event, in milliseconds.
  * @returns A promise that resolves to a tuple containing the new Page instance and the result of the click action.
  * @throws If the new page event does not occur within the specified timeout.
  */
 export async function waitForNewPageEvent(
   currentPage: Page,
   link: Locator,
-  timeoutMs: number
+  timeoutMs?: number
 ): Promise<[Page, void]> {
-  return await Promise.all([
-    currentPage.context().waitForEvent('page', { timeout: timeoutMs }),
-    link.click(),
-  ]);
+  const options = { ...(timeoutMs && { timeout: timeoutMs }) };
+  return await Promise.all([currentPage.context().waitForEvent('page', options), link.click()]);
 }
