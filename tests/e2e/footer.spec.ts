@@ -20,9 +20,15 @@ test('has footer icons links', async ({ page }) => {
   const links = footer.locator('div.gap-4 > a');
 
   await expect(links).toHaveCount(2);
+  const socialLinks = [
+    { index: 0, url: Constants.PROFILE_GITHUB_URL },
+    { index: 1, url: Constants.PROFILE_LINKEDIN_URL },
+  ];
 
-  await expect(links.nth(0)).toHaveAttribute('href', 'https://github.com/fmarinoa');
-  await expect(links.nth(1)).toHaveAttribute('href', 'https://www.linkedin.com/in/fmarinoa/');
+  for (const { index, url } of socialLinks) {
+    const link = links.nth(index);
+    await expect(link).toHaveAttribute('href', url);
+  }
 });
 
 test('has copyright notice', async ({ page }) => {
@@ -44,7 +50,7 @@ test('has footer tests link', async ({ page }) => {
 
   await expect(link).toHaveAttribute('href', Constants.TEST_RESULTS_URL);
 
-  const [newPage] = await waitForNewPageEvent(page, link, 3000);
+  const [newPage] = await waitForNewPageEvent(page, link);
   await expect(newPage).toHaveURL(Constants.TEST_RESULTS_URL);
 });
 
@@ -56,6 +62,6 @@ test('has footer doc link', async ({ page }) => {
 
   await expect(link).toHaveAttribute('href', Constants.DEEP_WIKI_URL);
 
-  const [newPage] = await waitForNewPageEvent(page, link, 3000);
+  const [newPage] = await waitForNewPageEvent(page, link);
   await expect(newPage).toHaveURL(Constants.DEEP_WIKI_URL);
 });
