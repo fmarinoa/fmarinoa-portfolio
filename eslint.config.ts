@@ -1,6 +1,6 @@
-import neostandard from 'neostandard';
-import astroParser from 'astro-eslint-parser';
-import eslintPluginAstro from 'eslint-plugin-astro';
+import neostandard from 'neostandard'
+import astroParser from 'astro-eslint-parser'
+import eslintPluginAstro from 'eslint-plugin-astro'
 
 export default [
   ...neostandard({
@@ -37,4 +37,4 @@ export default [
   {
     ignores: ['dist/**/*', '.astro/**/*', 'node_modules/**/*', '.vercel/**/*'],
   },
-];
+]
