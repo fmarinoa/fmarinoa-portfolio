@@ -44,7 +44,7 @@ export default function Header() {
 
   const handleAgree = () => {
     setShowModal(false);
-    window.location.href = Constants.CV_URL;
+    window.open(Constants.CV_URL, '_blank', 'noopener,noreferrer');
 
     setThanks(false);
     setTimeout(() => setThanks(true), 0);
