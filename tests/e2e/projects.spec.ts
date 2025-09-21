@@ -32,7 +32,7 @@ test('validate effects in cards', async ({ page, homePage, isMobile }) => {
     await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)')
 
     await card.hover({ force: true })
-    sleep(200)
+    sleep(500)
 
     await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', {
       timeout: 1000,

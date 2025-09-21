@@ -57,6 +57,21 @@ import Section from '@/components/Section.astro'
   </div>
 </Section>
 
+<style>
+  article {
+    border-color: rgb(55, 65, 81);
+  }
+
+  article:hover {
+    border-color: rgb(129, 140, 248);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  article:hover h3 {
+    color: rgb(129, 140, 248);
+  }
+</style>
+
 <script>
   // Obtener el carrusel y todas las tarjetas
   const carousel = document.getElementById('projects-carousel')
