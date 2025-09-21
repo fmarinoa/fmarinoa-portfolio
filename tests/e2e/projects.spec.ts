@@ -68,10 +68,11 @@ test('should display correct project information for each project', async ({
       project.githubUrl
     )
 
-    if (project.demoUrl)
-      {await expect(entry.locator('a:has-text("Demo 🛜")')).toHaveAttribute(
+    if (project.demoUrl) {
+      await expect(entry.locator('a:has-text("Demo 🛜")')).toHaveAttribute(
         'href',
         project.demoUrl
-      )}
+      )
+    }
   }
 })
