@@ -1,45 +1,50 @@
-import { expect, Locator, Page } from 'tests/fixtures';
+import { expect } from 'tests/fixtures'
+import type { Locator, Page } from 'tests/fixtures'
 
-type Section = 'experience' | 'about-me' | 'projects' | 'education';
+type Section = 'experience' | 'about-me' | 'projects' | 'education'
 
 export class HomePage {
-  readonly page: Page;
-  readonly menuToggle: Locator;
+  readonly page: Page
+  readonly menuToggle: Locator
 
   constructor(page: Page) {
-    this.page = page;
-    this.menuToggle = page.locator('button[aria-label="Toggle menu"]');
+    this.page = page
+    this.menuToggle = page.locator('button[aria-label="Toggle menu"]')
   }
 
   async openMenuIfMobile(isMobile: boolean): Promise<void> {
-    if (isMobile) await this.menuToggle.click();
+    if (isMobile) await this.menuToggle.click()
   }
 
   async goToSection(section: Section): Promise<void> {
-    await this.page.locator(`a[href="#${section}"]`).click();
-    await expect(this.page).toHaveURL(new RegExp(`#${section}`));
-    await expect(this.page.locator(`section[id="${section}"]`)).toBeInViewport();
-    await this.page.mouse.click(0, 0);
+    await this.page.locator(`a[href="#${section}"]`).click()
+    await expect(this.page).toHaveURL(new RegExp(`#${section}`))
+    await expect(this.page.locator(`section[id="${section}"]`)).toBeInViewport()
+    await this.page.mouse.click(0, 0)
   }
 
   async getExperienceGroups(): Promise<Locator> {
-    return this.page.locator('section#experience > div > div > div');
+    return this.page.locator('section#experience > div > div > div')
   }
 
   async getProjectsCards(): Promise<Locator> {
-    return this.page.locator('section#projects > div > div.marquee > article');
+    return this.page.locator('section#projects > div > div.marquee > article')
   }
 
   async getEducationCards(): Promise<Locator> {
-    return this.page.locator('section#education > div > article');
+    return this.page.locator('section#education > div > article')
   }
 
   async openCv(): Promise<void> {
-    this.page.locator('a[title="Download CV"]').click();
-    this.page.locator('button:has-text("De Acuerdo")').click();
+    this.page.locator('#cv-btn').click()
+    this.page.locator('button:has-text("De Acuerdo")').click()
   }
 
   async getSectionTitle(section: Section): Promise<string> {
-    return this.page.locator(`section[id="${section}"] > h2`).textContent();
+    return (
+      (await this.page
+        .locator(`section[id="${section}"] > h2`)
+        .textContent()) || ''
+    )
   }
 }

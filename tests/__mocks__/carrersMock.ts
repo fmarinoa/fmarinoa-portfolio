@@ -1,6 +1,6 @@
-import { careersData } from '@/data/careersData';
+import { careersData } from '@/data/careersData'
 
-export const careersMock = careersData.map((p) => ({
+export const careersMock = careersData.map(p => ({
   ...p,
   logo: '/mock.webp',
-}));
+}))

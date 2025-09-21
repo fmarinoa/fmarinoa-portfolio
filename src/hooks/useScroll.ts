@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
 export function useScrollToSection(hash: string) {
   useEffect(() => {
-    document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
-  }, [hash]);
+    document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
+  }, [hash])
 }

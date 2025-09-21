@@ -1,4 +1,4 @@
-import { Career } from '@/types';
+import { Career } from '@/types'
 
 export const careersData: Omit<Career, 'logo'>[] = [
   {
@@ -12,7 +12,8 @@ export const careersData: Omit<Career, 'logo'>[] = [
   {
     institutionShort: 'IDAT',
     location: 'Lima, Perú',
-    institutionLong: 'Instituto de Investigación y Desarrollo de Administración y Tecnología',
+    institutionLong:
+      'Instituto de Investigación y Desarrollo de Administración y Tecnología',
     title: 'Computación e Informática',
     period: '2022 - 2023',
     details: [
@@ -21,4 +22,4 @@ export const careersData: Omit<Career, 'logo'>[] = [
       'Implementación de bases de datos y sistemas de gestión.',
     ],
   },
-];
+]

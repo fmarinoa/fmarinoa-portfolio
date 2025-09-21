@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @layer base {
   html {
@@ -24,7 +22,7 @@
     --radius: 0.75rem;
 
     /* Carousel */
-    --carousel-speed: 28s;
+    --carousel-speed: 30s;
   }
 
   /* Use HSL variables properly */
@@ -43,7 +41,8 @@
   }
 
   .ring-primary {
-    box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--primary)) 20%, transparent);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, hsl(var(--primary)) 20%, transparent);
   }
 
   .edge-fade-left,
@@ -59,12 +58,20 @@
 
   .edge-fade-left {
     left: 0;
-    background: linear-gradient(90deg, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
+    background: linear-gradient(
+      90deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--background) / 0) 100%
+    );
   }
 
   .edge-fade-right {
     right: 0;
-    background: linear-gradient(270deg, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
+    background: linear-gradient(
+      270deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--background) / 0) 100%
+    );
   }
 
   .marquee {
@@ -91,15 +98,5 @@
     .marquee {
       animation: none !important;
     }
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
   }
 }

@@ -1,0 +1,17 @@
+---
+interface Props {
+  message: string
+  state: 'success' | 'failed'
+}
+
+const { message, state } = Astro.props
+
+const bgColor = state === 'success' ? 'bg-green-500' : 'bg-red-500'
+---
+
+<div
+  id="alert"
+  class={`fixed top-16 right-4 px-4 py-2 rounded shadow-md duration-300 transition-all text-white ${bgColor} hidden`}
+>
+  {message}
+</div>
