@@ -60,7 +60,9 @@ test('should display correct project information for each project', async ({
 
     await expect(entry.locator('p')).toHaveText(project.description)
 
-    const actualTechs = await entry.locator('.flex-wrap span').allTextContents()
+    const actualTechs = (
+      await entry.locator('.flex-wrap span').allTextContents()
+    ).map(t => t.trim())
     expect(actualTechs).toEqual(project.technologies)
 
     await expect(entry.locator('a:has-text("< GitHub / >")')).toHaveAttribute(
