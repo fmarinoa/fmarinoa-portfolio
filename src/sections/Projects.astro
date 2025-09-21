@@ -1,0 +1,94 @@
+---
+import Link from '@/components/Link.astro'
+import { projects } from '@/data/projects'
+import type { Project } from '@/types'
+import Section from '@/components/Section.astro'
+---
+
+<Section sectionId="projects" title="Proyectos personales">
+  <div class="relative overflow-hidden w-full h-[520px]">
+    <div class="edge-fade-left" aria-hidden="true"></div>
+    <div class="edge-fade-right" aria-hidden="true"></div>
+
+    <div id="projects-carousel" class="flex gap-6 w-max h-full marquee py-4">
+      {
+        projects.concat(projects).map((project: Project) => (
+          <article
+            class="project-card group flex flex-col w-[320px] h-full shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
+            rounded-xl shadow-xl border border-gray-700 hover:border-indigo-400 hover:shadow-2xl 
+            p-6 transition-all duration-300 whitespace-normal"
+          >
+            {project.imageUrl && (
+              <div class="aspect-video w-full mb-4 rounded-lg overflow-hidden">
+                <img
+                  src={project.imageUrl.src}
+                  alt={project.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            )}
+
+            <h3 class="text-xl font-bold text-white mb-2 tracking-tight group-hover:text-indigo-400 transition-colors">
+              {project.title}
+            </h3>
+            <p class="text-sm text-white mb-4">{project.description}</p>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.technologies.map((tech, i) => (
+                <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs font-medium">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex justify-end w-full text-sm mt-auto">
+              <div class="flex gap-4">
+                {project.demoUrl && <Link href={project.demoUrl}>Demo 🛜</Link>}
+                {project.githubUrl && (
+                  <Link href={project.githubUrl}>{'< GitHub / >'}</Link>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<script>
+  // Obtener el carrusel y todas las tarjetas
+  const carousel = document.getElementById('projects-carousel')
+  const projectCards = document.querySelectorAll('.project-card')
+
+  // Variable para controlar el estado de pausa
+  let isPaused = false
+
+  // Función para pausar la animación
+  function pauseCarousel() {
+    if (carousel && !isPaused) {
+      carousel.style.animationPlayState = 'paused'
+      isPaused = true
+    }
+  }
+
+  // Función para reanudar la animación
+  function resumeCarousel() {
+    if (carousel && isPaused) {
+      carousel.style.animationPlayState = 'running'
+      isPaused = false
+    }
+  }
+
+  // Agregar event listeners a cada tarjeta
+  projectCards.forEach(card => {
+    card.addEventListener('mouseenter', pauseCarousel)
+    card.addEventListener('mouseleave', resumeCarousel)
+  })
+
+  // Asegurar que la animación esté corriendo inicialmente
+  if (carousel) {
+    carousel.style.animationPlayState = 'running'
+  }
+</script>
