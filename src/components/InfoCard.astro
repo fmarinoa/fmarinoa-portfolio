@@ -77,3 +77,18 @@ const { title, entity, linkEntity, location, period, details, logo, logoAlt } =
     {details.map(item => <li class="leading-relaxed">{item}</li>)}
   </ul>
 </article>
+
+<style>
+  article {
+    border-color: rgb(55, 65, 81);
+  }
+
+  article:hover {
+    border-color: rgb(129, 140, 248);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  article:hover h3 {
+    color: rgb(129, 140, 248);
+  }
+</style>
