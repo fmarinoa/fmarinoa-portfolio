@@ -1,0 +1,73 @@
+---
+import github from '@/assets/socialmedia/github.svg'
+import linkedin from '@/assets/socialmedia/linkedin.svg'
+import Link from '@/components/Link.astro'
+import { Constants } from '@/data/constants'
+
+const year = new Date().getFullYear()
+
+const socialLinks = [
+  {
+    href: Constants.PROFILE_GITHUB_URL,
+    icon: github,
+    alt: 'GitHub',
+    label: 'GitHub Profile',
+  },
+  {
+    href: Constants.PROFILE_LINKEDIN_URL,
+    icon: linkedin,
+    alt: 'LinkedIn',
+    label: 'LinkedIn Profile',
+  },
+]
+
+const footerLinks = [
+  { href: Constants.TEST_RESULTS_URL, text: 'Reportes de pruebas' },
+  { href: Constants.DEEP_WIKI_URL, text: 'Documentación del proyecto' },
+]
+---
+
+<footer class="w-full bg-gray-800 text-white px-4 py-3 mt-6 shadow z-50">
+  <div
+    class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4"
+  >
+    <div class="flex gap-4 justify-center w-full md:w-auto">
+      {
+        socialLinks.map(({ href, icon, alt, label }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            class="hover:text-gray-400 text-2xl"
+          >
+            <img src={icon} alt={alt} width={32} height={32} />
+          </a>
+        ))
+      }
+    </div>
+
+    <span
+      class="w-full md:w-auto text-center md:text-right text-sm text-gray-400"
+    >
+      &copy; {year} Franco Mariño
+      <br />
+      Todos los derechos reservados
+    </span>
+  </div>
+
+  <div
+    class="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-2 text-xs pt-2"
+  >
+    {
+      footerLinks.map(({ href, text }) => (
+        <Link
+          href={href}
+          className="hover:text-gray-200 transition-colors duration-200 text-gray-400"
+        >
+          {text}
+        </Link>
+      ))
+    }
+  </div>
+</footer>
