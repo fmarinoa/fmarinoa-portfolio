@@ -1,4 +1,5 @@
-import { expect, Locator, Page } from 'tests/fixtures'
+import { expect } from 'tests/fixtures'
+import type { Locator, Page } from 'tests/fixtures'
 
 type Section = 'experience' | 'about-me' | 'projects' | 'education'
 
@@ -40,6 +41,10 @@ export class HomePage {
   }
 
   async getSectionTitle(section: Section): Promise<string> {
-    return this.page.locator(`section[id="${section}"] > h2`).textContent()
+    return (
+      (await this.page
+        .locator(`section[id="${section}"] > h2`)
+        .textContent()) || ''
+    )
   }
 }
