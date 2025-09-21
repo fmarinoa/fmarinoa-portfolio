@@ -4,7 +4,7 @@ export interface Project {
   technologies: string[]
   imageUrl?: ImageMetadata
   demoUrl?: string
-  githubUrl?: string
+  githubUrl: string
 }
 
 export type NavItem = {
