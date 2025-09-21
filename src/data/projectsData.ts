@@ -1,4 +1,4 @@
-import { Project } from '@/types';
+import { Project } from '@/types'
 
 export const projectsData: Omit<Project, 'imageUrl'>[] = [
   {
@@ -24,4 +24,4 @@ export const projectsData: Omit<Project, 'imageUrl'>[] = [
     githubUrl: 'https://github.com/fmarinoa/fmarinoa-portfolio',
     demoUrl: 'https://francomarino.vercel.app/',
   },
-];
+]

@@ -1,7 +1,7 @@
-import { Locator, Page } from 'tests/fixtures';
+import { Locator, Page } from 'tests/fixtures'
 
 export async function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 /**
@@ -22,6 +22,9 @@ export async function waitForNewPageEvent(
   link: Locator,
   timeoutMs?: number
 ): Promise<[Page, void]> {
-  const options = { ...(timeoutMs && { timeout: timeoutMs }) };
-  return await Promise.all([currentPage.context().waitForEvent('page', options), link.click()]);
+  const options = { ...(timeoutMs && { timeout: timeoutMs }) }
+  return await Promise.all([
+    currentPage.context().waitForEvent('page', options),
+    link.click(),
+  ])
 }

@@ -1,4 +1,4 @@
-import { Course } from '@/types';
+import { Course } from '@/types'
 
 export const courses: Course[] = [
   {
@@ -13,4 +13,4 @@ export const courses: Course[] = [
     year: '2023',
     url: 'https://www.scrumstudy.com/certification/verify?type=SFC&number=1016208',
   },
-];
+]
