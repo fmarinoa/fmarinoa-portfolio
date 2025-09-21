@@ -1,5 +1,7 @@
 ---
-type TIcon = { src: string; alt: string }
+import type { ImageMetadata } from 'astro'
+
+type TIcon = { src: ImageMetadata; alt: string }
 
 interface Props {
   readonly icons: TIcon[]
@@ -22,7 +24,7 @@ const { icons } = Astro.props as Props
           class="flex-shrink-0 w-16 h-16 bg-card border border-border rounded-xl flex items-center justify-center p-3 group hover:border-primary hover:shadow-lg hover:scale-110 transition-all duration-300"
         >
           <img
-            src={tool.src}
+            src={tool.src.src}
             alt={tool.alt}
             loading="lazy"
             class="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300"
