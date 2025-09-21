@@ -1,4 +1,4 @@
-import { Locator, Page } from 'tests/fixtures'
+import type { Locator, Page } from 'tests/fixtures'
 
 export async function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
@@ -25,6 +25,6 @@ export async function waitForNewPageEvent(
   const options = { ...(timeoutMs && { timeout: timeoutMs }) }
   return await Promise.all([
     currentPage.context().waitForEvent('page', options),
-    link.click(),
+    link.click({ force: true }),
   ])
 }
