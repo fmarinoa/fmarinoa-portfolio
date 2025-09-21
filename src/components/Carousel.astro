@@ -1,4 +1,5 @@
 ---
+// filepath: c:\mis proyectos\fmarinoa-portfolio\src\components\Carousel.astro
 import type { ImageMetadata } from 'astro'
 
 type TIcon = { src: ImageMetadata; alt: string }
@@ -21,16 +22,32 @@ const { icons } = Astro.props as Props
           role="listitem"
           tabindex="0"
           aria-label={tool.alt}
-          class="flex-shrink-0 w-16 h-16 bg-card border border-gray-700 rounded-xl flex items-center justify-center p-3 group hover:border-primary hover:shadow-lg hover:scale-110 transition-all duration-300"
+          class="tool-card flex-shrink-0 w-16 h-16 bg-card border border-gray-700 rounded-xl flex items-center justify-center p-3 transition-all duration-300"
         >
           <img
             src={tool.src.src}
             alt={tool.alt}
             loading="lazy"
-            class="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300"
+            class="tool-image w-full h-full object-contain transition-all duration-300"
           />
         </div>
       ))
     }
   </div>
 </div>
+
+<style>
+  /* Estilos hover para la tarjeta de herramienta */
+  .tool-card:hover {
+    border-color: rgb(60, 131, 246); /* primary/indigo-400 */
+    box-shadow:
+      0 10px 25px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    transform: scale(1.1); /* scale-110 */
+  }
+
+  /* Estilos hover para la imagen */
+  .tool-card:hover .tool-image {
+    filter: brightness(1.1); /* brightness-110 */
+  }
+</style>
