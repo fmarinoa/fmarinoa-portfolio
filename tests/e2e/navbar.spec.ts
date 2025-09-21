@@ -8,7 +8,7 @@ beforeEach(async ({ page }) => {
 
 test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Franco Mariño | Portfolio/)
-  await expect(page.locator('h1')).toHaveText('Franco Mariño')
+  await expect(page.locator('h1').nth(0)).toHaveText('Franco Mariño')
 })
 
 test('downloading CV shows thank-you alert and hides it after timeout', async ({
