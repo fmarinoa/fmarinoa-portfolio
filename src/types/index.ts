@@ -2,7 +2,7 @@ export interface Project {
   title: string
   description: string
   technologies: string[]
-  imageUrl?: ImageMetadata
+  imageUrl?: ImageMetadata | string
   demoUrl?: string
   githubUrl: string
 }

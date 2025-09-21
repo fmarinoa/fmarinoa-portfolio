@@ -1,7 +1,7 @@
 import franco from '@/assets/photos/franco.webp'
 import scrapper from '@/assets/projects/scrapper.webp'
 import whatismyip from '@/assets/projects/whatismyip.webp'
-import { Project } from '@/types'
+import type { Project } from '@/types'
 
 import { projectsData } from './projectsData'
 
