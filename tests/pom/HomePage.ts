@@ -36,7 +36,7 @@ export class HomePage {
   }
 
   async openCv(): Promise<void> {
-    this.page.locator('a[title="Download CV"]').click()
+    this.page.locator('#cv-btn').click()
     this.page.locator('button:has-text("De Acuerdo")').click()
   }
 
