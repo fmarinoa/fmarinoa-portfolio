@@ -24,7 +24,7 @@
     --radius: 0.75rem;
 
     /* Carousel */
-    --carousel-speed: 28s;
+    --carousel-speed: 50s;
   }
 
   /* Use HSL variables properly */
