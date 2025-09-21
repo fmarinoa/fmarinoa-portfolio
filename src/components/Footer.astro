@@ -39,9 +39,15 @@ const footerLinks = [
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
-            class="hover:text-gray-400 text-2xl"
+            class="social-link flex-shrink-0 rounded-xl flex items-center justify-center transition-all duration-300"
           >
-            <img src={icon.src} alt={alt} width={32} height={32} />
+            <img
+              class="social-img object-contain transition-all duration-300"
+              src={icon.src}
+              alt={alt}
+              width={32}
+              height={32}
+            />
           </a>
         ))
       }
@@ -71,3 +77,13 @@ const footerLinks = [
     }
   </div>
 </footer>
+
+<style>
+  .social-link:hover {
+    transform: scale(1.1);
+  }
+
+  .social-link:hover .social-img {
+    filter: brightness(1.1);
+  }
+</style>
