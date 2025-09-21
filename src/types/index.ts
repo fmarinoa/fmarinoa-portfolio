@@ -16,7 +16,7 @@ export interface Career {
   institutionShort: string
   location: string
   institutionLong: string
-  logo: string
+  logo: ImageMetadata
   title: string
   period: string
   details: string[]
