@@ -1,11 +1,11 @@
-import { capitalize } from '@/helpers/stringsUtils';
+import { capitalize } from '@/helpers/stringsUtils'
 
 const currentMonth = capitalize(
   new Date().toLocaleDateString('es-PE', {
     year: 'numeric',
     month: 'long',
   })
-);
+)
 
 export const jobList = [
   {
@@ -46,4 +46,4 @@ export const jobList = [
       'Implementación de marco de trabajo con GitFlow.',
     ],
   },
-];
+]
