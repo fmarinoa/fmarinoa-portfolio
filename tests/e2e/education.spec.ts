@@ -1,4 +1,4 @@
-import { careersMock } from 'tests/__mocks__/carrersMock'
+import { careersMock } from 'tests/__mocks__/careersMock'
 import { beforeEach, expect, test } from 'tests/fixtures'
 import { extractLocation } from 'tests/utils/extractUtils'
 import { sleep } from 'tests/utils/waits'

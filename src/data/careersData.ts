@@ -1,4 +1,4 @@
-import { Career } from '@/types'
+import type { Career } from '@/types'
 
 export const careersData: Omit<Career, 'logo'>[] = [
   {
