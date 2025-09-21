@@ -1,6 +1,6 @@
-import { projects } from '@/data/projects'
-import type { Project } from '@/types'
+import { projectsData } from '@/data/projectsData'
 
-export const projectsMock: Omit<Project, 'imageUrl'>[] = projects.map(
-  ({ imageUrl, ...rest }) => rest
-)
+export const projectsMock = projectsData.map(project => ({
+  ...project,
+  imageUrl: undefined,
+}))
