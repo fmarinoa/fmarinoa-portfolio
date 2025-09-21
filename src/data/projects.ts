@@ -5,16 +5,7 @@ import type { Project } from '@/types'
 import { projectsData } from './projectsData'
 
 export const projects: Project[] = [
-  {
-    ...projectsData[0],
-    imageUrl: scrapper,
-  },
-  {
-    ...projectsData[1],
-    imageUrl: whatismyip,
-  },
-  {
-    ...projectsData[2],
-    imageUrl: franco,
-  },
+  { ...projectsData[0], imageUrl: scrapper },
+  { ...projectsData[1], imageUrl: whatismyip },
+  { ...projectsData[2], imageUrl: franco },
 ]
