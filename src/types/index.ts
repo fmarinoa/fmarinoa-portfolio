@@ -1,8 +1,10 @@
+import type { ImageMetadata } from 'astro'
+
 export interface Project {
   title: string
   description: string
   technologies: string[]
-  imageUrl?: ImageMetadata | string
+  imageUrl?: ImageMetadata
   demoUrl?: string
   githubUrl: string
 }
