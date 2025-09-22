@@ -14,5 +14,5 @@ export class Constants {
   static readonly PROFILE_GITHUB_URL: string = 'https://github.com/fmarinoa'
 
   static readonly PROFILE_LINKEDIN_URL: string =
-    'https://pe.linkedin.com/in/fmarinoa?trk=profile-badge'
+    'https://www.linkedin.com/in/fmarinoa/'
 }
