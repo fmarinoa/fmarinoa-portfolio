@@ -1,8 +1,6 @@
 ---
 import downloadIcon from '@/assets/icons/download.svg'
-import Alert from '@/components/Alert.astro'
 import CvModal from '@/components/CvModal.astro'
-import { Constants } from '@/data/constants'
 
 import type { NavItem } from '@/types'
 
@@ -51,13 +49,14 @@ const navItems: NavItem[] = [
 
     <ul
       id="nav-menu"
-      class="flex-col md:flex-row gap-4 absolute md:static top-14 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent transition-all duration-200 ease-in-out hidden md:flex md:items-center"
+      class="flex-col md:flex-row gap-4 absolute md:static top-14 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent transition-all duration-200 ease-in-out hidden md:flex md:items-center pb-2"
     >
       {
         navItems.map(item => (
           <li>
             <a
               href={item.href}
+              aria-label={item.href.split('#').pop()}
               class="nav-link block py-2 px-4 md:p-0 transition-colors duration-200 text-white hover:text-indigo-300"
             >
               {item.label}
@@ -68,41 +67,41 @@ const navItems: NavItem[] = [
     </ul>
   </div>
 </nav>
-<CvModal />
-<Alert message="¡Gracias por abrir mi CV!" state="success" />
 
-<script define:vars={{ CV_URL: Constants.CV_URL }}>
+<CvModal triggerElementId="cv-btn" />
+
+<script is:inline define:vars={{ sections: navItems.map(i => i.href) }}>
   // Variables de estado
   let menuOpen = false
   let currentSection = ''
 
   // Elementos del DOM
-  const menuToggle = document.getElementById('menu-toggle')
   const navMenu = document.getElementById('nav-menu')
   const hamburgerLines = document.querySelectorAll('.hamburger-line')
   const navLinks = document.querySelectorAll('.nav-link')
-  const cvBtn = document.getElementById('cv-btn')
-  const cvModal = document.getElementById('cv-modal')
-  const confirmBtn = document.getElementById('confirm-btn')
-  const cancelBtn = document.getElementById('cancel-btn')
-  const alert = document.getElementById('alert')
+
+  const toggleMenuStyles = open => {
+    navMenu?.classList.toggle('hidden', !open)
+    navMenu?.classList.toggle('flex', open)
+    navMenu?.classList.toggle('rounded-b-2xl', open)
+    hamburgerLines[0]?.classList.toggle('rotate-45', open)
+    hamburgerLines[0]?.classList.toggle('translate-y-1.5', open)
+    hamburgerLines[1]?.classList.toggle('opacity-0', open)
+    hamburgerLines[2]?.classList.toggle('-rotate-45', open)
+    hamburgerLines[2]?.classList.toggle('-translate-y-1.5', open)
+  }
+
+  const removeMenuStyles = () => toggleMenuStyles(false)
+  const addMenuStyles = () => toggleMenuStyles(true)
 
   // Toggle del menú móvil
-  menuToggle?.addEventListener('click', () => {
+  document.getElementById('menu-toggle').addEventListener('click', () => {
     menuOpen = !menuOpen
 
     if (menuOpen) {
-      navMenu?.classList.remove('hidden')
-      navMenu?.classList.add('flex', 'rounded-b-2xl')
-      hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-1.5')
-      hamburgerLines[1]?.classList.add('opacity-0')
-      hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-1.5')
+      addMenuStyles()
     } else {
-      navMenu?.classList.add('hidden')
-      navMenu?.classList.remove('flex', 'rounded-b-2xl')
-      hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-1.5')
-      hamburgerLines[1]?.classList.remove('opacity-0')
-      hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-1.5')
+      removeMenuStyles()
     }
   })
 
@@ -111,11 +110,7 @@ const navItems: NavItem[] = [
     link.addEventListener('click', () => {
       if (menuOpen) {
         menuOpen = false
-        navMenu?.classList.add('hidden')
-        navMenu?.classList.remove('flex', 'rounded-b-2xl')
-        hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-1.5')
-        hamburgerLines[1]?.classList.remove('opacity-0')
-        hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-1.5')
+        removeMenuStyles()
       }
     })
   })
@@ -123,64 +118,31 @@ const navItems: NavItem[] = [
   // Highlight de sección activa en scroll
   function updateActiveSection() {
     const scrollPos = window.scrollY + 100
-    const sections = ['#about-me', '#experience', '#projects', '#education']
 
     for (const sectionId of sections) {
       const section = document.querySelector(sectionId)
-      if (section) {
-        const rect = section.getBoundingClientRect()
-        const sectionTop = window.scrollY + rect.top
-        const sectionBottom = sectionTop + rect.height
+      const rect = section.getBoundingClientRect()
+      const sectionTop = window.scrollY + rect.top
+      const sectionBottom = sectionTop + rect.height
 
-        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-          if (currentSection !== sectionId) {
-            currentSection = sectionId
+      if (scrollPos <= sectionTop && scrollPos > sectionBottom) return
+      if (currentSection === sectionId) return
 
-            // Actualizar estilos de navegación
-            navLinks.forEach(link => {
-              if (link.getAttribute('href') === sectionId) {
-                link.classList.add('text-indigo-400', 'font-semibold')
-                link.classList.remove('text-white')
-              } else {
-                link.classList.remove('text-indigo-400', 'font-semibold')
-                link.classList.add('text-white')
-              }
-            })
-          }
-          break
+      currentSection = sectionId
+
+      // Actualizar estilos de navegación
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === sectionId) {
+          link.classList.add('text-indigo-400', 'font-semibold')
+          link.classList.remove('text-white')
+        } else {
+          link.classList.remove('text-indigo-400', 'font-semibold')
+          link.classList.add('text-white')
         }
-      }
+      })
     }
   }
 
   // Event listener para scroll
   window.addEventListener('scroll', updateActiveSection)
-
-  // Modal del CV
-  cvBtn?.addEventListener('click', () => {
-    cvModal?.classList.remove('hidden')
-    cvModal?.classList.add('flex')
-  })
-
-  cancelBtn?.addEventListener('click', () => {
-    cvModal?.classList.add('hidden')
-  })
-
-  confirmBtn?.addEventListener('click', () => {
-    cvModal?.classList.add('hidden')
-    window.open(CV_URL, '_blank', 'noopener,noreferrer')
-
-    // Mostrar alert
-    alert?.classList.remove('hidden')
-    setTimeout(() => {
-      alert?.classList.add('hidden')
-    }, 3000)
-  })
-
-  // Cerrar modal al hacer clic fuera
-  cvModal?.addEventListener('click', e => {
-    if (e.target === cvModal) {
-      cvModal.classList.add('hidden')
-    }
-  })
 </script>

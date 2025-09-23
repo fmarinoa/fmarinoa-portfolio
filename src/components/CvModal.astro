@@ -1,3 +1,13 @@
+---
+import { Constants } from '@/data/constants'
+import Alert from './Alert.astro'
+
+interface Props {
+  triggerElementId: string
+}
+const { triggerElementId } = Astro.props
+---
+
 <div
   id="cv-modal"
   class="fixed inset-0 items-center justify-center bg-black/50 z-50 hidden"
@@ -24,3 +34,33 @@
     </div>
   </div>
 </div>
+
+<Alert
+  message="¡Gracias por abrir mi CV!"
+  state="success"
+  triggerElementId="confirm-btn"
+/>
+
+<script is:inline define:vars={{ CV_URL: Constants.CV_URL, triggerElementId }}>
+  const cvModal = document.getElementById('cv-modal')
+
+  document.getElementById(triggerElementId).addEventListener('click', () => {
+    cvModal?.classList.remove('hidden')
+    cvModal?.classList.add('flex')
+  })
+
+  document.getElementById('cancel-btn').addEventListener('click', () => {
+    cvModal?.classList.add('hidden')
+  })
+
+  document.getElementById('confirm-btn').addEventListener('click', () => {
+    cvModal?.classList.add('hidden')
+    window.open(CV_URL, '_blank', 'noopener,noreferrer')
+  })
+
+  cvModal?.addEventListener('click', e => {
+    if (e.target === cvModal) {
+      cvModal.classList.add('hidden')
+    }
+  })
+</script>

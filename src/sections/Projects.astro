@@ -3,6 +3,9 @@ import Link from '@/components/Link.astro'
 import { projects } from '@/data/projects'
 import type { Project } from '@/types'
 import Section from '@/components/Section.astro'
+import GitHub from '@/assets/icons/GitHub.astro'
+
+const styleLink = 'bg-gray-700 px-2 py-1 rounded inline-flex items-center gap-1'
 ---
 
 <Section sectionId="projects" title="Proyectos personales">
@@ -43,12 +46,16 @@ import Section from '@/components/Section.astro'
             </div>
 
             <div class="flex justify-end w-full text-sm mt-auto">
-              <div class="flex gap-4">
-                {project.demoUrl && <Link href={project.demoUrl}>Demo 🛜</Link>}
-                {project.githubUrl && (
-                  <Link href={project.githubUrl}>{'< GitHub / >'}</Link>
-                )}
-              </div>
+              {project.demoUrl && (
+                <Link href={project.demoUrl} className={`${styleLink} mr-2`}>
+                  🛜 Demo
+                </Link>
+              )}
+              {project.githubUrl && (
+                <Link href={project.githubUrl} className={styleLink}>
+                  <GitHub class="size-5" /> Código
+                </Link>
+              )}
             </div>
           </article>
         ))
