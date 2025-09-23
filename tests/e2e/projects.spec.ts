@@ -42,7 +42,13 @@ test('validate effects in cards', async ({ page, homePage, isMobile }) => {
   }
 })
 
-test('has correct number of project entries', async ({ homePage }) => {
+test('has correct number of project entries', async ({
+  homePage,
+  isMobile,
+}) => {
+  await homePage.openMenuIfMobile(isMobile)
+  await homePage.goToSection('projects')
+
   const projectEntries = await homePage.getProjectsCards()
   const count = await projectEntries.count()
   expect(count / 2).toBe(projectsMock.length)
@@ -50,7 +56,11 @@ test('has correct number of project entries', async ({ homePage }) => {
 
 test('should display correct project information for each project', async ({
   homePage,
+  isMobile,
 }) => {
+  await homePage.openMenuIfMobile(isMobile)
+  await homePage.goToSection('projects')
+
   const projectEntries = await homePage.getProjectsCards()
 
   for (const [index, project] of projectsMock.entries()) {
@@ -65,13 +75,13 @@ test('should display correct project information for each project', async ({
     ).map(t => t.trim())
     expect(actualTechs).toEqual(project.technologies)
 
-    await expect(entry.locator('a:has-text("< GitHub / >")')).toHaveAttribute(
+    await expect(entry.locator('a:has-text("Código")')).toHaveAttribute(
       'href',
       project.githubUrl
     )
 
     if (project.demoUrl) {
-      await expect(entry.locator('a:has-text("Demo 🛜")')).toHaveAttribute(
+      await expect(entry.locator('a:has-text("🛜 Demo")')).toHaveAttribute(
         'href',
         project.demoUrl
       )

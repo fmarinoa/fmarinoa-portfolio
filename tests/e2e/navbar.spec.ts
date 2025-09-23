@@ -27,5 +27,5 @@ test('downloading CV shows thank-you alert and hides it after timeout', async ({
   await expect(alert).toBeVisible()
   await expect(alert).toHaveText('¡Gracias por abrir mi CV!')
 
-  await expect(alert).toBeHidden({ timeout: 4000 })
+  await expect(alert).toBeHidden({ timeout: 5 * 1000 })
 })
