@@ -1,8 +1,6 @@
 ---
 import downloadIcon from '@/assets/icons/download.svg'
-import Alert from '@/components/Alert.astro'
 import CvModal from '@/components/CvModal.astro'
-import { Constants } from '@/data/constants'
 
 import type { NavItem } from '@/types'
 
@@ -69,9 +67,8 @@ const navItems: NavItem[] = [
   </div>
 </nav>
 <CvModal />
-<Alert message="¡Gracias por abrir mi CV!" state="success" />
 
-<script define:vars={{ CV_URL: Constants.CV_URL }}>
+<script>
   // Variables de estado
   let menuOpen = false
   let currentSection = ''
@@ -83,9 +80,6 @@ const navItems: NavItem[] = [
   const navLinks = document.querySelectorAll('.nav-link')
   const cvBtn = document.getElementById('cv-btn')
   const cvModal = document.getElementById('cv-modal')
-  const confirmBtn = document.getElementById('confirm-btn')
-  const cancelBtn = document.getElementById('cancel-btn')
-  const alert = document.getElementById('alert')
 
   // Toggle del menú móvil
   menuToggle?.addEventListener('click', () => {
@@ -160,21 +154,6 @@ const navItems: NavItem[] = [
   cvBtn?.addEventListener('click', () => {
     cvModal?.classList.remove('hidden')
     cvModal?.classList.add('flex')
-  })
-
-  cancelBtn?.addEventListener('click', () => {
-    cvModal?.classList.add('hidden')
-  })
-
-  confirmBtn?.addEventListener('click', () => {
-    cvModal?.classList.add('hidden')
-    window.open(CV_URL, '_blank', 'noopener,noreferrer')
-
-    // Mostrar alert
-    alert?.classList.remove('hidden')
-    setTimeout(() => {
-      alert?.classList.add('hidden')
-    }, 3000)
   })
 
   // Cerrar modal al hacer clic fuera

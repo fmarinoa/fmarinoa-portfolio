@@ -1,3 +1,8 @@
+---
+import { Constants } from '@/data/constants'
+import Alert from './Alert.astro'
+---
+
 <div
   id="cv-modal"
   class="fixed inset-0 items-center justify-center bg-black/50 z-50 hidden"
@@ -24,3 +29,34 @@
     </div>
   </div>
 </div>
+
+<Alert message="¡Gracias por abrir mi CV!" state="success" />
+
+<script define:vars={{ CV_URL: Constants.CV_URL }}>
+  const cvModal = document.getElementById('cv-modal')
+  const confirmBtn = document.getElementById('confirm-btn')
+  const cancelBtn = document.getElementById('cancel-btn')
+  const alert = document.getElementById('alert')
+
+  cancelBtn?.addEventListener('click', () => {
+    cvModal?.classList.add('hidden')
+  })
+
+  confirmBtn?.addEventListener('click', () => {
+    cvModal?.classList.add('hidden')
+    window.open(CV_URL, '_blank', 'noopener,noreferrer')
+
+    // Mostrar alert
+    alert?.classList.remove('hidden')
+    setTimeout(() => {
+      alert?.classList.add('hidden')
+    }, 3000)
+  })
+
+  // Cerrar modal al hacer clic fuera
+  cvModal?.addEventListener('click', e => {
+    if (e.target === cvModal) {
+      cvModal.classList.add('hidden')
+    }
+  })
+</script>
