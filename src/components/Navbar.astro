@@ -1,6 +1,7 @@
 ---
 import downloadIcon from '@/assets/icons/download.svg'
 import CvModal from '@/components/CvModal.astro'
+import { toKebabOrLower } from '@/helpers/stringsUtils'
 
 import type { NavItem } from '@/types'
 
@@ -56,6 +57,7 @@ const navItems: NavItem[] = [
           <li>
             <a
               href={item.href}
+              aria-label={toKebabOrLower(item.label)}
               class="nav-link block py-2 px-4 md:p-0 transition-colors duration-200 text-white hover:text-indigo-300"
             >
               {item.label}
