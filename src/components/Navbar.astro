@@ -1,7 +1,6 @@
 ---
 import downloadIcon from '@/assets/icons/download.svg'
 import CvModal from '@/components/CvModal.astro'
-import { toKebabOrLower } from '@/helpers/stringsUtils'
 
 import type { NavItem } from '@/types'
 
@@ -57,7 +56,7 @@ const navItems: NavItem[] = [
           <li>
             <a
               href={item.href}
-              aria-label={toKebabOrLower(item.label)}
+              aria-label={item.href.split('#').pop()}
               class="nav-link block py-2 px-4 md:p-0 transition-colors duration-200 text-white hover:text-indigo-300"
             >
               {item.label}
@@ -68,37 +67,41 @@ const navItems: NavItem[] = [
     </ul>
   </div>
 </nav>
-<CvModal />
 
-<script>
+<CvModal triggerElementId="cv-btn" />
+
+<script is:inline define:vars={{ sections: navItems.map(i => i.href) }}>
   // Variables de estado
   let menuOpen = false
   let currentSection = ''
 
   // Elementos del DOM
-  const menuToggle = document.getElementById('menu-toggle')
   const navMenu = document.getElementById('nav-menu')
   const hamburgerLines = document.querySelectorAll('.hamburger-line')
   const navLinks = document.querySelectorAll('.nav-link')
-  const cvBtn = document.getElementById('cv-btn')
-  const cvModal = document.getElementById('cv-modal')
+
+  const toggleMenuStyles = open => {
+    navMenu?.classList.toggle('hidden', !open)
+    navMenu?.classList.toggle('flex', open)
+    navMenu?.classList.toggle('rounded-b-2xl', open)
+    hamburgerLines[0]?.classList.toggle('rotate-45', open)
+    hamburgerLines[0]?.classList.toggle('translate-y-1.5', open)
+    hamburgerLines[1]?.classList.toggle('opacity-0', open)
+    hamburgerLines[2]?.classList.toggle('-rotate-45', open)
+    hamburgerLines[2]?.classList.toggle('-translate-y-1.5', open)
+  }
+
+  const removeMenuStyles = () => toggleMenuStyles(false)
+  const addMenuStyles = () => toggleMenuStyles(true)
 
   // Toggle del menú móvil
-  menuToggle?.addEventListener('click', () => {
+  document.getElementById('menu-toggle').addEventListener('click', () => {
     menuOpen = !menuOpen
 
     if (menuOpen) {
-      navMenu?.classList.remove('hidden')
-      navMenu?.classList.add('flex', 'rounded-b-2xl')
-      hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-1.5')
-      hamburgerLines[1]?.classList.add('opacity-0')
-      hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-1.5')
+      addMenuStyles()
     } else {
-      navMenu?.classList.add('hidden')
-      navMenu?.classList.remove('flex', 'rounded-b-2xl')
-      hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-1.5')
-      hamburgerLines[1]?.classList.remove('opacity-0')
-      hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-1.5')
+      removeMenuStyles()
     }
   })
 
@@ -107,11 +110,7 @@ const navItems: NavItem[] = [
     link.addEventListener('click', () => {
       if (menuOpen) {
         menuOpen = false
-        navMenu?.classList.add('hidden')
-        navMenu?.classList.remove('flex', 'rounded-b-2xl')
-        hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-1.5')
-        hamburgerLines[1]?.classList.remove('opacity-0')
-        hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-1.5')
+        removeMenuStyles()
       }
     })
   })
@@ -119,49 +118,31 @@ const navItems: NavItem[] = [
   // Highlight de sección activa en scroll
   function updateActiveSection() {
     const scrollPos = window.scrollY + 100
-    const sections = ['#about-me', '#experience', '#projects', '#education']
 
     for (const sectionId of sections) {
       const section = document.querySelector(sectionId)
-      if (section) {
-        const rect = section.getBoundingClientRect()
-        const sectionTop = window.scrollY + rect.top
-        const sectionBottom = sectionTop + rect.height
+      const rect = section.getBoundingClientRect()
+      const sectionTop = window.scrollY + rect.top
+      const sectionBottom = sectionTop + rect.height
 
-        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-          if (currentSection !== sectionId) {
-            currentSection = sectionId
+      if (scrollPos <= sectionTop && scrollPos > sectionBottom) return
+      if (currentSection === sectionId) return
 
-            // Actualizar estilos de navegación
-            navLinks.forEach(link => {
-              if (link.getAttribute('href') === sectionId) {
-                link.classList.add('text-indigo-400', 'font-semibold')
-                link.classList.remove('text-white')
-              } else {
-                link.classList.remove('text-indigo-400', 'font-semibold')
-                link.classList.add('text-white')
-              }
-            })
-          }
-          break
+      currentSection = sectionId
+
+      // Actualizar estilos de navegación
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === sectionId) {
+          link.classList.add('text-indigo-400', 'font-semibold')
+          link.classList.remove('text-white')
+        } else {
+          link.classList.remove('text-indigo-400', 'font-semibold')
+          link.classList.add('text-white')
         }
-      }
+      })
     }
   }
 
   // Event listener para scroll
   window.addEventListener('scroll', updateActiveSection)
-
-  // Modal del CV
-  cvBtn?.addEventListener('click', () => {
-    cvModal?.classList.remove('hidden')
-    cvModal?.classList.add('flex')
-  })
-
-  // Cerrar modal al hacer clic fuera
-  cvModal?.addEventListener('click', e => {
-    if (e.target === cvModal) {
-      cvModal.classList.add('hidden')
-    }
-  })
 </script>
