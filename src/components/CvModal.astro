@@ -30,30 +30,24 @@ import Alert from './Alert.astro'
   </div>
 </div>
 
-<Alert message="¡Gracias por abrir mi CV!" state="success" />
+<Alert
+  message="¡Gracias por abrir mi CV!"
+  state="success"
+  triggerElementId="confirm-btn"
+/>
 
-<script define:vars={{ CV_URL: Constants.CV_URL }}>
+<script is:inline define:vars={{ CV_URL: Constants.CV_URL }}>
   const cvModal = document.getElementById('cv-modal')
-  const confirmBtn = document.getElementById('confirm-btn')
-  const cancelBtn = document.getElementById('cancel-btn')
-  const alert = document.getElementById('alert')
 
-  cancelBtn?.addEventListener('click', () => {
+  document.getElementById('cancel-btn').addEventListener('click', () => {
     cvModal?.classList.add('hidden')
   })
 
-  confirmBtn?.addEventListener('click', () => {
+  document.getElementById('confirm-btn').addEventListener('click', () => {
     cvModal?.classList.add('hidden')
     window.open(CV_URL, '_blank', 'noopener,noreferrer')
-
-    // Mostrar alert
-    alert?.classList.remove('hidden')
-    setTimeout(() => {
-      alert?.classList.add('hidden')
-    }, 3000)
   })
 
-  // Cerrar modal al hacer clic fuera
   cvModal?.addEventListener('click', e => {
     if (e.target === cvModal) {
       cvModal.classList.add('hidden')

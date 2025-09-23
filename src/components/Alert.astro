@@ -2,9 +2,11 @@
 interface Props {
   message: string
   state: 'success' | 'failed'
+  triggerElementId: string
+  timeout?: number
 }
 
-const { message, state } = Astro.props
+const { message, state, triggerElementId, timeout = 5 * 1000 } = Astro.props
 
 const bgColor = state === 'success' ? 'bg-green-500' : 'bg-red-500'
 ---
@@ -15,3 +17,14 @@ const bgColor = state === 'success' ? 'bg-green-500' : 'bg-red-500'
 >
   {message}
 </div>
+
+<script is:inline define:vars={{ triggerElementId, timeout }}>
+  const alert = document.getElementById('alert')
+
+  document.getElementById(triggerElementId).addEventListener('click', () => {
+    alert.classList.remove('hidden')
+    setTimeout(() => {
+      alert.classList.add('hidden')
+    }, timeout)
+  })
+</script>
