@@ -115,6 +115,12 @@ const navItems: NavItem[] = [
     })
   })
 
+  const setLinkHighlight = (link, active) => {
+    link.classList.toggle('text-indigo-400', active)
+    link.classList.toggle('font-semibold', active)
+    link.classList.toggle('text-white', !active)
+  }
+
   // Highlight de sección activa en scroll
   function updateActiveSection() {
     const scrollPos = window.scrollY + 100
@@ -125,19 +131,18 @@ const navItems: NavItem[] = [
       const sectionTop = window.scrollY + rect.top
       const sectionBottom = sectionTop + rect.height
 
-      if (scrollPos <= sectionTop && scrollPos > sectionBottom) return
-      if (currentSection === sectionId) return
+      if (!section) continue
+
+      if (scrollPos <= sectionTop || scrollPos > sectionBottom) continue
+
+      if (currentSection === sectionId) break
 
       currentSection = sectionId
-
-      // Actualizar estilos de navegación
       navLinks.forEach(link => {
         if (link.getAttribute('href') === sectionId) {
-          link.classList.add('text-indigo-400', 'font-semibold')
-          link.classList.remove('text-white')
+          setLinkHighlight(link, true)
         } else {
-          link.classList.remove('text-indigo-400', 'font-semibold')
-          link.classList.add('text-white')
+          setLinkHighlight(link, false)
         }
       })
     }
