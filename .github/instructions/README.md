@@ -3,9 +3,9 @@ To configure the commit message instruction, add the following entry to your set
 ```json
 "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-        "file": ".github/instructions/commit-message.instructions.md"
+        "file": ".github/instructions/copilot-commit-message.instructions.md"
     }
 ]
 ```
 
-This tells GitHub Copilot Chat to use the instructions specified in `.github/instructions/commit-message.instructions.md` when generating commit messages.
+This tells GitHub Copilot Chat to use the instructions specified in `.github/instructions/copilot-commit-message.instructions.md` when generating commit messages.
