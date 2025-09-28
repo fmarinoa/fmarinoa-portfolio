@@ -7,7 +7,8 @@
     "period": "2025 - 2028",
     "details": [
       "Participación en proyectos de desarrollo de software ágiles."
-    ]
+    ],
+    "logo": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/education/idat.webp"
   },
   {
     "institutionShort": "IDAT",
@@ -19,6 +20,7 @@
       "Especialización en pruebas de software y automatización.",
       "Desarrollo de aplicaciones backend, web y móviles.",
       "Implementación de bases de datos y sistemas de gestión."
-    ]
+    ],
+    "logo": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/education/upc.webp"
   }
 ]
