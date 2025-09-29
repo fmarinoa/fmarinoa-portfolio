@@ -11,6 +11,11 @@ const urls = {
   jobs: `${BASE_URL}/data/jobs.json`,
   tools: `${BASE_URL}/data/tools.json`,
   photos: `${BASE_URL}/assets/photos/`,
+  icons: `${BASE_URL}/assets/icons/`,
+}
+
+export function getIconUrl(filename: string): string {
+  return `${urls.icons}${filename}.svg`
 }
 
 export function getPhotoUrl(filename: string): string {
