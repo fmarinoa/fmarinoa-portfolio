@@ -2,8 +2,10 @@
 import franco from '@/assets/photos/franco.webp'
 import Carousel from '@/components/Carousel.astro'
 import Section from '@/components/Section.astro'
-import { Constants } from '@/data/constants'
 import { toolsList } from '@/data/tools'
+import { getAbout } from '@/lib/content'
+
+const aboutMeParagraph = await getAbout()
 
 const mid: number = Math.ceil(toolsList.length / 2)
 const first = [...toolsList.slice(0, mid), ...toolsList.slice(0, mid)]
@@ -22,11 +24,9 @@ const second = [...toolsList.slice(mid), ...toolsList.slice(mid)]
     />
 
     <div class="flex flex-col w-full md:max-w-lg">
-      <p class="mb-6 text-center md:text-left">
-        {Constants.aboutMeParagraph}
-      </p>
+      <p class="mb-2 text-center md:text-left" set:html={aboutMeParagraph} />
 
-      <h3 class="text-lg font-semibold text-white mb-4">
+      <h3 class="text-lg font-semibold text-white mb-4 mt-6">
         Herramientas y tecnologías:
       </h3>
 
