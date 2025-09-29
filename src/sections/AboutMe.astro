@@ -1,8 +1,7 @@
 ---
-import franco from '@/assets/photos/franco.webp'
 import Carousel from '@/components/Carousel.astro'
 import Section from '@/components/Section.astro'
-import { getAbout, getTools } from '@/lib/content'
+import { getAbout, getPhotoUrl, getTools } from '@/lib/content'
 
 const aboutMeParagraph: string = await getAbout()
 const toolsList = await getTools()
@@ -15,7 +14,7 @@ const second = [...toolsList.slice(mid), ...toolsList.slice(mid)]
 <Section sectionId="about-me" title="Sobre mí">
   <div class="flex flex-col md:flex-row gap-8 items-start md:items-stretch">
     <img
-      src={franco.src}
+      src={getPhotoUrl('franco')}
       alt="Ingeniero Franco Mariño"
       width={256}
       height={256}
