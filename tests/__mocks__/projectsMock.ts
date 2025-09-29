@@ -1,3 +1,3 @@
-import { projectsData } from '@/data/projectsData'
+import { getProjects } from '@/lib/content'
 
-export const projectsMock = projectsData
+export const projectsMock = getProjects()

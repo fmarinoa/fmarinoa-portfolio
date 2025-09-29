@@ -1,3 +1,3 @@
-import { careersData } from '@/data/careersData'
+import { getCareers } from '@/lib/content'
 
-export const careersMock = careersData
+export const careersMock = await getCareers()
