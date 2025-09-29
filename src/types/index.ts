@@ -1,5 +1,3 @@
-import type { ImageMetadata } from 'astro'
-
 export interface Project {
   title: string
   description: string
@@ -20,9 +18,9 @@ export interface Career {
   institutionShort: string
   location: string
   institutionLong: string
-  logo: ImageMetadata
+  logo: string
   title: string
-  period: string
+  period: { start: string; end?: string }
   details: string[]
 }
 
