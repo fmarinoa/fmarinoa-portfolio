@@ -22,6 +22,12 @@ export async function getGlobals() {
   return res.json()
 }
 
+export async function getGlobal(globalKey: string) {
+  const res = await fetch(urls.globals)
+  const data = await res.json()
+  return data[globalKey]
+}
+
 export async function getAbout(): Promise<string> {
   const res = await fetch(urls.about)
   const md = await res.text()
