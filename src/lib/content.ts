@@ -10,6 +10,11 @@ const urls = {
   courses: `${BASE_URL}/data/courses.json`,
   jobs: `${BASE_URL}/data/jobs.json`,
   tools: `${BASE_URL}/data/tools.json`,
+  photos: `${BASE_URL}/assets/photos/`,
+}
+
+export function getPhotoUrl(filename: string): string {
+  return `${urls.photos}${filename}.webp`
 }
 
 export async function getGlobals() {
