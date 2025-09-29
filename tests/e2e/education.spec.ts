@@ -1,9 +1,8 @@
+import { getCourses } from '@/lib/content'
 import { careersMock } from 'tests/__mocks__/careersMock'
 import { beforeEach, expect, test } from 'tests/fixtures'
 import { extractLocation } from 'tests/utils/extractUtils'
 import { sleep } from 'tests/utils/waits'
-
-import { courses } from '@/data/courses'
 
 beforeEach(async ({ page }) => {
   await page.goto('/')
@@ -65,7 +64,7 @@ test('should display correct careers information for each education entry', asyn
     expect(textLocation).toBe(career.location)
 
     await expect(card.locator('div.text-sm.text-gray-300 > p')).toHaveText(
-      `📅 ${career.period}`
+      `📅 ${career.period.start} - ${career.period.end}`
     )
 
     const detailItems = await card.locator('ul li').all()
@@ -82,7 +81,7 @@ test('should display correct courses information for each education entry', asyn
   expect(await educationSection.locator('h3.text-lg').textContent()).toBe(
     'Algunas certificaciones:'
   )
-
+  const courses = await getCourses()
   const coursesCards = await educationSection.locator('ul.pl-2 > li').all()
 
   for (const [index, course] of courses.entries()) {
