@@ -17,7 +17,7 @@ export async function getGlobals() {
   return res.json()
 }
 
-export async function getAbout() {
+export async function getAbout(): Promise<string> {
   const res = await fetch(urls.about)
   const md = await res.text()
   return marked.parse(md)

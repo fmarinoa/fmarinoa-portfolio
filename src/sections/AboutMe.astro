@@ -2,10 +2,10 @@
 import franco from '@/assets/photos/franco.webp'
 import Carousel from '@/components/Carousel.astro'
 import Section from '@/components/Section.astro'
-import { toolsList } from '@/data/tools'
-import { getAbout } from '@/lib/content'
+import { getAbout, getTools } from '@/lib/content'
 
-const aboutMeParagraph = await getAbout()
+const aboutMeParagraph: string = await getAbout()
+const toolsList = await getTools()
 
 const mid: number = Math.ceil(toolsList.length / 2)
 const first = [...toolsList.slice(0, mid), ...toolsList.slice(0, mid)]
