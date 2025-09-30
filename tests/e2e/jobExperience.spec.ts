@@ -1,3 +1,4 @@
+import { formatPeriod } from '@/helpers/stringsUtils'
 import { beforeEach, expect, test } from 'tests/fixtures'
 import { fetchJobs } from 'tests/utils/api'
 import { extractLocation } from 'tests/utils/extractUtils'
@@ -64,7 +65,7 @@ test('should display correct experience information for each job', async ({
     expect(textLocation).toBe(job.location)
 
     await expect(group.locator('div.text-sm.text-gray-300 > p')).toHaveText(
-      `📅 ${job.period}`
+      `📅 ${formatPeriod(job.period)}`
     )
 
     const detailItems = await group.locator('ul li').all()
