@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 
 import sitemap from '@astrojs/sitemap'
+import vercelAdapter from '@astrojs/vercel'
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,4 +18,10 @@ export default defineConfig({
   },
 
   integrations: [sitemap()],
+
+  adapter: vercelAdapter({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 })
