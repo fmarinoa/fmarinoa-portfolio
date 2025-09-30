@@ -7,7 +7,7 @@ import vercelAdapter from '@astrojs/vercel'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://portfolio.francomarino.dev/',
+  site: 'https://portfolio.francomarino.dev',
 
   vite: {
     plugins: [tailwindcss()],
