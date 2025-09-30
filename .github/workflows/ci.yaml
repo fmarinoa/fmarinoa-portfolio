@@ -7,6 +7,11 @@ on:
 jobs:
   lint-test:
     runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: test
+      CONTENT_BASE_URL: ${{ secrets.CONTENT_BASE_URL }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
