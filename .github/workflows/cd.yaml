@@ -14,7 +14,7 @@ jobs:
 
     environment:
       name: Production
-      url: https://francomarino.vercel.app
+      url: https://portfolio.francomarino.dev/
 
     permissions:
       contents: write
