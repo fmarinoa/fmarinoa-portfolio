@@ -1,6 +1,5 @@
 ---
 import Link from './Link.astro'
-import type { ImageMetadata } from 'astro'
 
 interface Props {
   readonly title: string
@@ -9,7 +8,7 @@ interface Props {
   readonly location: string
   readonly period: string
   readonly details: string[]
-  readonly logo?: ImageMetadata
+  readonly logo?: string
   readonly logoAlt?: string
 }
 
@@ -26,7 +25,7 @@ const { title, entity, linkEntity, location, period, details, logo, logoAlt } =
       <div class="grid grid-cols-[auto_1fr] gap-4 items-center">
         <div class="flex-shrink-0">
           <img
-            src={logo.src}
+            src={logo}
             alt={logoAlt ?? entity}
             width={60}
             height={60}

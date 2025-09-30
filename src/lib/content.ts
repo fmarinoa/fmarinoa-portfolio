@@ -1,0 +1,70 @@
+import { marked } from 'marked'
+
+const BASE_URL = import.meta.env.CONTENT_BASE_URL
+
+const endpoints = {
+  globals: '/data/globals.json',
+  about: '/data/aboutMe.md',
+  projects: '/data/projects.json',
+  careers: '/data/careers.json',
+  courses: '/data/courses.json',
+  jobs: '/data/jobs.json',
+  tools: '/data/tools.json',
+} as const
+
+const assetPaths = {
+  photos: '/assets/photos/',
+  icons: '/assets/icons/',
+} as const
+
+async function fetchData<T>(endpoint: string, fallback: T): Promise<T> {
+  try {
+    const response = await fetch(`${BASE_URL}${endpoint}`)
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    return await response.json()
+  } catch (error) {
+    console.warn(`Failed to fetch ${endpoint}:`, error)
+    return fallback
+  }
+}
+
+async function fetchText(endpoint: string, fallback = ''): Promise<string> {
+  try {
+    const response = await fetch(`${BASE_URL}${endpoint}`)
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    return await response.text()
+  } catch (error) {
+    console.warn(`Failed to fetch ${endpoint}:`, error)
+    return fallback
+  }
+}
+
+export function getIconUrl(filename: string): string {
+  return `${BASE_URL}${assetPaths.icons}${filename}.svg`
+}
+
+export function getPhotoUrl(filename: string): string {
+  return `${BASE_URL}${assetPaths.photos}${filename}.webp`
+}
+
+export const getGlobals = async () => fetchData(endpoints.globals, {})
+
+export const getProjects = async () => fetchData(endpoints.projects, [])
+
+export const getCareers = async () => fetchData(endpoints.careers, [])
+
+export const getCourses = async () => fetchData(endpoints.courses, [])
+
+export const getJobs = async () => fetchData(endpoints.jobs, [])
+
+export const getTools = async () => fetchData(endpoints.tools, [])
+
+export async function getGlobal(globalKey: string): Promise<string> {
+  const globals = await getGlobals()
+  return globals[globalKey as keyof typeof globals] || ''
+}
+
+export async function getAbout(): Promise<string> {
+  const markdown = await fetchText(endpoints.about)
+  return markdown ? marked.parse(markdown) : ''
+}

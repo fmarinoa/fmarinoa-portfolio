@@ -1,12 +1,12 @@
-import type { ImageMetadata } from 'astro'
-
 export interface Project {
   title: string
   description: string
   technologies: string[]
-  imageUrl?: ImageMetadata
-  demoUrl?: string
-  githubUrl: string
+  urls: {
+    image?: string
+    demo?: string
+    github: string
+  }
 }
 
 export type NavItem = {
@@ -18,9 +18,9 @@ export interface Career {
   institutionShort: string
   location: string
   institutionLong: string
-  logo: ImageMetadata
+  logo: string
   title: string
-  period: string
+  period: { start: string; end?: string }
   details: string[]
 }
 

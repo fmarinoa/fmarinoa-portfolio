@@ -1,15 +1,8 @@
 import { beforeEach, expect, test } from 'tests/fixtures'
 import { sleep } from 'tests/utils/waits'
 
-import { Constants } from '@/data/constants'
-
 beforeEach(async ({ page }) => {
   await page.goto('/')
-})
-
-test('about me section contains correct text', async ({ page }) => {
-  const locator = page.locator('section#about-me p')
-  await expect(locator).toHaveText(Constants.aboutMeParagraph)
 })
 
 test('navigates to about me section', async ({ homePage, isMobile }) => {

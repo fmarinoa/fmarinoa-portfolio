@@ -1,5 +1,5 @@
-import { projectsMock } from 'tests/__mocks__/projectsMock'
 import { beforeEach, expect, test } from 'tests/fixtures'
+import { fetchProjects } from 'tests/utils/api'
 import { sleep } from 'tests/utils/waits'
 
 beforeEach(async ({ page }) => {
@@ -46,24 +46,26 @@ test('has correct number of project entries', async ({
   homePage,
   isMobile,
 }) => {
+  const projectsExpected = await fetchProjects()
   await homePage.openMenuIfMobile(isMobile)
   await homePage.goToSection('projects')
 
   const projectEntries = await homePage.getProjectsCards()
   const count = await projectEntries.count()
-  expect(count / 2).toBe(projectsMock.length)
+  expect(count / 2).toBe(projectsExpected.length)
 })
 
 test('should display correct project information for each project', async ({
   homePage,
   isMobile,
 }) => {
+  const projectsExpected = await fetchProjects()
   await homePage.openMenuIfMobile(isMobile)
   await homePage.goToSection('projects')
 
   const projectEntries = await homePage.getProjectsCards()
 
-  for (const [index, project] of projectsMock.entries()) {
+  for (const [index, project] of projectsExpected.entries()) {
     const entry = projectEntries.nth(index)
 
     await expect(entry.locator('h3')).toHaveText(project.title)

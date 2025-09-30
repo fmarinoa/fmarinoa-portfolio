@@ -1,29 +1,28 @@
 ---
-import github from '@/assets/socialmedia/github.svg'
-import linkedin from '@/assets/socialmedia/linkedin.svg'
 import Link from '@/components/Link.astro'
-import { Constants } from '@/data/constants'
+import { getGlobals, getIconUrl } from '@/lib/content'
 
+const globals = await getGlobals()
 const year = new Date().getFullYear()
 
 const socialLinks = [
   {
-    href: Constants.PROFILE_GITHUB_URL,
-    icon: github,
+    href: globals.social.github,
+    icon: getIconUrl('github'),
     alt: 'GitHub',
     label: 'GitHub Profile',
   },
   {
-    href: Constants.PROFILE_LINKEDIN_URL,
-    icon: linkedin,
+    href: globals.social.linkedin,
+    icon: getIconUrl('linkedin'),
     alt: 'LinkedIn',
     label: 'LinkedIn Profile',
   },
 ]
 
 const footerLinks = [
-  { href: Constants.TEST_RESULTS_URL, text: 'Reportes de pruebas' },
-  { href: Constants.DEEP_WIKI_URL, text: 'Documentación del proyecto' },
+  { href: globals.TEST_RESULTS_URL, text: 'Reportes de pruebas' },
+  { href: globals.DEEP_WIKI_URL, text: 'Documentación del proyecto' },
 ]
 ---
 
@@ -43,7 +42,7 @@ const footerLinks = [
           >
             <img
               class="social-img object-contain transition-all duration-300"
-              src={icon.src}
+              src={icon}
               alt={alt}
               width={32}
               height={32}

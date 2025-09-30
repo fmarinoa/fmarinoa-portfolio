@@ -1,8 +1,8 @@
+import { formatPeriod } from '@/helpers/stringsUtils'
 import { beforeEach, expect, test } from 'tests/fixtures'
+import { fetchJobs } from 'tests/utils/api'
 import { extractLocation } from 'tests/utils/extractUtils'
 import { sleep } from 'tests/utils/waits'
-
-import { jobList } from '@/data/jobs'
 
 beforeEach(async ({ page }) => {
   await page.goto('/')
@@ -41,18 +41,17 @@ test('validate effects in card', async ({ page, homePage, isMobile }) => {
   }
 })
 
-test('has correct number of job entries', async ({ homePage }) => {
-  const jobEntries = await homePage.getExperienceGroups()
-  await expect(jobEntries).toHaveCount(jobList.length)
-})
-
 test('should display correct experience information for each job', async ({
   homePage,
 }) => {
+  const jobsExpected = await fetchJobs()
   const groups = await homePage.getExperienceGroups()
+
+  await expect(groups).toHaveCount(jobsExpected.length)
+
   const allGroups = await groups.all()
 
-  for (const [index, job] of jobList.entries()) {
+  for (const [index, job] of jobsExpected.entries()) {
     const group = allGroups[index]
 
     await expect(group.locator('h3')).toHaveText(job.title)
@@ -66,7 +65,7 @@ test('should display correct experience information for each job', async ({
     expect(textLocation).toBe(job.location)
 
     await expect(group.locator('div.text-sm.text-gray-300 > p')).toHaveText(
-      `📅 ${job.period}`
+      `📅 ${formatPeriod(job.period)}`
     )
 
     const detailItems = await group.locator('ul li').all()
