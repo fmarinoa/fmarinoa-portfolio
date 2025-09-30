@@ -59,9 +59,9 @@ export const getJobs = async () => fetchData(endpoints.jobs, [])
 
 export const getTools = async () => fetchData(endpoints.tools, [])
 
-export async function getGlobal(globalKey: string) {
+export async function getGlobal(globalKey: string): Promise<string> {
   const globals = await getGlobals()
-  return globals[globalKey as keyof typeof globals] || null
+  return globals[globalKey as keyof typeof globals] || ''
 }
 
 export async function getAbout(): Promise<string> {
