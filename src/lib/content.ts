@@ -2,64 +2,69 @@ import { marked } from 'marked'
 
 const BASE_URL = import.meta.env.CONTENT_BASE_URL
 
-const urls = {
-  globals: `${BASE_URL}/data/globals.json`,
-  about: `${BASE_URL}/data/aboutMe.md`,
-  projects: `${BASE_URL}/data/projects.json`,
-  careers: `${BASE_URL}/data/careers.json`,
-  courses: `${BASE_URL}/data/courses.json`,
-  jobs: `${BASE_URL}/data/jobs.json`,
-  tools: `${BASE_URL}/data/tools.json`,
-  photos: `${BASE_URL}/assets/photos/`,
-  icons: `${BASE_URL}/assets/icons/`,
+const endpoints = {
+  globals: '/data/globals.json',
+  about: '/data/aboutMe.md',
+  projects: '/data/projects.json',
+  careers: '/data/careers.json',
+  courses: '/data/courses.json',
+  jobs: '/data/jobs.json',
+  tools: '/data/tools.json',
+} as const
+
+const assetPaths = {
+  photos: '/assets/photos/',
+  icons: '/assets/icons/',
+} as const
+
+async function fetchData<T>(endpoint: string, fallback: T): Promise<T> {
+  try {
+    const response = await fetch(`${BASE_URL}${endpoint}`)
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    return await response.json()
+  } catch (error) {
+    console.warn(`Failed to fetch ${endpoint}:`, error)
+    return fallback
+  }
+}
+
+async function fetchText(endpoint: string, fallback = ''): Promise<string> {
+  try {
+    const response = await fetch(`${BASE_URL}${endpoint}`)
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    return await response.text()
+  } catch (error) {
+    console.warn(`Failed to fetch ${endpoint}:`, error)
+    return fallback
+  }
 }
 
 export function getIconUrl(filename: string): string {
-  return `${urls.icons}${filename}.svg`
+  return `${BASE_URL}${assetPaths.icons}${filename}.svg`
 }
 
 export function getPhotoUrl(filename: string): string {
-  return `${urls.photos}${filename}.webp`
+  return `${BASE_URL}${assetPaths.photos}${filename}.webp`
 }
 
-export async function getGlobals() {
-  const res = await fetch(urls.globals)
-  return res.json()
-}
+export const getGlobals = async () => fetchData(endpoints.globals, {})
+
+export const getProjects = async () => fetchData(endpoints.projects, [])
+
+export const getCareers = async () => fetchData(endpoints.careers, [])
+
+export const getCourses = async () => fetchData(endpoints.courses, [])
+
+export const getJobs = async () => fetchData(endpoints.jobs, [])
+
+export const getTools = async () => fetchData(endpoints.tools, [])
 
 export async function getGlobal(globalKey: string) {
-  const res = await fetch(urls.globals)
-  const data = await res.json()
-  return data[globalKey]
+  const globals = await getGlobals()
+  return globals[globalKey as keyof typeof globals] || null
 }
 
 export async function getAbout(): Promise<string> {
-  const res = await fetch(urls.about)
-  const md = await res.text()
-  return marked.parse(md)
-}
-
-export async function getProjects() {
-  const res = await fetch(urls.projects)
-  return res.json()
-}
-
-export async function getCareers() {
-  const res = await fetch(urls.careers)
-  return res.json()
-}
-
-export async function getCourses() {
-  const res = await fetch(urls.courses)
-  return res.json()
-}
-
-export async function getJobs() {
-  const res = await fetch(urls.jobs)
-  return res.json()
-}
-
-export async function getTools() {
-  const res = await fetch(urls.tools)
-  return res.json()
+  const markdown = await fetchText(endpoints.about)
+  return markdown ? marked.parse(markdown) : ''
 }
