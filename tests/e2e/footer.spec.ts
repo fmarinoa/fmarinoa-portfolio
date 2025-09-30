@@ -1,5 +1,5 @@
-import { getGlobals } from '@/lib/content'
 import { beforeEach, expect, test } from 'tests/fixtures'
+import { fetchGlobals } from 'tests/utils/api'
 import { waitForNewPageEvent } from 'tests/utils/waits'
 
 beforeEach(async ({ page }) => {
@@ -13,7 +13,7 @@ test('has footer', async ({ page }) => {
 })
 
 test('has footer icons links', async ({ page }) => {
-  const { social } = await getGlobals()
+  const { social } = await fetchGlobals()
   const footer = page.locator('footer')
 
   await footer.scrollIntoViewIfNeeded()
@@ -42,7 +42,7 @@ test('has copyright notice', async ({ page }) => {
 })
 
 test('has footer tests link', async ({ page }) => {
-  const globals = await getGlobals()
+  const globals = await fetchGlobals()
   const footer = page.locator('footer')
   await footer.scrollIntoViewIfNeeded()
 
@@ -57,7 +57,7 @@ test('has footer tests link', async ({ page }) => {
 })
 
 test('has footer doc link', async ({ page }) => {
-  const globals = await getGlobals()
+  const globals = await fetchGlobals()
   const footer = page.locator('footer')
   await footer.scrollIntoViewIfNeeded()
 

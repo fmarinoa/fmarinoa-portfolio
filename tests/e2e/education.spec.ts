@@ -1,6 +1,5 @@
-import { getCourses } from '@/lib/content'
-import { careersMock } from 'tests/__mocks__/careersMock'
 import { beforeEach, expect, test } from 'tests/fixtures'
+import { fetchCareers, fetchCourses } from 'tests/utils/api'
 import { extractLocation } from 'tests/utils/extractUtils'
 import { sleep } from 'tests/utils/waits'
 
@@ -41,17 +40,21 @@ test('validate effects in cards', async ({ page, homePage, isMobile }) => {
   }
 })
 
-test('has correct number of education entries', async ({ homePage }) => {
+test('has correct number of education entries', async ({ page, homePage }) => {
+  const careersExpect = await fetchCareers()
   const educationEntries = await homePage.getEducationCards()
-  expect(educationEntries).toHaveCount(careersMock.length)
+  expect(educationEntries).toHaveCount(careersExpect.length)
 })
 
 test('should display correct careers information for each education entry', async ({
+  page,
   homePage,
 }) => {
+  const careersExpect = await fetchCareers()
+
   const cards = await (await homePage.getEducationCards()).all()
 
-  for (const [index, career] of careersMock.entries()) {
+  for (const [index, career] of careersExpect.entries()) {
     const card = cards[index]
 
     await expect(card.locator('h3')).toHaveText(career.title)
@@ -81,10 +84,10 @@ test('should display correct courses information for each education entry', asyn
   expect(await educationSection.locator('h3.text-lg').textContent()).toBe(
     'Algunas certificaciones:'
   )
-  const courses = await getCourses()
+  const coursesExpect = await fetchCourses()
   const coursesCards = await educationSection.locator('ul.pl-2 > li').all()
 
-  for (const [index, course] of courses.entries()) {
+  for (const [index, course] of coursesExpect.entries()) {
     const card = coursesCards[index]
 
     await expect(card.locator('a')).toHaveText(course.name)
