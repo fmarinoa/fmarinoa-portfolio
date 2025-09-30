@@ -11,10 +11,11 @@ jobs:
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       NODE_ENV: production
+      CONTENT_BASE_URL: ${{ secrets.CONTENT_BASE_URL }}
 
     environment:
       name: Production
-      url: https://portfolio.francomarino.dev/
+      url: https://portfolio.francomarino.dev
 
     permissions:
       contents: write
@@ -24,7 +25,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to Vercel (Production)
-        run: |
-          npm install -g vercel
-          vercel --prod --token=$VERCEL_TOKEN --yes
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro
+        run: npm run build
+
+      - name: Deploy to Vercel
+        run: npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN

@@ -1,30 +1,26 @@
 ---
 interface Props {
-  message: string
-  state: 'success' | 'failed'
-  triggerElementId: string
+  message?: string
+  state?: 'success' | 'failed'
+  triggerElementId?: string
   timeout?: number
 }
 
-const { message, state, triggerElementId, timeout = 5 * 1000 } = Astro.props
-
-const bgColor = state === 'success' ? 'bg-green-500' : 'bg-red-500'
+const { message = '', state = 'success' } = Astro.props
 ---
 
 <div
   id="alert"
-  class={`fixed top-16 right-4 px-4 py-2 rounded shadow-md duration-300 transition-all text-white ${bgColor} hidden`}
+  class={`fixed top-16 right-4 px-4 py-2 rounded shadow-md duration-300 transition-all text-white ${state} hidden`}
 >
   {message}
 </div>
 
-<script is:inline define:vars={{ triggerElementId, timeout }}>
-  const alert = document.getElementById('alert')
-
-  document.getElementById(triggerElementId).addEventListener('click', () => {
-    alert.classList.remove('hidden')
-    setTimeout(() => {
-      alert.classList.add('hidden')
-    }, timeout)
-  })
-</script>
+<style>
+  .success {
+    background-color: var(--color-green-500);
+  }
+  .failed {
+    background-color: var(--color-red-500);
+  }
+</style>

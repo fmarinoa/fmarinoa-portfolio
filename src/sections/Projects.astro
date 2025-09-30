@@ -1,11 +1,12 @@
 ---
 import Link from '@/components/Link.astro'
-import { projects } from '@/data/projects'
-import type { Project } from '@/types'
 import Section from '@/components/Section.astro'
 import GitHub from '@/assets/icons/GitHub.astro'
+import { getProjects } from '@/lib/content'
+import type { Project } from '@/types'
 
 const styleLink = 'bg-gray-700 px-2 py-1 rounded inline-flex items-center gap-1'
+const projects = await getProjects()
 ---
 
 <Section sectionId="projects" title="Proyectos personales">
@@ -21,10 +22,10 @@ const styleLink = 'bg-gray-700 px-2 py-1 rounded inline-flex items-center gap-1'
             rounded-xl shadow-xl border border-gray-700 hover:border-indigo-400 hover:shadow-2xl 
             p-6 transition-all duration-300 whitespace-normal"
           >
-            {project.imageUrl && (
+            {project.urls.image && (
               <div class="aspect-video w-full mb-4 rounded-lg overflow-hidden">
                 <img
-                  src={project.imageUrl.src}
+                  src={project.urls.image}
                   alt={project.title}
                   class="w-full h-full object-cover"
                   loading="lazy"
@@ -46,13 +47,13 @@ const styleLink = 'bg-gray-700 px-2 py-1 rounded inline-flex items-center gap-1'
             </div>
 
             <div class="flex justify-end w-full text-sm mt-auto">
-              {project.demoUrl && (
-                <Link href={project.demoUrl} className={`${styleLink} mr-2`}>
+              {project.urls.demo && (
+                <Link href={project.urls.demo} className={`${styleLink} mr-2`}>
                   🛜 Demo
                 </Link>
               )}
-              {project.githubUrl && (
-                <Link href={project.githubUrl} className={styleLink}>
+              {project.urls.github && (
+                <Link href={project.urls.github} className={styleLink}>
                   <GitHub class="size-5" /> Código
                 </Link>
               )}

@@ -2,11 +2,16 @@ name: CI Pipeline
 
 on:
   pull_request:
-    branches: [master]
+    branches: [master, develop]
 
 jobs:
   lint-test:
     runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: test
+      CONTENT_BASE_URL: ${{ secrets.CONTENT_BASE_URL }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -47,6 +52,7 @@ jobs:
   deploy-results:
     needs: lint-test
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'master'
 
     permissions:
       pages: write

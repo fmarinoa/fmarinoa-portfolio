@@ -2,9 +2,11 @@
 import InfoCard from '@/components/InfoCard.astro'
 import Link from '@/components/Link.astro'
 import Section from '@/components/Section.astro'
-import { careers } from '@/data/careers'
-import { courses } from '@/data/courses'
+import { getCareers, getCourses } from '@/lib/content'
 import type { Career, Course } from '@/types'
+
+const careers = await getCareers()
+const courses = await getCourses()
 ---
 
 <Section sectionId="education" title="Educación">
@@ -17,7 +19,7 @@ import type { Career, Course } from '@/types'
           logoAlt={career.institutionLong}
           entity={career.institutionShort}
           location={career.location}
-          period={career.period}
+          period={`${career.period.start} - ${career.period.end ?? 'Presente'}`}
           details={career.details}
         />
       ))
