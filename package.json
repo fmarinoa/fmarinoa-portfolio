@@ -16,8 +16,7 @@
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
     "prepare": "npx husky install",
-    "test": "playwright test",
-    "postinstall": "npx playwright install chromium"
+    "test": "playwright test"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.5.1",
