@@ -1,0 +1,22 @@
+{
+  "socials": {
+    "github": {
+      "profile": "https://github.com/fmarinoa",
+      "icon": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/icons/github.svg"
+    },
+    "linkedin": {
+      "profile": "https://www.linkedin.com/in/fmarinoa",
+      "icon": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/icons/linkedin.svg"
+    }
+  },
+  "links": {
+    "TEST_RESULTS_URL": {
+      "url": "https://fmarinoa.github.io/fmarinoa-portfolio/test-results/",
+      "humanText": "Reportes de pruebas"
+    },
+    "DEEP_WIKI_URL": {
+      "url": "https://deepwiki.com/fmarinoa/fmarinoa-portfolio",
+      "humanText": "Documentación del proyecto"
+    }
+  }
+}
