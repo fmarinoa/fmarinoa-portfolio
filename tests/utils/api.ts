@@ -23,6 +23,14 @@ export async function fetchFooterSocials(): Promise<any> {
     .then(data => data.socials)
     .catch(() => ({}))
 }
+
+export async function fetchFooterLinks(): Promise<any> {
+  return fetch(process.env.CONTENT_BASE_URL + '/data/footerInfo.json')
+    .then(response => response.json())
+    .then(data => data.links)
+    .catch(() => ({}))
+}
+
 export async function fetchJobs(): Promise<any[]> {
   return fetch(process.env.CONTENT_BASE_URL + '/data/jobs.json')
     .then(response => response.json())

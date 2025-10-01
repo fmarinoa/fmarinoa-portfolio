@@ -1,5 +1,5 @@
 import { beforeEach, expect, test } from 'tests/fixtures'
-import { fetchFooterSocials } from 'tests/utils/api'
+import { fetchFooterLinks, fetchFooterSocials } from 'tests/utils/api'
 import { waitForNewPageEvent } from 'tests/utils/waits'
 
 beforeEach(async ({ page }) => {
@@ -14,7 +14,6 @@ test('has footer', async ({ page }) => {
 
 test('has footer icons links', async ({ page }) => {
   const socialsInfo = await fetchFooterSocials()
-  console.log(socialsInfo)
   const footer = page.locator('footer')
 
   await footer.scrollIntoViewIfNeeded()
@@ -46,7 +45,7 @@ test('has copyright notice', async ({ page }) => {
 })
 
 test('has footer tests link', async ({ page }) => {
-  const globals = await fetchFooterSocials()
+  const links = await fetchFooterLinks()
   const footer = page.locator('footer')
   await footer.scrollIntoViewIfNeeded()
 
@@ -54,14 +53,14 @@ test('has footer tests link', async ({ page }) => {
     'div.flex-wrap > a:has-text("Reportes de pruebas")'
   )
 
-  await expect(link).toHaveAttribute('href', globals.TEST_RESULTS_URL)
+  await expect(link).toHaveAttribute('href', links.TEST_RESULTS_URL.url)
 
   const [newPage] = await waitForNewPageEvent(page, link)
-  await expect(newPage).toHaveURL(globals.TEST_RESULTS_URL)
+  await expect(newPage).toHaveURL(links.TEST_RESULTS_URL.url)
 })
 
 test('has footer doc link', async ({ page }) => {
-  const globals = await fetchFooterSocials()
+  const links = await fetchFooterLinks()
   const footer = page.locator('footer')
   await footer.scrollIntoViewIfNeeded()
 
@@ -69,8 +68,8 @@ test('has footer doc link', async ({ page }) => {
     'div.flex-wrap > a:has-text("Documentación del proyecto")'
   )
 
-  await expect(link).toHaveAttribute('href', globals.DEEP_WIKI_URL)
+  await expect(link).toHaveAttribute('href', links.DEEP_WIKI_URL.url)
 
   const [newPage] = await waitForNewPageEvent(page, link)
-  await expect(newPage).toHaveURL(globals.DEEP_WIKI_URL)
+  await expect(newPage).toHaveURL(links.DEEP_WIKI_URL.url)
 })
