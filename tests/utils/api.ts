@@ -1,7 +1,7 @@
 export async function fetchCVUrl(): Promise<string> {
-  return fetch(process.env.CONTENT_BASE_URL + '/data/globals.json')
+  return fetch(process.env.CONTENT_BASE_URL + '/data/urls.json')
     .then(response => response.json())
-    .then(data => data.CV_URL)
+    .then(data => data.cv)
     .catch(() => '')
 }
 
