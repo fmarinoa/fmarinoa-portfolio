@@ -25,7 +25,7 @@ const projects = await getProjects()
           >
             {project.urls.image && (
               <div class="aspect-video w-full mb-4 rounded-lg overflow-hidden">
-                <img
+                <Image
                   src={project.urls.image}
                   alt={project.title}
                   class="w-full h-full object-cover"
