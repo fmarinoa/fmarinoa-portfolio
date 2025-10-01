@@ -15,7 +15,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "prepare": "npx husky init",
+    "prepare": "husky",
     "test": "playwright test"
   },
   "dependencies": {
@@ -50,7 +50,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "*.{js,ts,jsx,tsx,astro}": [
       "eslint --fix",
       "prettier --write"
     ]
