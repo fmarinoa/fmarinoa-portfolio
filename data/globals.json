@@ -2,7 +2,7 @@
   "CV_URL": "https://drive.google.com/file/d/1FOhHMFr7kY7ZxKRQcHy5i1J5LBdOgLJR/view",
   "TEST_RESULTS_URL": "https://fmarinoa.github.io/fmarinoa-portfolio/test-results/",
   "DEEP_WIKI_URL": "https://deepwiki.com/fmarinoa/fmarinoa-portfolio",
-  "social":{
+  "social": [
     "github": {
       "profile": "https://github.com/fmarinoa",
       "icon": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/icons/github.svg"
@@ -11,5 +11,5 @@
       "profile": "https://www.linkedin.com/in/fmarinoa",
       "icon":"https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/icons/linkedin.svg"
     }
-  }
+  ]
 }
