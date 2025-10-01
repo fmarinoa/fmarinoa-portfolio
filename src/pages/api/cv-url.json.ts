@@ -1,9 +1,9 @@
-import { getGlobal } from '@/lib/content'
+import { getUrl } from '@/lib/content'
 import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async () => {
   try {
-    const cvUrl = await getGlobal('CV_URL')
+    const cvUrl = await getUrl('cv')
 
     if (!cvUrl || typeof cvUrl !== 'string' || !cvUrl.trim()) {
       return new Response(JSON.stringify({ error: 'CV URL not configured' }), {
