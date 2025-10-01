@@ -1,1 +1,0 @@
-Soy un Ingeniero especializado en *automatización de pruebas*, con experiencia liderando iniciativas de calidad en entornos de telecomunicaciones, bancarios y financieros. Me apasiona el uso de tecnologías modernas para asegurar productos robustos y eficientes.
