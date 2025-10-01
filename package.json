@@ -15,7 +15,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "test": "playwright test"
   },
   "dependencies": {
