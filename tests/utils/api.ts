@@ -17,9 +17,10 @@ export async function fetchCourses(): Promise<any[]> {
     .catch(() => [])
 }
 
-export async function fetchGlobals(): Promise<any> {
-  return fetch(process.env.CONTENT_BASE_URL + '/data/globals.json')
+export async function fetchFooterSocials(): Promise<any> {
+  return fetch(process.env.CONTENT_BASE_URL + '/data/footerInfo.json')
     .then(response => response.json())
+    .then(data => data.socials)
     .catch(() => ({}))
 }
 export async function fetchJobs(): Promise<any[]> {

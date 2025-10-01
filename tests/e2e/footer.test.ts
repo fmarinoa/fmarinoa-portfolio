@@ -1,5 +1,5 @@
 import { beforeEach, expect, test } from 'tests/fixtures'
-import { fetchGlobals } from 'tests/utils/api'
+import { fetchFooterSocials } from 'tests/utils/api'
 import { waitForNewPageEvent } from 'tests/utils/waits'
 
 beforeEach(async ({ page }) => {
@@ -13,17 +13,21 @@ test('has footer', async ({ page }) => {
 })
 
 test('has footer icons links', async ({ page }) => {
-  const { social } = await fetchGlobals()
+  const socialsInfo = await fetchFooterSocials()
+  console.log(socialsInfo)
   const footer = page.locator('footer')
 
   await footer.scrollIntoViewIfNeeded()
 
   const links = footer.locator('div.gap-4 > a')
-  const urls: string[] = Object.values(social)
 
-  await expect(links).toHaveCount(urls.length)
+  const socialUrls = Object.values(socialsInfo).map(
+    (social: any) => social.profile
+  )
 
-  for (const [i, url] of urls.entries()) {
+  await expect(links).toHaveCount(socialUrls.length)
+
+  for (const [i, url] of socialUrls.entries()) {
     await expect(links.nth(i)).toHaveAttribute('href', url)
   }
 })
@@ -42,7 +46,7 @@ test('has copyright notice', async ({ page }) => {
 })
 
 test('has footer tests link', async ({ page }) => {
-  const globals = await fetchGlobals()
+  const globals = await fetchFooterSocials()
   const footer = page.locator('footer')
   await footer.scrollIntoViewIfNeeded()
 
@@ -57,7 +61,7 @@ test('has footer tests link', async ({ page }) => {
 })
 
 test('has footer doc link', async ({ page }) => {
-  const globals = await fetchGlobals()
+  const globals = await fetchFooterSocials()
   const footer = page.locator('footer')
   await footer.scrollIntoViewIfNeeded()
 
