@@ -1,5 +1,7 @@
 ---
-type TIcon = { src: string; alt: string }
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+type TIcon = { src: ImageMetadata; alt: string }
 
 interface Props {
   readonly icons: TIcon[]
@@ -21,9 +23,12 @@ const { icons } = Astro.props as Props
           aria-label={tool.alt}
           class="tool-card flex-shrink-0 w-16 h-16 bg-card border border-gray-700 rounded-xl flex items-center justify-center p-3 transition-all duration-300"
         >
-          <img
+          <Image
             src={tool.src}
             alt={tool.alt}
+            width={48}
+            height={48}
+            format="webp"
             loading="lazy"
             class="tool-image w-full h-full object-contain transition-all duration-300"
           />

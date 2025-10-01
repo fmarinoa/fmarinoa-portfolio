@@ -1,29 +1,12 @@
 ---
+import { Image } from 'astro:assets'
 import Link from '@/components/Link.astro'
-import { getGlobals, getIconUrl } from '@/lib/content'
+import { getFooterInfo } from '@/lib/content'
 
-const globals = await getGlobals()
+const footerInfo = await getFooterInfo()
+const footerSocials = { ...footerInfo.socials }
+const footerLinks = { ...footerInfo.links }
 const year = new Date().getFullYear()
-
-const socialLinks = [
-  {
-    href: globals.social.github,
-    icon: getIconUrl('github'),
-    alt: 'GitHub',
-    label: 'GitHub Profile',
-  },
-  {
-    href: globals.social.linkedin,
-    icon: getIconUrl('linkedin'),
-    alt: 'LinkedIn',
-    label: 'LinkedIn Profile',
-  },
-]
-
-const footerLinks = [
-  { href: globals.TEST_RESULTS_URL, text: 'Reportes de pruebas' },
-  { href: globals.DEEP_WIKI_URL, text: 'Documentación del proyecto' },
-]
 ---
 
 <footer class="w-full bg-gray-800 text-white px-4 py-3 mt-6 shadow z-50">
@@ -32,18 +15,18 @@ const footerLinks = [
   >
     <div class="flex gap-4 justify-center w-full md:w-auto">
       {
-        socialLinks.map(({ href, icon, alt, label }) => (
+        Object.entries(footerSocials).map(([key, social]) => (
           <a
-            href={href}
+            href={social.profile}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={label}
+            aria-label={`${key} profile`}
             class="social-link flex-shrink-0 rounded-xl flex items-center justify-center transition-all duration-300"
           >
-            <img
+            <Image
               class="social-img object-contain transition-all duration-300"
-              src={icon}
-              alt={alt}
+              src={social.icon}
+              alt={`${key} icon`}
               width={32}
               height={32}
             />
@@ -65,12 +48,12 @@ const footerLinks = [
     class="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-2 text-xs pt-2"
   >
     {
-      footerLinks.map(({ href, text }) => (
+      Object.values(footerLinks).map(link => (
         <Link
-          href={href}
+          href={link.url}
           className="hover:text-gray-200 transition-colors duration-200 text-gray-400"
         >
-          {text}
+          {link.humanText}
         </Link>
       ))
     }

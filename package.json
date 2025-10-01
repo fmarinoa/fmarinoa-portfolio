@@ -15,7 +15,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "prepare": "npx husky install",
+    "prepare": "husky || true",
     "test": "playwright test"
   },
   "dependencies": {
@@ -23,9 +23,8 @@
     "@astrojs/vercel": "8.0.4",
     "@fontsource/bebas-neue": "5.2.6",
     "@tailwindcss/vite": "4.1.12",
-    "@vercel/analytics": "1.5.0",
     "astro": "5.13.5",
-    "marked": "16.3.0",
+    "sharp": "0.34.3",
     "tailwindcss": "4.1.12",
     "tailwindcss-animate": "1.0.7"
   },
@@ -43,7 +42,6 @@
     "neostandard": "0.12.2",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
-    "sharp": "0.34.3",
     "typescript-eslint": "8.41.0"
   },
   "config": {
@@ -52,7 +50,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "*.{js,ts,jsx,tsx,astro}": [
       "eslint --fix",
       "prettier --write"
     ]

@@ -1,7 +1,7 @@
 export async function fetchCVUrl(): Promise<string> {
-  return fetch(process.env.CONTENT_BASE_URL + '/data/globals.json')
+  return fetch(process.env.CONTENT_BASE_URL + '/data/urls.json')
     .then(response => response.json())
-    .then(data => data.CV_URL)
+    .then(data => data.cv)
     .catch(() => '')
 }
 
@@ -17,11 +17,20 @@ export async function fetchCourses(): Promise<any[]> {
     .catch(() => [])
 }
 
-export async function fetchGlobals(): Promise<any> {
-  return fetch(process.env.CONTENT_BASE_URL + '/data/globals.json')
+export async function fetchFooterSocials(): Promise<any> {
+  return fetch(process.env.CONTENT_BASE_URL + '/data/footerInfo.json')
     .then(response => response.json())
+    .then(data => data.socials)
     .catch(() => ({}))
 }
+
+export async function fetchFooterLinks(): Promise<any> {
+  return fetch(process.env.CONTENT_BASE_URL + '/data/footerInfo.json')
+    .then(response => response.json())
+    .then(data => data.links)
+    .catch(() => ({}))
+}
+
 export async function fetchJobs(): Promise<any[]> {
   return fetch(process.env.CONTENT_BASE_URL + '/data/jobs.json')
     .then(response => response.json())

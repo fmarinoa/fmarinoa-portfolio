@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets'
 import Link from './Link.astro'
 
 interface Props {
@@ -24,7 +25,7 @@ const { title, entity, linkEntity, location, period, details, logo, logoAlt } =
     logo ? (
       <div class="grid grid-cols-[auto_1fr] gap-4 items-center">
         <div class="flex-shrink-0">
-          <img
+          <Image
             src={logo}
             alt={logoAlt ?? entity}
             width={60}

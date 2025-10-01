@@ -1,5 +1,4 @@
 ---
-import Analytics from '@vercel/analytics/astro'
 import Footer from '@/components/Footer.astro'
 import BackToTop from '@/components/BackToTop.astro'
 import Navbar from '@/components/Navbar.astro'
@@ -71,7 +70,7 @@ const structuredData = {
     />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://portfolio.francomarino.dev/" />
+    <link rel="canonical" href="https://portfolio.francomarino.dev" />
 
     <!-- Agregar metadatos estructurados para SEO -->
     <script
@@ -85,7 +84,6 @@ const structuredData = {
     <Navbar />
     <main class="pt-20 max-w-4xl mx-auto px-4 space-y-6">
       <slot />
-      <Analytics />
       <BackToTop />
     </main>
     <Footer />
