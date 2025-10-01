@@ -6,6 +6,10 @@
     "name": "Franco Mariño",
     "url": "https://github.com/fmarinoa/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fmarinoa/fmarinoa-portfolio/"
+  },
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
