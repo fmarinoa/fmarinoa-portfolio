@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets'
 import Link from '@/components/Link.astro'
-import { getGlobals } from '@/lib/content'
+import { getFooterInfo } from '@/lib/content'
 
-const globals = await getGlobals()
-const footerSocials = { ...globals.footer.socials }
-const footerLinks = { ...globals.footer.links }
+const footerInfo = await getFooterInfo()
+const footerSocials = { ...footerInfo.socials }
+const footerLinks = { ...footerInfo.links }
 const year = new Date().getFullYear()
 ---
 

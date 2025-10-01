@@ -3,7 +3,7 @@ import { marked } from 'marked'
 const BASE_URL = import.meta.env.CONTENT_BASE_URL
 
 const endpoints = {
-  globals: '/data/globals.json',
+  footerInfo: '/data/footerInfo.json',
   about: '/data/aboutMe.md',
   projects: '/data/projects.json',
   careers: '/data/careers.json',
@@ -47,7 +47,7 @@ export function getPhotoUrl(filename: string): string {
   return `${BASE_URL}${assetPaths.photos}${filename}.webp`
 }
 
-export const getGlobals = async () => fetchData(endpoints.globals, {})
+export const getFooterInfo = async () => fetchData(endpoints.footerInfo, {})
 
 export const getProjects = async () => fetchData(endpoints.projects, [])
 
@@ -58,11 +58,6 @@ export const getCourses = async () => fetchData(endpoints.courses, [])
 export const getJobs = async () => fetchData(endpoints.jobs, [])
 
 export const getTools = async () => fetchData(endpoints.tools, [])
-
-export async function getGlobal(globalKey: string): Promise<string> {
-  const globals = await getGlobals()
-  return globals[globalKey as keyof typeof globals] || ''
-}
 
 export async function getAbout(): Promise<string> {
   const markdown = await fetchText(endpoints.about)
