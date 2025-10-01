@@ -28,6 +28,8 @@ const projects = await getProjects()
                 <Image
                   src={project.urls.image}
                   alt={project.title}
+                  width={320}
+                  height={180}
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
