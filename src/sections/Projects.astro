@@ -1,7 +1,8 @@
 ---
+import { Image } from 'astro:assets'
+import GithubIcon from '@/assets/icons/github.svg'
 import Link from '@/components/Link.astro'
 import Section from '@/components/Section.astro'
-import GitHub from '@/assets/icons/GitHub.astro'
 import { getProjects } from '@/lib/content'
 import type { Project } from '@/types'
 
@@ -54,7 +55,15 @@ const projects = await getProjects()
               )}
               {project.urls.github && (
                 <Link href={project.urls.github} className={styleLink}>
-                  <GitHub class="size-5" /> Código
+                  <Image
+                    src={GithubIcon}
+                    alt="GitHub"
+                    width={48}
+                    height={48}
+                    format="webp"
+                    class="size-5"
+                  />
+                  Código
                 </Link>
               )}
             </div>
