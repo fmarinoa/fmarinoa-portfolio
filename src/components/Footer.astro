@@ -4,11 +4,8 @@ import Link from '@/components/Link.astro'
 import { getGlobals } from '@/lib/content'
 
 const globals = await getGlobals()
-const socials = { ...globals.socials }
-const footerLinks = [
-  { href: globals.TEST_RESULTS_URL, text: 'Reportes de pruebas' },
-  { href: globals.DEEP_WIKI_URL, text: 'Documentación del proyecto' },
-]
+const footerSocials = { ...globals.footer.socials }
+const footerLinks = { ...globals.footer.links }
 const year = new Date().getFullYear()
 ---
 
@@ -18,7 +15,7 @@ const year = new Date().getFullYear()
   >
     <div class="flex gap-4 justify-center w-full md:w-auto">
       {
-        Object.entries(socials).map(([key, social]) => (
+        Object.entries(footerSocials).map(([key, social]) => (
           <a
             href={social.profile}
             target="_blank"
@@ -51,12 +48,12 @@ const year = new Date().getFullYear()
     class="w-full md:w-auto flex flex-wrap justify-center md:justify-end gap-2 text-xs pt-2"
   >
     {
-      footerLinks.map(({ href, text }) => (
+      Object.values(footerLinks).map(link => (
         <Link
-          href={href}
+          href={link.url}
           className="hover:text-gray-200 transition-colors duration-200 text-gray-400"
         >
-          {text}
+          {link.humanText}
         </Link>
       ))
     }
