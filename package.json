@@ -15,7 +15,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "prepare": "npx husky install",
+    "prepare": "npx husky init",
     "test": "playwright test"
   },
   "dependencies": {
