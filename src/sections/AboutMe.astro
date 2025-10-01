@@ -1,7 +1,8 @@
 ---
+import { Image } from 'astro:assets'
 import Carousel from '@/components/Carousel.astro'
 import Section from '@/components/Section.astro'
-import { getPhotoUrl } from '@/lib/content'
+import PhotoFranco from '@/assets/photos/franco.webp'
 
 import Appium from '@/assets/icons/appium.svg'
 import AWS from '@/assets/icons/aws.svg'
@@ -66,8 +67,8 @@ const second = [...toolsList.slice(mid), ...toolsList.slice(mid)]
 
 <Section sectionId="about-me" title="Sobre mí">
   <div class="flex flex-col md:flex-row gap-8 items-start md:items-stretch">
-    <img
-      src={getPhotoUrl('franco')}
+    <Image
+      src={PhotoFranco}
       alt="Ingeniero Franco Mariño"
       width={256}
       height={256}
@@ -76,7 +77,7 @@ const second = [...toolsList.slice(mid), ...toolsList.slice(mid)]
     />
 
     <div class="flex flex-col w-full md:max-w-lg">
-      <p class="mb-2 text-center md:text-left">
+      <p class="mt-2 text-center md:text-left">
         Soy un Ingeniero especializado en <i>automatización de pruebas</i>, con
         experiencia liderando iniciativas de calidad en entornos de
         telecomunicaciones, bancarios y financieros. Me apasiona el uso de
