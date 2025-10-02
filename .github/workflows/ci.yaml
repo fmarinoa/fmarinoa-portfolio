@@ -3,6 +3,7 @@ name: CI Pipeline
 on:
   pull_request:
     branches: [master, develop]
+
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
@@ -14,11 +15,13 @@ jobs:
 
     environment:
       name: Preview
-      url: https://portfolio.test.francomarino.dev
 
     permissions:
       contents: write
       deployments: write
+
+    outputs:
+      deployment-url: ${{ steps.vercel-deploy.outputs.deployment-url }}
 
     steps:
       - name: Checkout code
@@ -45,19 +48,15 @@ jobs:
         run: |
           DEPLOYMENT_URL=$(npx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
-          echo "✅ Deployed to: $DEPLOYMENT_URL"
-
-      - name: Comment deployment URL
-        run: |
-          echo "🚀 Preview deployment successful!"
-          echo "📍 URL: ${{ steps.vercel-deploy.outputs.deployment-url }}"
 
   lint-test:
+    needs: deploy-preview
     runs-on: ubuntu-latest
 
     env:
       NODE_ENV: test
       CONTENT_BASE_URL: ${{ secrets.CONTENT_BASE_URL }}
+      TEST_URL_BASE: ${{ needs.deploy-preview.outputs.deployment-url }}
 
     steps:
       - name: Checkout code
