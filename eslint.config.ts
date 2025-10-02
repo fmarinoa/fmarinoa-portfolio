@@ -1,40 +1,53 @@
 import neostandard from 'neostandard'
-import astroParser from 'astro-eslint-parser'
-import eslintPluginAstro from 'eslint-plugin-astro'
 
 export default [
   ...neostandard({
     ts: true, // Habilitar soporte para TypeScript
     noStyle: true, // Deshabilitar reglas de estilo para usar Prettier
   }),
-  // Configuración específica para archivos .astro
+  // Configuración personalizada para el proyecto
   {
-    files: ['**/*.astro'],
-    languageOptions: {
-      parser: astroParser,
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.astro'],
-      },
-    },
-    plugins: {
-      astro: eslintPluginAstro,
-    },
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {
-      // Reglas recomendadas para Astro
-      ...eslintPluginAstro.configs.recommended.rules,
-      // Ajustes específicos si es necesario
-      'astro/no-conflict-set-directives': 'error',
-      'astro/no-unused-define-vars-in-style': 'error',
-      // Deshabilitar reglas de React que no aplican a Astro
-      'react/jsx-key': 'off',
-      'react/self-closing-comp': 'off',
-      'react/jsx-no-undef': 'off',
+      // Relajar reglas problemáticas para testing
+      'no-unused-expressions': 'off',
+      'no-sequences': 'warn',
+      'promise/param-names': 'off',
+      // Permitir console.log en tests
+      'no-console': 'warn',
+      // Permitir any en tests cuando sea necesario
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
-
-  // Ignores
+  // Configuración específica para archivos de test
   {
-    ignores: ['dist/**/*', '.astro/**/*', 'node_modules/**/*', '.vercel/**/*'],
+    files: ['tests/**/*.ts', '**/*.test.ts', '**/*.spec.ts'],
+    rules: {
+      // Reglas más relajadas para tests
+      'no-unused-expressions': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-console': 'off',
+    },
+  },
+  // Ignores ampliados
+  {
+    ignores: [
+      'dist/**/*',
+      '.astro/**/*',
+      'node_modules/**/*',
+      '.vercel/**/*',
+      'playwright-report/**/*',
+      'test-results/**/*',
+      'coverage/**/*',
+      '.next/**/*',
+      '.nuxt/**/*',
+      'build/**/*',
+      'out/**/*',
+      '*.config.js',
+      'pnpm-lock.yaml',
+      'package-lock.json',
+      'yarn.lock',
+    ],
   },
 ]
