@@ -48,7 +48,6 @@ jobs:
           echo "✅ Deployed to: $DEPLOYMENT_URL"
 
       - name: Comment deployment URL
-        if: github.event_name == 'push'
         run: |
           echo "🚀 Preview deployment successful!"
           echo "📍 URL: ${{ steps.vercel-deploy.outputs.deployment-url }}"
