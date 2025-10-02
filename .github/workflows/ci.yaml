@@ -41,7 +41,17 @@ jobs:
         run: pnpm run build
 
       - name: Deploy to Vercel Preview
-        run: npx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes
+        id: vercel-deploy
+        run: |
+          DEPLOYMENT_URL=$(npx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes)
+          echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          echo "✅ Deployed to: $DEPLOYMENT_URL"
+
+      - name: Comment deployment URL
+        if: github.event_name == 'push'
+        run: |
+          echo "🚀 Preview deployment successful!"
+          echo "📍 URL: ${{ steps.vercel-deploy.outputs.deployment-url }}"
 
   lint-test:
     runs-on: ubuntu-latest
