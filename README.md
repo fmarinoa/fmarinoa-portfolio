@@ -1,25 +1,52 @@
-# Portfolio Website Overview
+# Testing Configuration
 
-Apersonal portfolio website showcasing professional experience, projects, education, and technical skills. The application is a single-page portfolio built with React, TypeScript, and Vite, deployed via Vercel with comprehensive CI/CD automation.
+Este proyecto está optimizado para **testing exclusivo** con Playwright.
 
-The portfolio displays four main content sections: About Me with technical skills, Professional Experience, Projects showcase, and Education background. The application emphasizes responsive design, accessibility, and modern development practices with automated testing and quality controls.
+## 🚀 Scripts de Testing Disponibles
 
-## Technology Stack Overview
+```bash
+# Ejecutar todos los tests
+pnpm test
+```
 
-Use a modern frontend technology stack centered around React, TypeScript, and Vite. The following table summarizes the core technologies and their roles:
+## ⚙️ Configuración de Variables de Entorno
 
-| Category     | Technology        | Purpose                                        |
-| ------------ | ----------------- | ---------------------------------------------- |
-| Build Tool   | Vite              | Development server and production build system |
-| Framework    | React             | Component-based UI framework                   |
-| Language     | TypeScript        | Type-safe JavaScript development               |
-| Styling      | Tailwind CSS      | Utility-first CSS framework                    |
-| Testing      | Playwright        | End-to-end testing framework                   |
-| CI/CD        | GitHub Actions    | Automated testing and deployment               |
-| Deployment   | Vercel            | Production hosting and preview deployments     |
-| Code Quality | ESLint + Prettier | Linting and code formatting                    |
-| Git Hooks    | Husky             | Pre-commit quality checks                      |
+### Variables Requeridas para Testing:
 
-The application does not use complex state management or routing libraries, keeping the architecture simple and focused on content presentation.
+- `TEST_URL_BASE`: URL base donde ejecutar los tests
+- `NODE_ENV`: Debe ser "test"
+- `CONTENT_BASE_URL`: URL base para contenido (si aplica)
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/fmarinoa/fmarinoa-portfolio)
+### Para desarrollo local:
+
+```bash
+cp .env.test .env.local
+# Editar .env.local con tus configuraciones locales
+```
+
+## 🔧 Configuración de Playwright
+
+El proyecto está configurado para:
+
+- ✅ Testing exclusivo (sin webServer)
+- ✅ Múltiples browsers (Chrome Desktop y Mobile)
+- ✅ Reports en HTML y JUnit
+- ✅ Captura de screenshots/videos en fallos
+- ✅ Reintentos automáticos en CI
+- ✅ Paralelización optimizada
+
+## 🎯 Flujo de CI
+
+1. **Deploy Preview**: Se despliega la aplicación
+2. **Testing**: Se ejecutan tests contra la URL de preview
+3. **Reports**: Se generan y publican reportes de tests
+
+## 📁 Estructura de Archivos de Testing
+
+```
+tests/                  # Tests de Playwright
+test-results/          # Resultados de tests (generado)
+playwright-report/     # Reportes HTML (generado)
+playwright.config.ts   # Configuración de Playwright
+.env.test             # Variables de entorno para testing
+```
