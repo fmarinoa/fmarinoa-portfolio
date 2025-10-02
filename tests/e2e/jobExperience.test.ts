@@ -1,8 +1,7 @@
-import { formatPeriod } from '@/helpers/stringsUtils'
-import { beforeEach, expect, test } from 'tests/fixtures'
-import { fetchJobs } from 'tests/utils/api'
-import { extractLocation } from 'tests/utils/extractUtils'
-import { sleep } from 'tests/utils/waits'
+import { formatPeriod, extractLocation } from '@tests/utils/extractUtils'
+import { beforeEach, expect, test } from '@tests/fixtures'
+import { fetchJobs } from '@tests/utils/api'
+import { sleep } from '@tests/utils/waits'
 
 beforeEach(async ({ page }) => {
   await page.goto('/')
@@ -51,7 +50,8 @@ test('should display correct experience information for each job', async ({
 
   const allGroups = await groups.all()
 
-  for (const [index, job] of jobsExpected.entries()) {
+  for (let index = 0; index < jobsExpected.length; index++) {
+    const job = jobsExpected[index]
     const group = allGroups[index]
 
     await expect(group.locator('h3')).toHaveText(job.title)

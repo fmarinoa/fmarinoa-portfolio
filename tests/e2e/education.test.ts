@@ -1,7 +1,7 @@
-import { beforeEach, expect, test } from 'tests/fixtures'
-import { fetchCareers, fetchCourses } from 'tests/utils/api'
-import { extractLocation } from 'tests/utils/extractUtils'
-import { sleep } from 'tests/utils/waits'
+import { beforeEach, expect, test } from '@tests/fixtures'
+import { fetchCareers, fetchCourses } from '@tests/utils/api'
+import { extractLocation } from '@tests/utils/extractUtils'
+import { sleep } from '@tests/utils/waits'
 
 beforeEach(async ({ page }) => {
   await page.goto('/')

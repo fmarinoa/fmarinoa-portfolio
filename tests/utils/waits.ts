@@ -1,4 +1,4 @@
-import type { Locator, Page } from 'tests/fixtures'
+import type { Locator, Page } from '@tests/fixtures'
 
 export async function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))

@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test'
-import { HomePage } from 'tests/pom/HomePage'
+import { HomePage } from '@tests/pom/HomePage'
 
 type MyFixtures = {
   homePage: HomePage

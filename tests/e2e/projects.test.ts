@@ -1,6 +1,6 @@
-import { beforeEach, expect, test } from 'tests/fixtures'
-import { fetchProjects } from 'tests/utils/api'
-import { sleep } from 'tests/utils/waits'
+import { beforeEach, expect, test } from '@tests/fixtures'
+import { fetchProjects } from '@tests/utils/api'
+import { sleep } from '@tests/utils/waits'
 
 beforeEach(async ({ page }) => {
   await page.goto('/')

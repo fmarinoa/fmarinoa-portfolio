@@ -1,6 +1,6 @@
-import { beforeEach, expect, test } from 'tests/fixtures'
-import { fetchFooterLinks, fetchFooterSocials } from 'tests/utils/api'
-import { waitForNewPageEvent } from 'tests/utils/waits'
+import { beforeEach, expect, test } from '@tests/fixtures'
+import { fetchFooterLinks, fetchFooterSocials } from '@tests/utils/api'
+import { waitForNewPageEvent } from '@tests/utils/waits'
 
 beforeEach(async ({ page }) => {
   await page.goto('/')

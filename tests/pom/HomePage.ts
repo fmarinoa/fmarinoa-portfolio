@@ -1,5 +1,5 @@
-import { expect } from 'tests/fixtures'
-import type { Locator, Page } from 'tests/fixtures'
+import { expect } from '@tests/fixtures'
+import type { Locator, Page } from '@tests/fixtures'
 
 type Section = 'experience' | 'about-me' | 'projects' | 'education'
 

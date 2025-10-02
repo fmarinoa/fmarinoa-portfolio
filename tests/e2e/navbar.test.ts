@@ -1,5 +1,5 @@
-import { beforeEach, expect, test } from 'tests/fixtures'
-import { fetchCVUrl } from 'tests/utils/api'
+import { beforeEach, expect, test } from '@tests/fixtures'
+import { fetchCVUrl } from '@tests/utils/api'
 
 beforeEach(async ({ page }) => {
   await page.goto('/')
