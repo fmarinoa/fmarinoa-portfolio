@@ -1,7 +1,6 @@
 {
   "name": "fmarinoa-portfolio",
   "version": "0.1.0",
-  "type": "module",
   "author": {
     "name": "Franco Mariño",
     "url": "https://github.com/fmarinoa/"
@@ -17,7 +16,8 @@
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
     "prepare": "husky || true",
-    "test": "playwright test"
+    "test": "playwright test",
+    "postinstall": "npx playwright install chromium"
   },
   "dependencies": {
     "@playwright/test": "1.55.0",

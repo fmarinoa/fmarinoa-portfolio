@@ -1,11 +1,14 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "include": ["**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@tests/*": ["tests/*"]
+    },
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
