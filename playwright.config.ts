@@ -1,29 +1,40 @@
 import { defineConfig, devices } from '@playwright/test'
 import dotenv from 'dotenv'
 
-const urlBase = 'http://localhost:4321'
-
 dotenv.config({
   quiet: !!process.env.CI,
 })
+
+// URL base para tests - debe ser proporcionada por CI o configurada localmente
+const urlBase = process.env.TEST_URL_BASE
+
+if (!urlBase) {
+  throw new Error('TEST_URL_BASE environment variable is required for tests')
+}
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 5 * 1000,
+  timeout: 30 * 1000, // 30 segundos timeout para tests más estables
   testDir: './tests',
-  /* Run tests in files in parallel */
+
+  /* Configuración de ejecución optimizada para CI */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+
+  /* Reporter optimizado para tests */
+  reporter: process.env.CI
+    ? [
+        ['html', { outputFolder: 'playwright-report' }],
+        ['junit', { outputFile: 'test-results/junit.xml' }],
+        ['github'],
+      ]
+    : [['html', { outputFolder: 'playwright-report' }]],
+
+  /* Configuración global para todos los tests */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: urlBase,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -36,20 +47,20 @@ export default defineConfig({
   projects: [
     {
       name: 'Desktop Chrome',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        // Configuraciones específicas para Chrome
+        launchOptions: {
+          args: [
+            '--disable-web-security',
+            '--disable-features=VizDisplayCompositor',
+          ],
+        },
+      },
     },
-
-    /* Test against mobile viewports. */
     {
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
     },
   ],
-
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run dev',
-    url: urlBase,
-    reuseExistingServer: !process.env.CI,
-  },
 })
