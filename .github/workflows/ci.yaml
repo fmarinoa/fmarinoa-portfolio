@@ -46,7 +46,7 @@ jobs:
       - name: Deploy to Vercel Preview
         id: vercel-deploy
         run: |
-          DEPLOYMENT_URL=$(npx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes)
+          DEPLOYMENT_URL=$(npx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes --public)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
   lint-test:
