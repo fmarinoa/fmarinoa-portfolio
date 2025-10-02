@@ -17,7 +17,7 @@
     "prettier:check": "prettier --check .",
     "prepare": "husky || true",
     "test": "playwright test",
-    "postinstall": "npx playwright install chromium"
+    "postinstall": "pnpm exec playwright install chromium"
   },
   "dependencies": {
     "@playwright/test": "1.55.0",
