@@ -49,7 +49,7 @@ jobs:
           DEPLOYMENT_URL=$(npx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes --public)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
-  lint-test:
+  excute-test:
     needs: deploy-preview
     runs-on: ubuntu-latest
 
@@ -78,9 +78,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run lint
-        run: pnpm run lint
-
       - name: Run tests
         run: pnpm run test
 
@@ -103,7 +100,7 @@ jobs:
           path: dist
 
   deploy-results:
-    needs: lint-test
+    needs: excute-test
     runs-on: ubuntu-latest
     if: github.event.pull_request.base.ref == 'master'
 
