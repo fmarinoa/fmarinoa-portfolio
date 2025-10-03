@@ -99,7 +99,6 @@ const projects = await getProjects()
 <script>
   // Obtener el carrusel y todas las tarjetas
   const carousel = document.getElementById('projects-carousel')
-  const projectCards = document.querySelectorAll('.project-card')
 
   // Variable para controlar el estado de pausa
   let isPaused = false
@@ -121,7 +120,7 @@ const projects = await getProjects()
   }
 
   // Agregar event listeners a cada tarjeta
-  projectCards.forEach(card => {
+  document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mouseenter', pauseCarousel)
     card.addEventListener('mouseleave', resumeCarousel)
   })
