@@ -33,7 +33,8 @@
     ],
     "urls": {
       "github": "https://github.com/fmarinoa/fmarinoa-portfolio",
-      "demo": "https://portfolio.francomarino.dev/"
+      "demo": "https://portfolio.francomarino.dev/",
+      "image": "https://portfolio.francomarino.dev/og-image.jpg"
     }
   }
 ]
