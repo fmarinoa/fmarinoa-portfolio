@@ -177,9 +177,9 @@ const carouselProjects = [...projects, projects[0]]
       restartAutoSlide()
     })
 
-    // Auto-slide cada 5 segundos
+    // Auto-slide cada 15 segundos
     function startAutoSlide() {
-      autoSlide = setInterval(nextSlide, 5000)
+      autoSlide = setInterval(nextSlide, 15 * 1000)
     }
 
     function restartAutoSlide() {
