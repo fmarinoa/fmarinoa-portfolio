@@ -26,6 +26,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -49,7 +52,7 @@ jobs:
           DEPLOYMENT_URL=$(pnpx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes --public)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
-  excute-test:
+  execute-test:
     needs: deploy-preview
     runs-on: ubuntu-latest
 
@@ -90,19 +93,21 @@ jobs:
           retention-days: 30
 
       - name: Prepare test results for Pages
+        if: ${{ always() }}
         run: |
           mkdir -p dist/test-results
           cp -r playwright-report/* dist/test-results/
 
       - name: Upload Pages artifact (test results)
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
+        if: ${{ always() }}
         with:
           path: dist
 
   deploy-results:
-    needs: excute-test
+    needs: execute-test
     runs-on: ubuntu-latest
-    if: github.event.pull_request.base.ref == 'master'
+    if: ${{ always() && github.event.pull_request.base.ref == 'master' }}
 
     permissions:
       pages: write
@@ -118,3 +123,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        if: ${{ always() }}
