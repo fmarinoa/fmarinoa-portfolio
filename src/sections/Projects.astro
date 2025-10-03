@@ -128,81 +128,82 @@ const carouselProjects = [...projects, projects[0]]
   const cards = carousel?.querySelectorAll('.project-card')
   const nextBtn = document.getElementById('next-btn')
 
-  if (carousel && cards && nextBtn) {
-    let currentIndex = 0
-    const totalCards = cards.length
-    const originalProjectsCount = totalCards - 1 // Restamos 1 porque la última carta es duplicada
-    let autoSlide: ReturnType<typeof setInterval>
-    let isTransitioning = false
-
-    // Función para obtener el ancho actual de la carta (dinámico para responsive)
-    function getCardWidth() {
-      return cards[0].offsetWidth + 24 // ancho + gap (tailwind gap-6 = 1.5rem = 24px)
-    }
-
-    function updateCarousel(animate = true) {
-      const cardWidth = getCardWidth() // Calcular dinámicamente
-      if (animate) {
-        carousel.style.transition = 'transform 0.7s ease-in-out'
-      } else {
-        carousel.style.transition = 'none'
-      }
-      carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`
-    }
-
-    function nextSlide() {
-      if (isTransitioning) return
-      isTransitioning = true
-
-      currentIndex++
-      updateCarousel()
-
-      // Si llegamos a la carta duplicada (última posición)
-      if (currentIndex >= originalProjectsCount) {
-        setTimeout(() => {
-          currentIndex = 0 // Volver al inicio real
-          updateCarousel(false)
-          isTransitioning = false
-        }, 700)
-      } else {
-        setTimeout(() => {
-          isTransitioning = false
-        }, 700)
-      }
-    }
-
-    // Evento del botón
-    nextBtn.addEventListener('click', () => {
-      nextSlide()
-      restartAutoSlide()
-    })
-
-    // Auto-slide cada 15 segundos
-    function startAutoSlide() {
-      autoSlide = setInterval(nextSlide, 15 * 1000)
-    }
-
-    function restartAutoSlide() {
-      clearInterval(autoSlide)
-      startAutoSlide()
-    }
-
-    // Pausar auto-slide cuando el mouse esté sobre el carrusel
-    carousel.addEventListener('mouseenter', () => {
-      clearInterval(autoSlide)
-    })
-
-    carousel.addEventListener('mouseleave', () => {
-      startAutoSlide()
-    })
-
-    // Recalcular posición cuando cambie el tamaño de la ventana
-    window.addEventListener('resize', () => {
-      updateCarousel(false) // Actualizar sin animación
-    })
-
-    startAutoSlide()
-  } else {
-    console.error('No se encontraron elementos del carrusel')
+  if (!carousel || !cards || !nextBtn) {
+    throw new Error('Carousel elements not found')
   }
+
+  let currentIndex = 0
+  let autoSlide: ReturnType<typeof setTimeout>
+  let isTransitioning = false
+
+  const totalCards = cards.length
+  const originalProjectsCount = totalCards - 1
+  const autoSlideInterval = 15 * 1000 // 15 seconds
+  let remainingTime = autoSlideInterval
+  let lastTime = Date.now()
+
+  const getCardWidth = () => {
+    const firstCard = cards[0] as HTMLElement
+    return firstCard?.offsetWidth ? firstCard.offsetWidth + 24 : 0
+  }
+
+  const updateCarousel = (animate = true) => {
+    const cardWidth = getCardWidth()
+    carousel.style.transition = animate ? 'transform 0.7s ease-in-out' : 'none'
+    carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`
+  }
+
+  const nextSlide = () => {
+    if (isTransitioning) return
+
+    isTransitioning = true
+    currentIndex++
+    updateCarousel()
+
+    const resetTime = currentIndex >= originalProjectsCount ? 700 : 700
+
+    setTimeout(() => {
+      if (currentIndex >= originalProjectsCount) {
+        currentIndex = 0
+        updateCarousel(false)
+      }
+      isTransitioning = false
+    }, resetTime)
+  }
+
+  const startAutoSlide = () => {
+    lastTime = Date.now()
+    autoSlide = setTimeout(() => {
+      nextSlide()
+      remainingTime = autoSlideInterval
+      startAutoSlide()
+    }, remainingTime)
+  }
+
+  const pauseAutoSlide = () => {
+    clearTimeout(autoSlide)
+    remainingTime = Math.max(1000, remainingTime - (Date.now() - lastTime))
+  }
+
+  const resumeAutoSlide = () => {
+    if (remainingTime <= 0) remainingTime = autoSlideInterval
+    startAutoSlide()
+  }
+
+  const restartAutoSlide = () => {
+    clearTimeout(autoSlide)
+    remainingTime = autoSlideInterval
+    startAutoSlide()
+  }
+
+  nextBtn.addEventListener('click', () => {
+    nextSlide()
+    restartAutoSlide()
+  })
+
+  carousel.addEventListener('mouseenter', pauseAutoSlide)
+  carousel.addEventListener('mouseleave', resumeAutoSlide)
+  window.addEventListener('resize', () => updateCarousel(false))
+
+  startAutoSlide()
 </script>
