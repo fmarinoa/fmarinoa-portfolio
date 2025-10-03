@@ -3,6 +3,7 @@ import { Image } from 'astro:assets'
 import GithubIcon from '@/assets/icons/github.svg'
 import Link from '@/components/Link.astro'
 import Section from '@/components/Section.astro'
+import RightArrow from '@/assets/icons/arrow-right.svg'
 import { getProjects } from '@/lib/content'
 import type { Project } from '@/types'
 
@@ -15,74 +16,84 @@ const carouselProjects = [...projects, projects[0]]
 
 <Section sectionId="projects" title="Proyectos personales">
   <div class="relative w-full h-[520px] overflow-hidden">
+    <div
+      class="hidden md:block absolute top-0 right-20 md:right-24 w-20 md:w-24 h-full bg-gradient-to-l from-gray-900 via-gray-900/40 to-transparent z-5 pointer-events-none"
+    >
+    </div>
+
     <button
       id="next-btn"
-      class="absolute top-0 right-0 z-10 bg-gradient-to-r from-black/60 via-black/90 to-black text-white h-full w-16 md:w-24 transition flex items-center justify-center text-2xl hover:from-black/80 hover:via-black/95 hover:to-black"
+      class="absolute top-0 right-0 z-10 bg-gradient-to-r from-black via-black to-black text-white h-full w-12 md:w-24 transition flex items-center justify-center text-2xl hover:from-black/80 hover:via-black/95 hover:to-black rounded-l-xl md:rounded-l-none md:rounded-r-xl"
       aria-label="Siguiente"
     >
-      ›
+      <RightArrow />
     </button>
 
-    <div
-      id="projects-carousel"
-      class="flex gap-6 h-full transition-transform duration-700 ease-in-out pr-20"
-    >
-      {
-        carouselProjects.map((project: Project) => (
-          <article
-            class="project-card group flex flex-col w-[300px] md:w-[450px] h-full shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
+    <div class="h-full max-w-full overflow-hidden mr-10">
+      <div
+        id="projects-carousel"
+        class="flex gap-6 h-full transition-transform duration-700 ease-in-out pr-20"
+      >
+        {
+          carouselProjects.map((project: Project) => (
+            <article
+              class="project-card group flex flex-col w-[300px] md:w-[450px] h-full shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
             rounded-xl shadow-xl border border-gray-700 hover:border-indigo-400 hover:shadow-2xl 
             p-6 transition-all duration-300 whitespace-normal"
-          >
-            {project.urls.image && (
-              <div class="aspect-video w-full mb-4 rounded-lg overflow-hidden">
-                <Image
-                  src={project.urls.image}
-                  alt={project.title}
-                  width={300}
-                  height={169}
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            )}
-
-            <h3 class="text-xl font-bold text-white mb-2 tracking-tight group-hover:text-indigo-400 transition-colors">
-              {project.title}
-            </h3>
-            <p class="text-sm text-white mb-4">{project.description}</p>
-
-            <div class="flex flex-wrap gap-2 mb-4">
-              {project.technologies.map(tech => (
-                <span class="bt-tech px-2 py-1 rounded text-xs font-medium">
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <div class="flex justify-end w-full text-sm mt-auto">
-              {project.urls.demo && (
-                <Link href={project.urls.demo} className={`${styleLink} mr-2`}>
-                  🛜 Demo
-                </Link>
-              )}
-              {project.urls.github && (
-                <Link href={project.urls.github} className={styleLink}>
+            >
+              {project.urls.image && (
+                <div class="aspect-video w-full mb-4 rounded-lg overflow-hidden">
                   <Image
-                    src={GithubIcon}
-                    alt="GitHub"
-                    width={48}
-                    height={48}
-                    format="webp"
-                    class="size-5"
+                    src={project.urls.image}
+                    alt={project.title}
+                    width={300}
+                    height={169}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
                   />
-                  Código
-                </Link>
+                </div>
               )}
-            </div>
-          </article>
-        ))
-      }
+
+              <h3 class="text-xl font-bold text-white mb-2 tracking-tight group-hover:text-indigo-400 transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-sm text-white mb-4">{project.description}</p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map(tech => (
+                  <span class="bt-tech px-2 py-1 rounded text-xs font-medium">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div class="flex justify-end w-full text-sm mt-auto">
+                {project.urls.demo && (
+                  <Link
+                    href={project.urls.demo}
+                    className={`${styleLink} mr-2`}
+                  >
+                    🛜 Demo
+                  </Link>
+                )}
+                {project.urls.github && (
+                  <Link href={project.urls.github} className={styleLink}>
+                    <Image
+                      src={GithubIcon}
+                      alt="GitHub"
+                      width={48}
+                      height={48}
+                      format="webp"
+                      class="size-5"
+                    />
+                    Código
+                  </Link>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </Section>
