@@ -10,8 +10,12 @@ import type { Project } from '@/types'
 const styleLink = 'bg-gray-700 px-2 py-1 rounded inline-flex items-center gap-1'
 const projects = await getProjects()
 
-// Crear array con última carta al inicio + proyectos originales para efecto infinito
-const carouselProjects = [projects[projects.length - 1], ...projects]
+// Crear array con duplicados para carrusel infinito real: [último, todos, primero]
+const carouselProjects = [
+  projects[projects.length - 1],
+  ...projects,
+  projects[0],
+]
 ---
 
 <Section sectionId="projects" title="Proyectos personales">
@@ -137,7 +141,6 @@ const carouselProjects = [projects[projects.length - 1], ...projects]
   let isTransitioning = false
 
   const totalCards = cards.length
-  const originalProjectsCount = totalCards - 1 // Número de proyectos originales
   const autoSlideInterval = 15 * 1000 // 15 seconds
   let remainingTime = autoSlideInterval
   let lastTime = Date.now()
@@ -160,13 +163,20 @@ const carouselProjects = [projects[projects.length - 1], ...projects]
     currentIndex++
     updateCarousel()
 
-    setTimeout(() => {
-      if (currentIndex >= originalProjectsCount) {
-        currentIndex = 0
+    // Si llegamos al final, configurar listener para reset automático
+    if (currentIndex >= totalCards - 1) {
+      const handleTransitionEnd = () => {
+        carousel.removeEventListener('transitionend', handleTransitionEnd)
+        currentIndex = 1
         updateCarousel(false)
+        isTransitioning = false
       }
-      isTransitioning = false
-    }, 700)
+      carousel.addEventListener('transitionend', handleTransitionEnd)
+    } else {
+      setTimeout(() => {
+        isTransitioning = false
+      }, 100)
+    }
   }
 
   const startAutoSlide = () => {
