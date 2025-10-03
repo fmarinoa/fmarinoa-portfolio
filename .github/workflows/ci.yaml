@@ -52,7 +52,7 @@ jobs:
           DEPLOYMENT_URL=$(pnpx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes --public)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
-  excute-test:
+  execute-test:
     needs: deploy-preview
     runs-on: ubuntu-latest
 
@@ -105,7 +105,7 @@ jobs:
           path: dist
 
   deploy-results:
-    needs: excute-test
+    needs: execute-test
     runs-on: ubuntu-latest
     if: ${{ always() && github.event.pull_request.base.ref == 'master' }}
 
