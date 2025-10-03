@@ -6,19 +6,18 @@ The portfolio displays four main content sections: About Me with technical skill
 
 ## Technology Stack Overview
 
-Use a modern frontend technology stack centered around React, TypeScript, and Vite. The following table summarizes the core technologies and their roles:
+Use a modern frontend technology stack centered around Astro and TypeScript. The following table summarizes the core technologies and their roles:
 
-| Category     | Technology        | Purpose                                        |
-| ------------ | ----------------- | ---------------------------------------------- |
-| Build Tool   | Vite              | Development server and production build system |
-| Framework    | React             | Component-based UI framework                   |
-| Language     | TypeScript        | Type-safe JavaScript development               |
-| Styling      | Tailwind CSS      | Utility-first CSS framework                    |
-| Testing      | Playwright        | End-to-end testing framework                   |
-| CI/CD        | GitHub Actions    | Automated testing and deployment               |
-| Deployment   | Vercel            | Production hosting and preview deployments     |
-| Code Quality | ESLint + Prettier | Linting and code formatting                    |
-| Git Hooks    | Husky             | Pre-commit quality checks                      |
+| Category     | Technology        | Purpose                                    |
+| ------------ | ----------------- | ------------------------------------------ |
+| Framework    | Astro             | Component-based UI framework               |
+| Language     | TypeScript        | Type-safe JavaScript development           |
+| Styling      | Tailwind CSS      | Utility-first CSS framework                |
+| Testing      | Playwright        | End-to-end testing framework               |
+| CI/CD        | GitHub Actions    | Automated testing and deployment           |
+| Deployment   | Vercel            | Production hosting and preview deployments |
+| Code Quality | ESLint + Prettier | Linting and code formatting                |
+| Git Hooks    | Husky             | Pre-commit quality checks                  |
 
 The application does not use complex state management or routing libraries, keeping the architecture simple and focused on content presentation.
 

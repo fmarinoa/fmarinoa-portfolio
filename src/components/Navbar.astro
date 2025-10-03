@@ -128,11 +128,10 @@ const navItems: NavItem[] = [
 
     for (const sectionId of sections) {
       const section = document.querySelector(sectionId)
+      if (!section) continue
       const rect = section.getBoundingClientRect()
       const sectionTop = window.scrollY + rect.top
       const sectionBottom = sectionTop + rect.height
-
-      if (!section) continue
 
       if (scrollPos <= sectionTop || scrollPos > sectionBottom) continue
 
