@@ -16,7 +16,7 @@ interface Props {
 
 const {
   title = 'Franco Mariño | Portfolio',
-  description = 'Portfolio de Franco Mariño, Senior Test Automation Engineer.',
+  description = 'Portfolio profesional de Franco Mariño, Senior Test Automation Engineer especializado en QA, automatización de pruebas y tecnologías modernas de testing.',
 } = Astro.props
 
 const structuredData = {
@@ -24,8 +24,9 @@ const structuredData = {
   '@type': 'Person',
   name: 'Franco Mariño',
   jobTitle: 'Senior Test Automation Engineer',
-  description: 'Portfolio de Franco Mariño, Senior Test Automation Engineer.',
-  url: 'https://tu-dominio.com',
+  description:
+    'Portfolio profesional de Franco Mariño, Senior Test Automation Engineer especializado en QA, automatización de pruebas y tecnologías modernas de testing.',
+  url: 'https://portfolio.francomarino.dev',
   sameAs: ['https://linkedin.com/in/fmarinoa', 'https://github.com/fmarinoa'],
 }
 ---
@@ -34,7 +35,10 @@ const structuredData = {
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Franco Mariño" />
+    <meta name="language" content="es" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 
     <!-- Metadatos SEO básicos -->
@@ -42,13 +46,20 @@ const structuredData = {
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="QA, testing, test automation, ingeniería, ingeniero de sistemas, senior, freelance, portfolio, Franco Mariño"
+      content="QA, testing, test automation, Selenium, Cypress, Playwright, Jest, CI/CD, DevOps testing, ingeniería, ingeniero de sistemas, senior, freelance, portfolio, Franco Mariño"
     />
 
     <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="es_ES" />
     <meta
       property="og:image"
-      content="https://portfolio.francomarino.dev/favicon.ico"
+      content="https://portfolio.francomarino.dev/og-image.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Franco Mariño - Senior Test Automation Engineer Portfolio"
     />
     <meta property="og:site_name" content="Franco Mariño | Portfolio" />
     <meta property="og:type" content="website" />
@@ -57,9 +68,11 @@ const structuredData = {
     <meta property="og:description" content={description} />
 
     <!-- Twitter -->
+    <meta name="twitter:creator" content="@@francoedson_" />
+    <meta name="twitter:site" content="@francoedson_" />
     <meta
       property="twitter:image"
-      content="https://portfolio.francomarino.dev/favicon.ico"
+      content="https://portfolio.francomarino.dev/og-image.jpg"
     />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://portfolio.francomarino.dev" />
