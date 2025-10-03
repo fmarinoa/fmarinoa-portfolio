@@ -8,18 +8,29 @@ import type { Project } from '@/types'
 
 const styleLink = 'bg-gray-700 px-2 py-1 rounded inline-flex items-center gap-1'
 const projects = await getProjects()
+
+// Crear array con proyectos originales + primera carta al final para efecto infinito
+const carouselProjects = [...projects, projects[0]]
 ---
 
 <Section sectionId="projects" title="Proyectos personales">
-  <div class="relative overflow-hidden w-full h-[520px]">
-    <div class="edge-fade-left" aria-hidden="true"></div>
-    <div class="edge-fade-right" aria-hidden="true"></div>
+  <div class="relative w-full h-[520px] overflow-hidden">
+    <button
+      id="next-btn"
+      class="absolute top-0 right-0 z-10 bg-gradient-to-r from-black/60 via-black/90 to-black text-white h-full w-16 md:w-24 transition flex items-center justify-center text-2xl hover:from-black/80 hover:via-black/95 hover:to-black"
+      aria-label="Siguiente"
+    >
+      ›
+    </button>
 
-    <div id="projects-carousel" class="flex gap-6 w-max h-full marquee py-4">
+    <div
+      id="projects-carousel"
+      class="flex gap-6 h-full transition-transform duration-700 ease-in-out pr-20"
+    >
       {
-        projects.concat(projects).map((project: Project) => (
+        carouselProjects.map((project: Project) => (
           <article
-            class="project-card group flex flex-col w-[320px] h-full shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
+            class="project-card group flex flex-col w-[300px] md:w-[450px] h-full shrink-0 bg-gradient-to-br from-gray-800 to-gray-900 
             rounded-xl shadow-xl border border-gray-700 hover:border-indigo-400 hover:shadow-2xl 
             p-6 transition-all duration-300 whitespace-normal"
           >
@@ -28,8 +39,8 @@ const projects = await getProjects()
                 <Image
                   src={project.urls.image}
                   alt={project.title}
-                  width={320}
-                  height={180}
+                  width={300}
+                  height={169}
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -94,39 +105,93 @@ const projects = await getProjects()
   article:hover h3 {
     color: rgb(129, 140, 248);
   }
+
+  /* Deja que se asome el siguiente card */
+  #projects-carousel {
+    will-change: transform;
+  }
 </style>
 
 <script>
-  // Obtener el carrusel y todas las tarjetas
   const carousel = document.getElementById('projects-carousel')
+  const cards = carousel?.querySelectorAll('.project-card')
+  const nextBtn = document.getElementById('next-btn')
 
-  // Variable para controlar el estado de pausa
-  let isPaused = false
+  if (carousel && cards && nextBtn) {
+    let currentIndex = 0
+    const totalCards = cards.length
+    const originalProjectsCount = totalCards - 1 // Restamos 1 porque la última carta es duplicada
+    let autoSlide: ReturnType<typeof setInterval>
+    let isTransitioning = false
 
-  // Función para pausar la animación
-  function pauseCarousel() {
-    if (carousel && !isPaused) {
-      carousel.style.animationPlayState = 'paused'
-      isPaused = true
+    // Función para obtener el ancho actual de la carta (dinámico para responsive)
+    function getCardWidth() {
+      return cards[0].offsetWidth + 24 // ancho + gap (tailwind gap-6 = 1.5rem = 24px)
     }
-  }
 
-  // Función para reanudar la animación
-  function resumeCarousel() {
-    if (carousel && isPaused) {
-      carousel.style.animationPlayState = 'running'
-      isPaused = false
+    function updateCarousel(animate = true) {
+      const cardWidth = getCardWidth() // Calcular dinámicamente
+      if (animate) {
+        carousel.style.transition = 'transform 0.7s ease-in-out'
+      } else {
+        carousel.style.transition = 'none'
+      }
+      carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`
     }
-  }
 
-  // Agregar event listeners a cada tarjeta
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', pauseCarousel)
-    card.addEventListener('mouseleave', resumeCarousel)
-  })
+    function nextSlide() {
+      if (isTransitioning) return
+      isTransitioning = true
 
-  // Asegurar que la animación esté corriendo inicialmente
-  if (carousel) {
-    carousel.style.animationPlayState = 'running'
+      currentIndex++
+      updateCarousel()
+
+      // Si llegamos a la carta duplicada (última posición)
+      if (currentIndex >= originalProjectsCount) {
+        setTimeout(() => {
+          currentIndex = 0 // Volver al inicio real
+          updateCarousel(false)
+          isTransitioning = false
+        }, 700)
+      } else {
+        setTimeout(() => {
+          isTransitioning = false
+        }, 700)
+      }
+    }
+
+    // Evento del botón
+    nextBtn.addEventListener('click', () => {
+      nextSlide()
+      restartAutoSlide()
+    })
+
+    // Auto-slide cada 5 segundos
+    function startAutoSlide() {
+      autoSlide = setInterval(nextSlide, 5000)
+    }
+
+    function restartAutoSlide() {
+      clearInterval(autoSlide)
+      startAutoSlide()
+    }
+
+    // Pausar auto-slide cuando el mouse esté sobre el carrusel
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(autoSlide)
+    })
+
+    carousel.addEventListener('mouseleave', () => {
+      startAutoSlide()
+    })
+
+    // Recalcular posición cuando cambie el tamaño de la ventana
+    window.addEventListener('resize', () => {
+      updateCarousel(false) // Actualizar sin animación
+    })
+
+    startAutoSlide()
+  } else {
+    console.error('No se encontraron elementos del carrusel')
   }
 </script>
