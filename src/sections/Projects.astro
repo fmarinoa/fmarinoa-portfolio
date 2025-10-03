@@ -10,8 +10,8 @@ import type { Project } from '@/types'
 const styleLink = 'bg-gray-700 px-2 py-1 rounded inline-flex items-center gap-1'
 const projects = await getProjects()
 
-// Crear array con proyectos originales + primera carta al final para efecto infinito
-const carouselProjects = [...projects, projects[0]]
+// Crear array con última carta al inicio + proyectos originales para efecto infinito
+const carouselProjects = [projects[projects.length - 1], ...projects]
 ---
 
 <Section sectionId="projects" title="Proyectos personales">
@@ -132,12 +132,12 @@ const carouselProjects = [...projects, projects[0]]
     throw new Error('Carousel elements not found')
   }
 
-  let currentIndex = 0
+  let currentIndex = 1 // Empezar en la primera carta real (después de la duplicada)
   let autoSlide: ReturnType<typeof setTimeout>
   let isTransitioning = false
 
   const totalCards = cards.length
-  const originalProjectsCount = totalCards - 1
+  const originalProjectsCount = totalCards - 1 // Número de proyectos originales
   const autoSlideInterval = 15 * 1000 // 15 seconds
   let remainingTime = autoSlideInterval
   let lastTime = Date.now()
@@ -160,15 +160,13 @@ const carouselProjects = [...projects, projects[0]]
     currentIndex++
     updateCarousel()
 
-    const resetTime = currentIndex >= originalProjectsCount ? 700 : 700
-
     setTimeout(() => {
       if (currentIndex >= originalProjectsCount) {
         currentIndex = 0
         updateCarousel(false)
       }
       isTransitioning = false
-    }, resetTime)
+    }, 700)
   }
 
   const startAutoSlide = () => {
@@ -205,5 +203,7 @@ const carouselProjects = [...projects, projects[0]]
   carousel.addEventListener('mouseleave', resumeAutoSlide)
   window.addEventListener('resize', () => updateCarousel(false))
 
+  // Posicionar el carrusel en la primera carta real al inicio
+  updateCarousel(false)
   startAutoSlide()
 </script>
