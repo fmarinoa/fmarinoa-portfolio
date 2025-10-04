@@ -19,6 +19,7 @@ jobs:
     permissions:
       contents: write
       deployments: write
+      pull-requests: write
 
     outputs:
       deployment-url: ${{ steps.vercel-deploy.outputs.deployment-url }}
@@ -64,6 +65,29 @@ jobs:
         run: |
           DEPLOYMENT_URL=$(pnpx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes --public)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+
+      - name: Create Deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+          token: '${{ github.token }}'
+          environment-url: ${{ steps.vercel-deploy.outputs.deployment-url }}
+          environment: preview
+          description: 'Preview deployment for PR #${{ github.event.number }}'
+
+      - name: Comment PR with Preview URL
+        if: success() && github.event_name == 'pull_request'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            🚀 **Preview deployment is ready!**
+
+            📱 **Preview URL**: ${{ steps.vercel-deploy.outputs.deployment-url }}
+            ✅ **Status**: Deployed successfully
+            🔗 **Environment**: Preview
+
+            > This preview will be available until the PR is merged or closed.
+          comment_tag: preview_deployment
 
   execute-test:
     needs: deploy-preview
