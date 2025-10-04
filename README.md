@@ -19,10 +19,13 @@
 </p>
 
 <p align="center">
+    <img src="https://raw.githubusercontent.com/fmarinoa/github-readme-stats//refs/heads/master/powered-by-vercel.svg"/>
+</p>
+
+<p align="center">
   <a href="https://portfolio.francomarino.dev">View Demo</a>
   ·
   <a href="https://github.com/fmarinoa/fmarinoa-portfolio/issues/new">Report Bug</a>
-
 </p>
 
 A personal portfolio website showcasing professional experience, projects, education, and technical skills. The application is a single-page portfolio built with React, TypeScript, and Vite, deployed via Vercel with comprehensive CI/CD automation.
