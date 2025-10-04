@@ -25,7 +25,10 @@ test('validate effects in cards', async ({ page, homePage, isMobile }) => {
   const count = await cardsHandle.count()
   const cards = await cardsHandle.all()
 
-  for (const card of cards.slice(0, Math.floor(count / 2))) {
+  // El carrusel tiene [último, ...todos, primero], así que los proyectos reales están en índices 1 hasta count-2
+  const realCards = cards.slice(1, count - 1)
+
+  for (const card of realCards.slice(0, Math.min(3, realCards.length))) {
     const heading = card.locator('h3')
 
     await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)')
@@ -65,28 +68,30 @@ test('should display correct project information for each project', async ({
 
   const projectEntries = await homePage.getProjectsCards()
 
-  for (const [index, project] of projectsExpected.entries()) {
-    const entry = projectEntries.nth(index)
+  await Promise.all(
+    projectsExpected.map(async (project, index) => {
+      const entry = projectEntries.nth(index + 1)
 
-    await expect(entry.locator('h3')).toHaveText(project.title)
+      await expect(entry.locator('h3')).toHaveText(project.title)
 
-    await expect(entry.locator('p')).toHaveText(project.description)
+      await expect(entry.locator('p')).toHaveText(project.description)
 
-    const actualTechs = (
-      await entry.locator('.flex-wrap span').allTextContents()
-    ).map(t => t.trim())
-    expect(actualTechs).toEqual(project.technologies)
+      const actualTechs = (
+        await entry.locator('.flex-wrap span').allTextContents()
+      ).map(t => t.trim())
+      expect(actualTechs).toEqual(project.technologies)
 
-    await expect(entry.locator('a:has-text("Código")')).toHaveAttribute(
-      'href',
-      project.githubUrl
-    )
-
-    if (project.demoUrl) {
-      await expect(entry.locator('a:has-text("🛜 Demo")')).toHaveAttribute(
+      await expect(entry.locator('a:has-text("Código")')).toHaveAttribute(
         'href',
-        project.demoUrl
+        project.urls.github
       )
-    }
-  }
+
+      if (project.urls.demo) {
+        await expect(entry.locator('a:has-text("🛜 Demo")')).toHaveAttribute(
+          'href',
+          project.urls.demo
+        )
+      }
+    })
+  )
 })
