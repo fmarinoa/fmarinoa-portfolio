@@ -1,11 +1,17 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vitest/config'
+import { config } from 'dotenv'
+
+// Cargar variables del archivo .env
+config()
 
 export default defineConfig({
   test: {
     env: {
+      // Heredar todas las variables de entorno del sistema
+      ...process.env,
+      // Variables específicas para tests (sobrescriben las del sistema)
       TZ: 'America/Lima', // Timezone de Perú (es-PE)
-      CONTENT_BASE_URL: 'https://test-api.example.com', // Mock para tests
     },
     // Buscar tests en folders __tests__
     include: [
