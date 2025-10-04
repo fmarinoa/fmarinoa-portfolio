@@ -72,7 +72,7 @@ jobs:
         with:
           token: '${{ github.token }}'
           environment-url: ${{ steps.vercel-deploy.outputs.deployment-url }}
-          environment: preview
+          environment: Preview
           description: 'Preview deployment for PR #${{ github.event.number }}'
 
       - name: Comment PR with Preview URL
