@@ -175,6 +175,30 @@ const navItems: NavItem[] = [
   const removeMenuStyles = () => toggleMenuStyles(false)
   const addMenuStyles = () => toggleMenuStyles(true)
 
+  // Función para resetear completamente el estado del menú
+  const resetMenuState = () => {
+    menuOpen = false
+    navMenu?.classList.remove('rounded-b-2xl')
+    menuOverlay?.classList.add('hidden')
+
+    // Resetear hamburger
+    hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-1.5')
+    hamburgerLines[1]?.classList.remove('opacity-0')
+    hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-1.5')
+
+    // Resetear enlaces
+    navLinks.forEach(link => {
+      link.style.animation = ''
+      if (window.innerWidth <= 767) {
+        link.style.opacity = '0'
+        link.style.transform = 'translateX(-40px)'
+      } else {
+        link.style.opacity = ''
+        link.style.transform = ''
+      }
+    })
+  }
+
   // Toggle del menú móvil
   document.getElementById('menu-toggle').addEventListener('click', () => {
     menuOpen = !menuOpen
@@ -238,4 +262,22 @@ const navItems: NavItem[] = [
 
   // Event listener para scroll
   window.addEventListener('scroll', updateActiveSection)
+
+  // Manejar cambios de tamaño de pantalla
+  window.addEventListener('resize', () => {
+    const isDesktop = window.innerWidth >= 768
+
+    if (isDesktop) {
+      // En desktop, asegurar que el menú sea visible y resetear estado
+      navMenu?.classList.remove('hidden')
+      navMenu?.classList.add('flex')
+      resetMenuState()
+    } else {
+      // En móvil, ocultar menú si no está abierto
+      if (!menuOpen) {
+        navMenu?.classList.add('hidden')
+        navMenu?.classList.remove('flex')
+      }
+    }
+  })
 </script>
