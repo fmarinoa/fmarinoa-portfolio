@@ -6,8 +6,11 @@ import {
   handleSuccess,
 } from '@/helpers/apiUtils'
 
+const errorMessageNotConfigured = 'CV URL not configured'
+const endpoint = '/data/urls.json'
+
 export const GET: APIRoute = async () => {
-  return await fetch(`${BASE_URL}/data/urls.json`)
+  return await fetch(`${BASE_URL}${endpoint}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(
@@ -24,12 +27,12 @@ export const GET: APIRoute = async () => {
     })
     .then(cv => {
       if (!cv || typeof cv !== 'string' || !cv.trim()) {
-        throw new Error('CV URL not configured')
+        throw new Error(errorMessageNotConfigured)
       }
       return handleSuccess({ cvUrl: cv.trim() })
     })
     .catch(error => {
-      if (error.message === 'CV URL not configured') {
+      if (error.message === errorMessageNotConfigured) {
         return handleBadRequest({ error })
       }
       return handleError({ error })
