@@ -47,6 +47,9 @@ jobs:
       - name: Deploy to Vercel
         run: pnpx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN --yes
 
+      - name: Install test & coverage dependencies
+        run: pnpm install vitest @vitest/coverage-v8
+
       - name: Run unit tests
         run: pnpm run test:coverage
 
