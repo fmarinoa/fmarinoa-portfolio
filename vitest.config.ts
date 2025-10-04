@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -15,6 +16,8 @@ export default defineConfig({
       '.astro/',
       '**/*.config.*',
     ],
+    // Configuración de entorno
+    environment: 'node', // Cambiar a node para evitar conflictos con DOM
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
