@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import { CONTENT_BASE_URL as BASE_URL } from '.'
+import { CONTENT_BASE_URL as BASE_URL } from '..'
 import {
   handleBadRequest,
   handleError,
