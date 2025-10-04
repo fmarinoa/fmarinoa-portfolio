@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import { getFooterInfo, getIconUrl, getPhotoUrl, getProjects } from '../content'
+import {
+  getCareers,
+  getFooterInfo,
+  getIconUrl,
+  getPhotoUrl,
+  getProjects,
+} from '../content'
 
 describe('Content Library Functions', () => {
   describe('getIconUrl function', () => {
@@ -266,6 +272,15 @@ describe('Content Library Functions', () => {
           ).toBeGreaterThan(0)
         })
       }
+    })
+  })
+  describe('getCareers function', () => {
+    it('fetches data with correct array schema structure', async () => {
+      const result = await getCareers()
+
+      // Validar que el resultado sea un array
+      expect(Array.isArray(result)).toBe(true)
+      expect(result).not.toBeNull()
     })
   })
 })
