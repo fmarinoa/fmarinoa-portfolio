@@ -67,7 +67,7 @@ jobs:
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: preview
+          env: Preview
           ref: ${{ github.head_ref }}
 
       - name: Update Deployment Status
@@ -77,7 +77,7 @@ jobs:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
           status: ${{ job.status }}
-          env: preview
+          env: Preview
           env_url: ${{ steps.vercel-deploy.outputs.deployment-url }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
