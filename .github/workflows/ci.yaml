@@ -17,7 +17,7 @@ jobs:
       name: Preview
 
     permissions:
-      contents: write
+      contents: read
       deployments: write
       pull-requests: write
 
@@ -52,11 +52,6 @@ jobs:
       - name: Run unit tests
         run: pnpm run test:coverage
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
       - name: Build Astro
         run: pnpm run build
 
@@ -66,14 +61,25 @@ jobs:
           DEPLOYMENT_URL=$(pnpx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes --public)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
-      - name: Create Deployment
-        uses: chrnorm/deployment-action@v2
+      - name: Start Deployment
+        uses: bobheadxi/deployments@v1
         id: deployment
         with:
-          token: '${{ github.token }}'
-          environment-url: ${{ steps.vercel-deploy.outputs.deployment-url }}
-          environment: Preview
-          description: 'Preview deployment for PR #${{ github.event.number }}'
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: preview
+          ref: ${{ github.head_ref }}
+
+      - name: Update Deployment Status
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env: preview
+          env_url: ${{ steps.vercel-deploy.outputs.deployment-url }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
       - name: Comment PR with Preview URL
         if: success() && github.event_name == 'pull_request'

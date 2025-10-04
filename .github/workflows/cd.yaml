@@ -46,3 +46,11 @@ jobs:
 
       - name: Deploy to Vercel
         run: pnpx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN --yes
+
+      - name: Run unit tests
+        run: pnpm run test:coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
