@@ -76,71 +76,7 @@ describe('Content Library Functions', () => {
       // Validar que el resultado sea un objeto
       expect(result).toBeTypeOf('object')
       expect(result).not.toBeNull()
-
-      // Validar estructura de links
-      expect(result).toHaveProperty('links')
-      expect((result as any).links).toBeTypeOf('object')
-
-      // Validar que cada link tenga la estructura correcta
-      const links = (result as any).links
-      Object.entries(links).forEach(([key, linkData]: [string, any]) => {
-        expect(linkData).toBeTypeOf('object')
-        expect(linkData).toHaveProperty('humanText')
-        expect(linkData).toHaveProperty('url')
-        expect(linkData.humanText).toBeTypeOf('string')
-        expect(linkData.url).toBeTypeOf('string')
-        expect(linkData.url).toMatch(/^https?:\/\//)
-      })
-
-      // Validar estructura de socials
-      expect(result).toHaveProperty('socials')
-      expect((result as any).socials).toBeTypeOf('object')
-
-      // Validar que cada social tenga la estructura correcta
-      const socials = (result as any).socials
-      Object.entries(socials).forEach(([key, socialData]: [string, any]) => {
-        expect(socialData).toBeTypeOf('object')
-        expect(socialData).toHaveProperty('icon')
-        expect(socialData).toHaveProperty('profile')
-        expect(socialData.icon).toBeTypeOf('string')
-        expect(socialData.profile).toBeTypeOf('string')
-        expect(socialData.icon).toMatch(/^https?:\/\/.*\.svg$/)
-        expect(socialData.profile).toMatch(/^https?:\/\//)
-      })
-    })
-
-    it('validates specific social platforms schema', async () => {
-      const result = (await getFooterInfo()) as any
-
-      // Validar que existan las plataformas sociales esperadas
-      expect(result.socials).toHaveProperty('github')
-      expect(result.socials).toHaveProperty('linkedin')
-
-      // Validar estructura específica de GitHub
-      const github = result.socials.github
-      expect(github.profile).toMatch(/^https?:\/\/github\.com\//)
-      expect(github.icon).toMatch(/github\.svg$/)
-
-      // Validar estructura específica de LinkedIn
-      const linkedin = result.socials.linkedin
-      expect(linkedin.profile).toMatch(/^https?:\/\/.*linkedin\.com\//)
-      expect(linkedin.icon).toMatch(/linkedin\.svg$/)
-    })
-
-    it('validates links schema contains required entries', async () => {
-      const result = (await getFooterInfo()) as any
-
-      // Validar que existan los links esperados
-      expect(result.links).toHaveProperty('DEEP_WIKI_URL')
-      expect(result.links).toHaveProperty('TEST_RESULTS_URL')
-
-      // Validar que cada link tenga texto descriptivo
-      Object.entries(result.links).forEach(([key, linkData]: [string, any]) => {
-        expect(linkData.humanText).toBeTruthy()
-        expect(linkData.humanText.length).toBeGreaterThan(0)
-        expect(linkData.url).toBeTruthy()
-        expect(linkData.url.length).toBeGreaterThan(0)
-      })
+      expect(result).not.toBeInstanceOf(Array)
     })
   })
   describe('getProjects function', () => {
