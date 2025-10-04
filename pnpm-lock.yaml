@@ -79,6 +79,9 @@ devDependencies:
   typescript-eslint:
     specifier: 8.41.0
     version: 8.41.0(eslint@9.34.0)(typescript@5.9.3)
+  vitest:
+    specifier: ^3.2.4
+    version: 3.2.4(@types/node@24.6.1)(@vitest/ui@3.2.4)
 
 packages:
 

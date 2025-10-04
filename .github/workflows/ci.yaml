@@ -48,6 +48,14 @@ jobs:
           pnpm run lint
           pnpm run prettier:check
 
+      - name: Run unit tests
+        run: pnpm run test:coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Build Astro
         run: pnpm run build
 
