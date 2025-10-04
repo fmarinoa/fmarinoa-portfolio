@@ -70,7 +70,7 @@ const { triggerElementId } = Astro.props
       confirmBtn.disabled = true
       confirmBtn.textContent = 'Cargando...'
 
-      const response = await fetch('/api/cv-url.json')
+      const response = await fetch('/api/v1/cv-url.json')
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
 
       const { cvUrl } = await response.json()

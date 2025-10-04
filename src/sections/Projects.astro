@@ -31,7 +31,7 @@ const carouselProjects = [
 
     <button
       id="next-btn"
-      class="absolute top-0 right-0 z-10 bg-gradient-to-r from-black via-black to-black text-white h-full w-12 md:w-24 transition flex items-center justify-center text-2xl hover:from-black/90 hover:via-black/95 hover:to-black rounded-l-xl md:rounded-l-none md:rounded-r-xl"
+      class="absolute top-0 right-0 z-10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white h-full w-12 md:w-24 transition flex items-center justify-center text-2xl hover:from-gray-900 hover:via-gray-700 hover:to-gray-900 border-gray-700 rounded-l-xl md:rounded-l-none md:rounded-r-xl"
       aria-label="Siguiente"
     >
       <RightArrow />
@@ -128,6 +128,11 @@ const carouselProjects = [
   /* Deja que se asome el siguiente card */
   #projects-carousel {
     will-change: transform;
+    cursor: grab;
+  }
+
+  #projects-carousel:active {
+    cursor: grabbing;
   }
 </style>
 
@@ -143,6 +148,12 @@ const carouselProjects = [
   let currentIndex = 1 // Empezar en la primera carta real (después de la duplicada)
   let autoSlide: ReturnType<typeof setTimeout>
   let isTransitioning = false
+
+  // Variables para drag and drop
+  let isDragging = false
+  let startX = 0
+  let startTranslate = 0
+  let currentTranslate = 0
 
   const totalCards = cards.length
   const autoSlideInterval = 15 * 1000 // 15 seconds
@@ -160,6 +171,48 @@ const carouselProjects = [
     carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`
   }
 
+  // Funciones para drag and drop
+  const handleDragStart = (e: MouseEvent | TouchEvent) => {
+    if (isTransitioning) return
+    isDragging = true
+    startX = 'touches' in e ? e.touches[0].clientX : e.clientX
+    startTranslate = -currentIndex * getCardWidth()
+    carousel.style.transition = 'none'
+    pauseAutoSlide()
+  }
+
+  const handleDragMove = (e: MouseEvent | TouchEvent) => {
+    if (!isDragging) return
+    e.preventDefault()
+    const x = 'touches' in e ? e.touches[0].clientX : e.clientX
+    const deltaX = x - startX
+    currentTranslate = startTranslate + deltaX
+    carousel.style.transform = `translateX(${currentTranslate}px)`
+  }
+
+  const handleDragEnd = () => {
+    if (!isDragging) return
+    isDragging = false
+
+    const dragDistance = currentTranslate - startTranslate
+    const threshold = getCardWidth() * 0.2 // 20% del ancho de la card
+
+    if (Math.abs(dragDistance) > threshold) {
+      if (dragDistance > 0) {
+        // Arrastrando hacia la derecha - ir atrás (slide anterior)
+        prevSlide()
+      } else {
+        // Arrastrando hacia la izquierda - ir adelante (slide siguiente)
+        nextSlide()
+      }
+    } else {
+      // Si no pasó el threshold, volver a la posición original
+      updateCarousel()
+    }
+
+    restartAutoSlide()
+  }
+
   const nextSlide = () => {
     if (isTransitioning) return
 
@@ -172,6 +225,29 @@ const carouselProjects = [
       const handleTransitionEnd = () => {
         carousel.removeEventListener('transitionend', handleTransitionEnd)
         currentIndex = 1
+        updateCarousel(false)
+        isTransitioning = false
+      }
+      carousel.addEventListener('transitionend', handleTransitionEnd)
+    } else {
+      setTimeout(() => {
+        isTransitioning = false
+      }, 100)
+    }
+  }
+
+  const prevSlide = () => {
+    if (isTransitioning) return
+
+    isTransitioning = true
+    currentIndex--
+    updateCarousel()
+
+    // Si llegamos al inicio, configurar listener para reset automático
+    if (currentIndex <= 0) {
+      const handleTransitionEnd = () => {
+        carousel.removeEventListener('transitionend', handleTransitionEnd)
+        currentIndex = totalCards - 2
         updateCarousel(false)
         isTransitioning = false
       }
@@ -212,6 +288,17 @@ const carouselProjects = [
     nextSlide()
     restartAutoSlide()
   })
+
+  // Event listeners para drag and drop
+  carousel.addEventListener('mousedown', handleDragStart)
+  carousel.addEventListener('mousemove', handleDragMove)
+  carousel.addEventListener('mouseup', handleDragEnd)
+  carousel.addEventListener('mouseleave', handleDragEnd)
+
+  // Touch events para móviles
+  carousel.addEventListener('touchstart', handleDragStart)
+  carousel.addEventListener('touchmove', handleDragMove)
+  carousel.addEventListener('touchend', handleDragEnd)
 
   carousel.addEventListener('mouseenter', pauseAutoSlide)
   carousel.addEventListener('mouseleave', resumeAutoSlide)
