@@ -43,8 +43,3 @@ export const getCareers = async () => fetchData(endpoints.careers, [])
 export const getCourses = async () => fetchData(endpoints.courses, [])
 
 export const getJobs = async () => fetchData(endpoints.jobs, [])
-
-export const getUrl = async (key: string): Promise<string> => {
-  const urls = await fetchData(endpoints.urls, {} as Record<string, string>)
-  return urls[key] || ''
-}
