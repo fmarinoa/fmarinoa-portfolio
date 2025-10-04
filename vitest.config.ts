@@ -1,0 +1,39 @@
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    // Buscar tests en folders __tests__
+    include: [
+      'src/**/__tests__/**/*.{test,spec}.{js,ts,jsx,tsx}',
+      'src/**/*.{test,spec}.{js,ts,jsx,tsx}',
+    ],
+    // Excluir archivos que no son tests
+    exclude: [
+      'node_modules/',
+      'dist/',
+      'coverage/',
+      '.astro/',
+      '**/*.config.*',
+    ],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html', 'lcov'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        'coverage/',
+        '.astro/',
+        'astro.config.mjs',
+        'tailwind.config.ts',
+        'commitlint.config.ts',
+        'eslint.config.ts',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/types/**',
+        '**/__tests__/**',
+        '**/*.{test,spec}.*',
+      ],
+      include: ['src/**/*.{js,ts,jsx,tsx}'],
+    },
+  },
+})

@@ -21,7 +21,10 @@
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
     "prepare": "husky || true",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.5.1",
@@ -38,6 +41,8 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@tailwindcss/typography": "0.5.16",
+    "@vitest/ui": "3.2.4",
+    "@vitest/coverage-v8": "3.2.4",
     "astro-eslint-parser": "1.2.2",
     "dotenv": "17.2.3",
     "eslint": "9.34.0",
@@ -48,11 +53,6 @@
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
     "typescript-eslint": "8.41.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,astro}": [
