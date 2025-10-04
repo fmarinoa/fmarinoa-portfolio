@@ -18,8 +18,6 @@ jobs:
 
     permissions:
       contents: read
-      deployments: write
-      pull-requests: write
 
     outputs:
       deployment-url: ${{ steps.vercel-deploy.outputs.deployment-url }}
@@ -61,6 +59,16 @@ jobs:
           DEPLOYMENT_URL=$(pnpx vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes --public)
           echo "deployment-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
 
+  notify-deployment:
+    needs: deploy-preview
+    runs-on: ubuntu-latest
+    if: always()
+
+    permissions:
+      deployments: write
+      pull-requests: write
+
+    steps:
       - name: Start Deployment
         uses: bobheadxi/deployments@v1
         id: deployment
@@ -76,19 +84,20 @@ jobs:
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
+          status: ${{ needs.deploy-preview.result }}
           env: Preview
-          env_url: ${{ steps.vercel-deploy.outputs.deployment-url }}
+          env_url: ${{ needs.deploy-preview.outputs.deployment-url }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          auto_inactive: false
 
       - name: Comment PR with Preview URL
-        if: success() && github.event_name == 'pull_request'
+        if: needs.deploy-preview.result == 'success' && github.event_name == 'pull_request'
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
             🚀 **Preview deployment is ready!**
 
-            📱 **Preview URL**: ${{ steps.vercel-deploy.outputs.deployment-url }}
+            📱 **Preview URL**: ${{ needs.deploy-preview.outputs.deployment-url }}
             ✅ **Status**: Deployed successfully
             🔗 **Environment**: Preview
 
