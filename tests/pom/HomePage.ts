@@ -28,7 +28,9 @@ export class HomePage {
   }
 
   async getProjectsCards(): Promise<Locator> {
-    return this.page.locator('section#projects > div > div.marquee > article')
+    return this.page.locator(
+      'section#projects div#projects-carousel article.project-card'
+    )
   }
 
   async getEducationCards(): Promise<Locator> {

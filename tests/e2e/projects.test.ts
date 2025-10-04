@@ -52,7 +52,7 @@ test('has correct number of project entries', async ({
 
   const projectEntries = await homePage.getProjectsCards()
   const count = await projectEntries.count()
-  expect(count / 2).toBe(projectsExpected.length)
+  expect(projectsExpected.length).toBe(count - 2)
 })
 
 test('should display correct project information for each project', async ({
