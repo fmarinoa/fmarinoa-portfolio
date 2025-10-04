@@ -5,10 +5,11 @@ export const toKebabOrLower = (str: string): string =>
   str.toLowerCase().replace(/\s+/g, '-')
 
 export function formatPeriod(period: { start: string; end?: string }): string {
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
-  } as const
+    timeZone: 'UTC',
+  }
   const start = new Date(period.start).toLocaleDateString('es-PE', options)
   const end =
     period.end === 'present' || !period.end
