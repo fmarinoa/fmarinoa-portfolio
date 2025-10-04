@@ -4,7 +4,7 @@ import {
   handleBadRequest,
   handleError,
   handleSuccess,
-} from '@/helpers/apiUtils'
+} from '@/helpers/responseHandlers'
 
 const errorMessageNotConfigured = 'CV URL not configured'
 const endpoint = '/data/urls.json'

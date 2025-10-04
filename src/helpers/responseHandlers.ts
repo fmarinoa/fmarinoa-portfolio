@@ -30,30 +30,6 @@ export const handleBadRequest = ({
   return createJsonResponse({ error: message }, 400)
 }
 
-export const handleNotFound = ({
-  error,
-  message = 'Not Found',
-}: ApiErrorProps): Response => {
-  log.error(error, message)
-  return createJsonResponse({ error: message }, 404)
-}
-
-export const handleUnauthorized = ({
-  error,
-  message = 'Unauthorized',
-}: ApiErrorProps): Response => {
-  log.error(error, message)
-  return createJsonResponse({ error: message }, 401)
-}
-
-export const handleForbidden = ({
-  error,
-  message = 'Forbidden',
-}: ApiErrorProps): Response => {
-  log.error(error, message)
-  return createJsonResponse({ error: message }, 403)
-}
-
 export const handleSuccess = (data: object): Response => {
   log.info(data, 'Successful response')
   return createJsonResponse(data, 200)
