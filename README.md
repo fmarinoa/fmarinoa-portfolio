@@ -1,6 +1,31 @@
-# Portfolio Website Overview
+<h1 align="center">Portfolio Website Overview</h1>
 
-Apersonal portfolio website showcasing professional experience, projects, education, and technical skills. The application is a single-page portfolio built with React, TypeScript, and Vite, deployed via Vercel with comprehensive CI/CD automation.
+<p align="center">
+  <a href="https://github.com/fmarinoa/fmarinoa-portfolio/actions">
+    <img alt="Tests Passing" src="https://github.com/fmarinoa/fmarinoa-portfolio/workflows/CI%20Pipeline/badge.svg" />
+  </a>
+  <a href="https://codecov.io/gh/fmarinoa/fmarinoa-portfolio">
+    <img alt="Tests Coverage" src="https://codecov.io/gh/fmarinoa/fmarinoa-portfolio/branch/main/graph/badge.svg" />
+  </a>
+  <a href="https://github.com/fmarinoa/fmarinoa-portfolio/pulls">
+    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/fmarinoa/fmarinoa-portfolio?color=0088ff" />
+  </a>
+  <a href="https://github.com/fmarinoa/fmarinoa-portfolio/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/fmarinoa/fmarinoa-portfolio?color=0088ff" />
+  </a>
+  <a href="https://github.com/fmarinoa/fmarinoa-portfolio/graphs/contributors">
+    <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/fmarinoa/fmarinoa-portfolio" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://portfolio.francomarino.dev">View Demo</a>
+  ·
+  <a href="https://github.com/fmarinoa/fmarinoa-portfolio/issues/new">Report Bug</a>
+
+</p>
+
+A personal portfolio website showcasing professional experience, projects, education, and technical skills. The application is a single-page portfolio built with React, TypeScript, and Vite, deployed via Vercel with comprehensive CI/CD automation.
 
 The portfolio displays four main content sections: About Me with technical skills, Professional Experience, Projects showcase, and Education background. The application emphasizes responsive design, accessibility, and modern development practices with automated testing and quality controls.
 
