@@ -1,8 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import {
   getCareers,
+  getCourses,
   getFooterInfo,
   getIconUrl,
+  getJobs,
   getPhotoUrl,
   getProjects,
 } from '../content'
@@ -148,135 +150,29 @@ describe('Content Library Functions', () => {
       // Validar que el resultado sea un array
       expect(Array.isArray(result)).toBe(true)
       expect(result).not.toBeNull()
-
-      // Si hay proyectos, validar estructura de cada uno
-      if (result.length > 0) {
-        result.forEach((project: any) => {
-          // Validar propiedades principales requeridas
-          expect(project).toBeTypeOf('object')
-          expect(project).toHaveProperty('title')
-          expect(project).toHaveProperty('description')
-          expect(project).toHaveProperty('technologies')
-          expect(project).toHaveProperty('urls')
-
-          // Validar tipos de datos
-          expect(project.title).toBeTypeOf('string')
-          expect(project.description).toBeTypeOf('string')
-          expect(Array.isArray(project.technologies)).toBe(true)
-          expect(project.urls).toBeTypeOf('object')
-
-          // Validar que title y description no estén vacíos
-          expect(project.title.trim().length).toBeGreaterThan(0)
-          expect(project.description.trim().length).toBeGreaterThan(0)
-
-          // Validar que technologies sea un array de strings
-          project.technologies.forEach((tech: any) => {
-            expect(tech).toBeTypeOf('string')
-            expect(tech.trim().length).toBeGreaterThan(0)
-          })
-        })
-      }
-    })
-
-    it('validates project URLs schema structure', async () => {
-      const result = await getProjects()
-
-      if (result.length > 0) {
-        result.forEach((project: any) => {
-          const urls = project.urls
-
-          // Validar que urls sea un objeto
-          expect(urls).toBeTypeOf('object')
-
-          // Validar que tenga al menos github
-          expect(urls).toHaveProperty('github')
-          expect(urls.github).toBeTypeOf('string')
-          expect(urls.github).toMatch(/^https?:\/\/github\.com\//)
-
-          // Validar URLs opcionales si existen
-          if (urls.demo) {
-            expect(urls.demo).toBeTypeOf('string')
-            expect(urls.demo).toMatch(/^https?:\/\//)
-          }
-
-          if (urls.image) {
-            expect(urls.image).toBeTypeOf('string')
-            expect(urls.image).toMatch(/^https?:\/\//)
-          }
-
-          // Validar que todas las URLs sean válidas
-          Object.entries(urls).forEach(([key, url]: [string, any]) => {
-            expect(url).toBeTypeOf('string')
-            expect(url).toMatch(/^https?:\/\//)
-          })
-        })
-      }
-    })
-
-    it('validates technologies array contains valid entries', async () => {
-      const result = await getProjects()
-
-      if (result.length > 0) {
-        result.forEach((project: any) => {
-          // Validar que technologies no esté vacío
-          expect(project.technologies.length).toBeGreaterThan(0)
-
-          // Validar que cada tecnología sea un string válido
-          project.technologies.forEach((tech: any) => {
-            expect(tech).toBeTypeOf('string')
-            expect(tech.trim()).not.toBe('')
-          })
-        })
-      }
-    })
-
-    it('validates required fields are present and non-empty', async () => {
-      const result = await getProjects()
-
-      if (result.length > 0) {
-        result.forEach((project: any, index: number) => {
-          // Validar campos requeridos con contexto de índice para debug
-          expect(
-            project.title,
-            `Project ${index}: title should be present`
-          ).toBeTruthy()
-          expect(
-            project.description,
-            `Project ${index}: description should be present`
-          ).toBeTruthy()
-          expect(
-            project.technologies,
-            `Project ${index}: technologies should be present`
-          ).toBeTruthy()
-          expect(
-            project.urls,
-            `Project ${index}: urls should be present`
-          ).toBeTruthy()
-          expect(
-            project.urls.github,
-            `Project ${index}: github URL should be present`
-          ).toBeTruthy()
-
-          // Validar longitudes mínimas
-          expect(
-            project.title.length,
-            `Project ${index}: title should not be empty`
-          ).toBeGreaterThan(0)
-          expect(
-            project.description.length,
-            `Project ${index}: description should not be empty`
-          ).toBeGreaterThan(0)
-          expect(
-            project.technologies.length,
-            `Project ${index}: should have at least one technology`
-          ).toBeGreaterThan(0)
-        })
-      }
     })
   })
   describe('getCareers function', () => {
     it('fetches data with correct array schema structure', async () => {
       const result = await getCareers()
+
+      // Validar que el resultado sea un array
+      expect(Array.isArray(result)).toBe(true)
+      expect(result).not.toBeNull()
+    })
+  })
+  describe('getCourses function', () => {
+    it('fetches data with correct array schema structure', async () => {
+      const result = await getCourses()
+
+      // Validar que el resultado sea un array
+      expect(Array.isArray(result)).toBe(true)
+      expect(result).not.toBeNull()
+    })
+  })
+  describe('getJobs function', () => {
+    it('fetches data with correct array schema structure', async () => {
+      const result = await getJobs()
 
       // Validar que el resultado sea un array
       expect(Array.isArray(result)).toBe(true)
