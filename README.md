@@ -5,7 +5,7 @@
     <img alt="Tests Passing" src="https://github.com/fmarinoa/fmarinoa-portfolio/workflows/CI%20Pipeline/badge.svg" />
   </a>
   <a href="https://codecov.io/gh/fmarinoa/fmarinoa-portfolio">
-    <img alt="Tests Coverage" src="https://codecov.io/gh/fmarinoa/fmarinoa-portfolio/branch/main/graph/badge.svg" />
+    <img alt="Tests Coverage" src="https://codecov.io/gh/fmarinoa/fmarinoa-portfolio/branch/master/graph/badge.svg" />
   </a>
   <a href="https://github.com/fmarinoa/fmarinoa-portfolio/pulls">
     <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/fmarinoa/fmarinoa-portfolio?color=0088ff" />
