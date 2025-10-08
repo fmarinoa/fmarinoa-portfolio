@@ -56,7 +56,7 @@ const carouselProjects = [
                     alt={project.title}
                     width={300}
                     height={169}
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover select-none"
                     loading="lazy"
                   />
                 </div>
@@ -146,7 +146,7 @@ const carouselProjects = [
   }
 
   let currentIndex = 1 // Empezar en la primera carta real (después de la duplicada)
-  let autoSlide: ReturnType<typeof setTimeout>
+  let autoSlide: ReturnType<typeof setTimeout> | null = null
   let isTransitioning = false
 
   // Variables para drag and drop
@@ -210,6 +210,7 @@ const carouselProjects = [
       updateCarousel()
     }
 
+    // Reiniciar el auto-slide después de cualquier interacción de drag
     restartAutoSlide()
   }
 
@@ -260,6 +261,12 @@ const carouselProjects = [
   }
 
   const startAutoSlide = () => {
+    // Limpiar cualquier timeout existente
+    if (autoSlide) {
+      clearTimeout(autoSlide)
+      autoSlide = null
+    }
+
     lastTime = Date.now()
     autoSlide = setTimeout(() => {
       nextSlide()
@@ -268,18 +275,31 @@ const carouselProjects = [
     }, remainingTime)
   }
 
+  const stopAutoSlide = () => {
+    if (autoSlide) {
+      clearTimeout(autoSlide)
+      autoSlide = null
+    }
+  }
+
   const pauseAutoSlide = () => {
-    clearTimeout(autoSlide)
-    remainingTime = Math.max(1000, remainingTime - (Date.now() - lastTime))
+    if (autoSlide) {
+      clearTimeout(autoSlide)
+      autoSlide = null
+      remainingTime = Math.max(1000, remainingTime - (Date.now() - lastTime))
+    }
   }
 
   const resumeAutoSlide = () => {
-    if (remainingTime <= 0) remainingTime = autoSlideInterval
-    startAutoSlide()
+    // Solo reanudar si no hay un timeout activo
+    if (!autoSlide) {
+      if (remainingTime <= 0) remainingTime = autoSlideInterval
+      startAutoSlide()
+    }
   }
 
   const restartAutoSlide = () => {
-    clearTimeout(autoSlide)
+    stopAutoSlide()
     remainingTime = autoSlideInterval
     startAutoSlide()
   }
