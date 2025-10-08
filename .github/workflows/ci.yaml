@@ -155,6 +155,7 @@ jobs:
         if: ${{ always() }}
         with:
           path: dist
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
   deploy-results:
     needs: execute-test
@@ -176,3 +177,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         if: ${{ always() }}
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
