@@ -52,6 +52,7 @@ export default defineConfig({
         '**/types/**',
         '**/__tests__/**',
         '**/*.{test,spec}.*',
+        'src/index.ts', // Archivo de entrada sin lógica
       ],
       include: ['src/**/*.{js,ts,jsx,tsx}'],
     },

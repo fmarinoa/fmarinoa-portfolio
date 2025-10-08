@@ -1,10 +1,5 @@
 ---
 import Alert from './Alert.astro'
-
-interface Props {
-  triggerElementId: string
-}
-const { triggerElementId } = Astro.props
 ---
 
 <div
@@ -37,13 +32,15 @@ const { triggerElementId } = Astro.props
 
 <Alert />
 
-<script is:inline define:vars={{ triggerElementId }}>
-  const cvModal = document.getElementById('cv-modal')
-  const confirmBtn = document.getElementById('confirm-btn')
+<script>
+  import { actions } from 'astro:actions'
+
+  const cvModal = document.getElementById('cv-modal') as HTMLElement
+  const confirmBtn = document.getElementById('confirm-btn') as HTMLButtonElement
 
   let isLoading = false
 
-  function showAlert(message, state = 'success') {
+  function showAlert(message: string, state: 'success' | 'failed' = 'success') {
     const alertElement = document.getElementById('alert')
     if (!alertElement) return
     alertElement.classList.remove('success', 'failed', 'hidden')
@@ -70,22 +67,19 @@ const { triggerElementId } = Astro.props
       confirmBtn.disabled = true
       confirmBtn.textContent = 'Cargando...'
 
-      const response = await fetch('/api/v1/cv-url.json')
-      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      const { data, error } = await actions.getCvUrl()
 
-      const { cvUrl } = await response.json()
-      closeModal()
-
-      if (cvUrl) {
-        window.open(cvUrl, '_blank', 'noopener,noreferrer')
-        showAlert('¡Gracias por abrir mi CV!', 'success')
-      } else {
+      if (error || !data?.cvUrl) {
         showAlert('No se pudo obtener la URL del CV', 'failed')
+        return
       }
+
+      window.open(data.cvUrl, '_blank', 'noopener,noreferrer')
+      showAlert('¡Gracias por abrir mi CV!', 'success')
     } catch (error) {
-      closeModal()
       showAlert('Error al cargar el CV. Intenta de nuevo', 'failed')
     } finally {
+      closeModal()
       isLoading = false
       confirmBtn.disabled = false
       confirmBtn.textContent = 'De acuerdo'
@@ -93,9 +87,12 @@ const { triggerElementId } = Astro.props
   }
 
   document.addEventListener('click', e => {
-    if (e.target.closest(`#${triggerElementId}`)) openModal()
-    else if (e.target.closest('#cancel-btn')) closeModal()
-    else if (e.target === cvModal) closeModal()
-    else if (e.target === confirmBtn) handleConfirm()
+    const target = e.target as HTMLElement
+    if (!target) return
+
+    if (target.closest(`#cv-btn`)) openModal()
+    else if (target.closest('#cancel-btn')) closeModal()
+    else if (target === cvModal) closeModal()
+    else if (target === confirmBtn) handleConfirm()
   })
 </script>
