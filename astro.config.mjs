@@ -9,6 +9,14 @@ import vercelAdapter from '@astrojs/vercel'
 export default defineConfig({
   site: 'https://portfolio.francomarino.dev',
 
+  experimental: {
+    actions: true,
+  },
+
+  security: {
+    checkOrigin: true,
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
