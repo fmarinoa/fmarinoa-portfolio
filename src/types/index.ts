@@ -32,6 +32,6 @@ export interface Course {
 }
 
 export interface FooterInfo {
-  socials: { social: { profile: string; icon: string } }
-  links: { link: { url: string; humanText: string } }
+  socials: Array<{ profile: string; icon: string }>
+  links: Array<{ url: string; humanText: string }>
 }
