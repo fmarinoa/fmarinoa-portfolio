@@ -49,13 +49,6 @@ export default defineConfig({
       name: 'Desktop Chrome',
       use: {
         ...devices['Desktop Chrome'],
-        // Configuraciones específicas para Chrome
-        launchOptions: {
-          args: [
-            '--disable-web-security',
-            '--disable-features=VizDisplayCompositor',
-          ],
-        },
       },
     },
     {
