@@ -1,5 +1,6 @@
-import { getCvUrl } from './cv'
+import { defineAction } from 'astro:actions'
+import { createGetCvUrlAction } from './cv'
 
 export const server = {
-  getCvUrl,
+  getCvUrl: defineAction(createGetCvUrlAction()),
 }
