@@ -27,7 +27,7 @@ describe('CV URL API', () => {
 
     vi.mocked(fetch).mockResolvedValue(mockResponse as any)
 
-    const result = await GET()
+    const result = await GET({} as any)
 
     expect(fetch).toHaveBeenCalledWith(
       `${process.env.CONTENT_BASE_URL}/data/urls.json`
@@ -47,12 +47,11 @@ describe('CV URL API', () => {
 
     vi.mocked(fetch).mockResolvedValue(mockResponse as any)
 
-    const result = await GET()
+    const result = await GET({} as any)
 
     expect(result).toEqual({
-      error: true,
       status: 500,
-      error: expect.any(Error),
+      error: new Error('Failed to fetch CV URL: 404 - Not Found'),
     })
   })
 
@@ -64,12 +63,11 @@ describe('CV URL API', () => {
 
     vi.mocked(fetch).mockResolvedValue(mockResponse as any)
 
-    const result = await GET()
+    const result = await GET({} as any)
 
     expect(result).toEqual({
-      error: true,
       status: 500,
-      error: expect.any(Error),
+      error: new Error('Invalid data format received'),
     })
   })
 
@@ -81,12 +79,11 @@ describe('CV URL API', () => {
 
     vi.mocked(fetch).mockResolvedValue(mockResponse as any)
 
-    const result = await GET()
+    const result = await GET({} as any)
 
     expect(result).toEqual({
-      error: true,
       status: 400,
-      error: expect.any(Error),
+      error: new Error('CV URL not configured'),
     })
   })
 
@@ -98,7 +95,7 @@ describe('CV URL API', () => {
 
     vi.mocked(fetch).mockResolvedValue(mockResponse as any)
 
-    const result = await GET()
+    const result = await GET({} as any)
 
     expect(result).toEqual({
       success: true,
