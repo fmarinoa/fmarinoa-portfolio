@@ -30,3 +30,8 @@ export interface Course {
   year: string
   url: string
 }
+
+export interface FooterInfo {
+  socials: Array<{ profile: string; icon: string }>
+  links: Array<{ url: string; humanText: string }>
+}

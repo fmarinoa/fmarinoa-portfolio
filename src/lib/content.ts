@@ -1,3 +1,5 @@
+import type { FooterInfo } from '@/types'
+
 const BASE_URL = import.meta.env.CONTENT_BASE_URL
 
 const endpoints = {
@@ -35,7 +37,11 @@ export function getPhotoUrl(filename: string): string {
   return `${BASE_URL}${assetPaths.photos}${filename}.webp`
 }
 
-export const getFooterInfo = async () => fetchData(endpoints.footerInfo, {})
+export const getFooterInfo: () => Promise<FooterInfo> = async () =>
+  fetchData<FooterInfo>(endpoints.footerInfo, {
+    socials: { social: { profile: '', icon: '' } },
+    links: { link: { url: '', humanText: '' } },
+  })
 
 export const getProjects = async () => fetchData(endpoints.projects, [])
 
