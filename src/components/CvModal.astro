@@ -39,14 +39,25 @@ import Alert from './Alert.astro'
   const confirmBtn = document.getElementById('confirm-btn') as HTMLButtonElement
 
   let isLoading = false
+  let alertTimeout: NodeJS.Timeout | null = null
 
   function showAlert(message: string, state: 'success' | 'failed' = 'success') {
     const alertElement = document.getElementById('alert')
     if (!alertElement) return
+
+    if (alertTimeout) {
+      clearTimeout(alertTimeout)
+      alertTimeout = null
+    }
+
     alertElement.classList.remove('success', 'failed', 'hidden')
     alertElement.textContent = message
     alertElement.classList.add(state)
-    setTimeout(() => alertElement.classList.add('hidden'), 5000)
+
+    alertTimeout = setTimeout(() => {
+      alertElement.classList.add('hidden')
+      alertTimeout = null
+    }, 5000)
   }
 
   function openModal() {
