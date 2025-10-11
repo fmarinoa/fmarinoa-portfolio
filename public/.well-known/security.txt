@@ -1,0 +1,4 @@
+Contact: mailto:franco.edson.18014@gmail.com
+Expires: 2099-12-31T23:59:59.000Z
+Preferred-Languages: es
+Canonical: https://portfolio.francomarino.dev/.well-known/security.txt
