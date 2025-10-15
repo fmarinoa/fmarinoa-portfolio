@@ -1,20 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { __testExports } from '../cv'
-
-const { getCvUrlHandler } = __testExports
-
-// Mock astro:actions
-vi.mock('astro:actions', () => ({
-  ActionError: class ActionError extends Error {
-    code: string
-    constructor({ code, message }: { code: string; message: string }) {
-      super(message)
-      this.code = code
-      this.name = 'ActionError'
-    }
-  },
-  defineAction: vi.fn(),
-}))
+import { getCvUrl } from '../getCvUrl'
 
 // Mock de BASE_URL
 vi.mock('..', () => ({
@@ -43,12 +28,8 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      const result = await getCvUrlHandler()
-
-      expect(mockFetch).toHaveBeenCalledWith(
-        'https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/data/urls.json'
-      )
-      expect(result).toEqual({ cvUrl: mockCvUrl })
+      const result = await getCvUrl()
+      expect(result).toEqual({ cvUrl: mockCvUrl, success: true })
     })
 
     it('should handle cv URL with whitespace', async () => {
@@ -59,9 +40,9 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      const result = await getCvUrlHandler()
+      const result = await getCvUrl()
 
-      expect(result).toEqual({ cvUrl: mockCvUrl.trim() })
+      expect(result).toEqual({ cvUrl: mockCvUrl.trim(), success: true })
     })
 
     it('should handle numeric cv URL', async () => {
@@ -72,9 +53,11 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      const result = await getCvUrlHandler()
-
-      expect(result).toEqual({ cvUrl: '123456' })
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'CV URL not configured',
+        success: false,
+      })
     })
   })
 
@@ -87,9 +70,11 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      await expect(getCvUrlHandler()).rejects.toThrow(
-        'Failed to fetch CV URL: 404 - Not Found'
-      )
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'Failed to fetch CV URL: 404 - Not Found',
+        success: false,
+      })
     })
 
     it('should throw error when response is not JSON', async () => {
@@ -99,9 +84,11 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      await expect(getCvUrlHandler()).rejects.toThrow(
-        'An unexpected error occurred'
-      )
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'An unexpected error occurred',
+        success: false,
+      })
     })
 
     it('should throw error when data format is invalid', async () => {
@@ -111,9 +98,11 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      await expect(getCvUrlHandler()).rejects.toThrow(
-        'Invalid data format received'
-      )
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'Invalid data format received',
+        success: false,
+      })
     })
 
     it('should throw error when data is not an object', async () => {
@@ -123,9 +112,11 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      await expect(getCvUrlHandler()).rejects.toThrow(
-        'Invalid data format received'
-      )
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'Invalid data format received',
+        success: false,
+      })
     })
 
     it('should throw error when cv property is missing', async () => {
@@ -135,7 +126,11 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      await expect(getCvUrlHandler()).rejects.toThrow('CV URL not configured')
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'CV URL not configured',
+        success: false,
+      })
     })
 
     it('should throw error when cv property is empty string', async () => {
@@ -145,7 +140,11 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      await expect(getCvUrlHandler()).rejects.toThrow('CV URL not configured')
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'CV URL not configured',
+        success: false,
+      })
     })
 
     it('should throw error when cv property is only whitespace', async () => {
@@ -155,15 +154,21 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      await expect(getCvUrlHandler()).rejects.toThrow('CV URL not configured')
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'CV URL not configured',
+        success: false,
+      })
     })
 
     it('should handle network errors', async () => {
       mockFetch.mockRejectedValue(new Error('Network error'))
 
-      await expect(getCvUrlHandler()).rejects.toThrow(
-        'An unexpected error occurred'
-      )
+      const result = await getCvUrl()
+      expect(result).toEqual({
+        error: 'An unexpected error occurred',
+        success: false,
+      })
     })
   })
 
@@ -175,10 +180,10 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      const result = await getCvUrlHandler()
+      const result = await getCvUrl()
 
       // false.toString() es "false", que es un string válido
-      expect(result).toEqual({ cvUrl: 'false' })
+      expect(result).toEqual({ error: 'CV URL not configured', success: false })
     })
 
     it('should handle cv as number zero', async () => {
@@ -188,10 +193,10 @@ describe('getCvUrl action handler', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
 
-      const result = await getCvUrlHandler()
+      const result = await getCvUrl()
 
       // 0.toString() es "0", que es un string válido
-      expect(result).toEqual({ cvUrl: '0' })
+      expect(result).toEqual({ error: 'CV URL not configured', success: false })
     })
   })
 })

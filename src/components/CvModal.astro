@@ -4,7 +4,7 @@ import Alert from './Alert.astro'
 
 <div
   id="cv-modal"
-  class="fixed inset-0 items-center justify-center bg-black/50 z-50 hidden"
+  class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50"
 >
   <div
     class="bg-gradient-to-br from-gray-800 to-gray-900 border border-indigo-400 transition-all duration-300 p-5 rounded-lg shadow-md max-w-xs text-center"
@@ -57,7 +57,7 @@ import Alert from './Alert.astro'
     alertTimeout = setTimeout(() => {
       alertElement.classList.add('hidden')
       alertTimeout = null
-    }, 5000)
+    }, 5 * 1000)
   }
 
   function openModal() {
@@ -80,12 +80,12 @@ import Alert from './Alert.astro'
 
       const { data, error } = await actions.getCvUrl()
 
-      if (error || !data?.cvUrl) {
+      if (error || !data) {
         showAlert('No se pudo obtener la URL del CV', 'failed')
         return
       }
 
-      window.open(data.cvUrl, '_blank', 'noopener,noreferrer')
+      window.open(data, '_blank', 'noopener,noreferrer')
       showAlert('¡Gracias por abrir mi CV!', 'success')
     } catch (error) {
       showAlert('Error al cargar el CV. Intenta de nuevo', 'failed')

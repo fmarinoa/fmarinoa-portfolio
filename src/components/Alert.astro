@@ -11,7 +11,7 @@ const { message = '', state = 'success' } = Astro.props
 
 <div
   id="alert"
-  class={`fixed top-16 right-4 px-4 py-2 rounded shadow-md duration-300 transition-all text-white ${state} hidden`}
+  class={`hidden fixed top-16 right-4 px-4 py-2 rounded shadow-md duration-300 transition-all text-white ${state}`}
 >
   {message}
 </div>
