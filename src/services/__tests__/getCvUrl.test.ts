@@ -1,19 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { getCvUrl } from '../getCvUrl'
 
-// Mock astro:actions
-vi.mock('astro:actions', () => ({
-  ActionError: class ActionError extends Error {
-    code: string
-    constructor({ code, message }: { code: string; message: string }) {
-      super(message)
-      this.code = code
-      this.name = 'ActionError'
-    }
-  },
-  defineAction: vi.fn(),
-}))
-
 // Mock de BASE_URL
 vi.mock('..', () => ({
   CONTENT_BASE_URL: 'https://test-api.com',

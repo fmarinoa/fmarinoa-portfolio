@@ -1,11 +1,17 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vitest/config'
 import { config } from 'dotenv'
+import path from 'path'
 
 // Cargar variables del archivo .env
 config()
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   test: {
     env: {
       // Heredar todas las variables de entorno del sistema
