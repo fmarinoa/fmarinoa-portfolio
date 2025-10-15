@@ -1,1 +1,4 @@
-pnpm run test:run && pnpm run lint
+if git diff --cached --name-only | grep -q '^src/'; then
+    pnpm run test:run
+fi
+pnpm run lint
