@@ -38,7 +38,7 @@ export const getCvUrl = async (): Promise<CvUrlResponse> => {
 
     const cv = data.cv
 
-    if (!cv || typeof cv !== 'string') {
+    if (typeof cv !== 'string' || !cv.trim()) {
       return {
         success: false,
         error: `${CV_CONFIG.ERROR_MESSAGES.NOT_CONFIGURED}`,
