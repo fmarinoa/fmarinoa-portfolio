@@ -8,7 +8,7 @@ export function formatPeriod(period: { start: string; end?: string }): string {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
-    timeZone: 'UTC-5',
+    timeZone: 'UTC',
   }
   const start = new Date(period.start).toLocaleDateString('es-PE', options)
   const end =
