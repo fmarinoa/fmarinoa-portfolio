@@ -14,7 +14,7 @@
     "technologies": ["Fetch API", "HTML", "CSS"],
     "urls": {
       "github": "https://github.com/fmarinoa/what-is-my-public-ip",
-      "demo": "https://what-is-my-public-ip.francomarino.dev/",
+      "demo": "https://what-is-my-public-ip.francomarino.dev",
       "image": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/projects/whatismyip.webp"
     }
   },
@@ -33,8 +33,23 @@
     ],
     "urls": {
       "github": "https://github.com/fmarinoa/fmarinoa-portfolio",
-      "demo": "https://portfolio.francomarino.dev/",
+      "demo": "https://portfolio.francomarino.dev",
       "image": "https://portfolio.francomarino.dev/og-image.jpg"
+    }
+  },
+  {
+    "title": "GitHub README Auto-Updater",
+    "description": "Script automatizado en Node.js que actualiza dinámicamente el archivo README.md del perfil de GitHub con la actividad reciente del usuario (pull requests, pushes y ramas creadas). Utiliza la API de GitHub y un workflow de GitHub Actions para ejecutar el proceso periódicamente. Arquitectura modular basada en utilidades, constantes y plantillas personalizables, asegurando fácil mantenimiento y extensión.",
+    "technologies": [
+      "Node.js",
+      "GitHub API",
+      "GitHub Actions",
+      "JavaScript",
+      "ESM Modules"
+    ],
+    "urls": {
+      "github": "https://github.com/fmarinoa/fmarinoa",
+      "image": "https://opengraph.githubassets.com/1/fmarinoa/fmarinoa"
     }
   }
 ]
