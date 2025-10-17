@@ -39,8 +39,8 @@ export function getPhotoUrl(filename: string): string {
 
 export const getFooterInfo: () => Promise<FooterInfo> = async () =>
   fetchData<FooterInfo>(endpoints.footerInfo, {
-    socials: { social: { profile: '', icon: '' } },
-    links: { link: { url: '', humanText: '' } },
+    socials: [{ profile: '', icon: '' }],
+    links: [{ url: '', humanText: '' }],
   })
 
 export const getProjects = async () => fetchData(endpoints.projects, [])
