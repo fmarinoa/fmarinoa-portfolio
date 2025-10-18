@@ -18,7 +18,9 @@ interface CvUrlResponse {
 
 export const getCvUrl = async (): Promise<CvUrlResponse> => {
   try {
-    const response = await fetch(`${BASE_URL}${CV_CONFIG.ENDPOINT}`)
+    const response = await fetch(`${BASE_URL}${CV_CONFIG.ENDPOINT}`, {
+      cache: 'no-cache',
+    })
 
     if (!response.ok) {
       return {
