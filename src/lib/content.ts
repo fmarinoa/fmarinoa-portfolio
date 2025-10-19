@@ -18,7 +18,7 @@ const assetPaths = {
 } as const
 
 async function fetchData<T>(endpoint: string, fallback: T): Promise<T> {
-  return await fetch(`${BASE_URL}${endpoint}`)
+  return await fetch(`${BASE_URL}${endpoint}`, { cache: 'no-cache' })
     .then(response => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       return response.json()

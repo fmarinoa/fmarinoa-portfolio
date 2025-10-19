@@ -39,8 +39,10 @@ const { icons } = Astro.props as Props
 </div>
 
 <style>
-  /* Estilos hover para la tarjeta de herramienta */
-  .tool-card:hover {
+  /* Estilos hover / focus para la tarjeta de herramienta */
+  .tool-card:hover,
+  .tool-card:focus,
+  .tool-card:focus-visible {
     border-color: rgb(60, 131, 246); /* primary/indigo-400 */
     box-shadow:
       0 10px 25px -3px rgba(0, 0, 0, 0.1),
@@ -48,8 +50,10 @@ const { icons } = Astro.props as Props
     transform: scale(1.1); /* scale-110 */
   }
 
-  /* Estilos hover para la imagen */
-  .tool-card:hover .tool-image {
+  /* Estilos hover / focus para la imagen */
+  .tool-card:hover .tool-image,
+  .tool-card:focus .tool-image,
+  .tool-card:focus-visible .tool-image {
     filter: brightness(1.1); /* brightness-110 */
   }
 </style>
