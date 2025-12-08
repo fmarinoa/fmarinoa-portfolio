@@ -62,6 +62,7 @@
     ],
     "urls": {
       "github": "https://github.com/fmarinoa/el-impostor-game",
+      "demo": "https://el-impostor.francomarino.dev",
       "image": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/projects/el-impostor-game.webp"
     }
   }
