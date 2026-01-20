@@ -183,7 +183,10 @@ describe('getCvUrl action handler', () => {
       const result = await getCvUrl()
 
       // false.toString() es "false", que es un string válido
-      expect(result).toEqual({ error: 'CV URL not configured', success: false })
+      expect(result).toEqual({
+        error: 'CV URL not configured',
+        success: false,
+      })
     })
 
     it('should handle cv as number zero', async () => {
@@ -196,7 +199,10 @@ describe('getCvUrl action handler', () => {
       const result = await getCvUrl()
 
       // 0.toString() es "0", que es un string válido
-      expect(result).toEqual({ error: 'CV URL not configured', success: false })
+      expect(result).toEqual({
+        error: 'CV URL not configured',
+        success: false,
+      })
     })
   })
 })
