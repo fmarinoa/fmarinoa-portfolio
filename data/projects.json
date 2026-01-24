@@ -9,6 +9,48 @@
     }
   },
   {
+    "title": "AWS Amplify Deploy Action",
+    "description": "GitHub Action compuesta para desplegar artefactos estáticos (.zip) directamente a AWS Amplify utilizando AWS CLI, sin necesidad de gestionar un bucket S3 intermedio.",
+    "technologies": [
+      "Shell",
+      "GH Action"
+    ],
+    "urls": {
+      "github": "https://github.com/fmarinoa/amplify-deploy",
+      "demo": "https://github.com/marketplace/actions/deploy-to-amplify-aws-cli",
+      "image": "https://media.licdn.com/dms/image/v2/D4D22AQGerAtBwj0-Xw/feedshare-shrink_2048_1536/B4DZvx4kElIwAk-/0/1769289695884?e=1770854400&v=beta&t=qDGoR-YTps6L5-mR_rMtqyTU_iFK38YcTjxyNw-Mimo"
+    }
+  },
+  {
+    "title": "Juego El Impostor",
+    "description": "Juego para descubrir quien es el impostor a raíz de una lista de palabras. Se crean salas, se escogen la cantidad de impostores, minimo y máximo de jugadores. Gestión de las salas, jugadores y votos en supabase.",
+    "technologies": [
+      "Vite",
+      "React",
+      "Vite",
+      "Supabase"
+    ],
+    "urls": {
+      "github": "https://github.com/fmarinoa/el-impostor-game",
+      "demo": "https://el-impostor.francomarino.dev",
+      "image": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/projects/el-impostor-game.webp"
+    }
+  },
+  {
+    "title": "GitHub README Auto-Updater",
+    "description": "Script automatizado en Node.js que actualiza dinámicamente el archivo README.md del perfil de GitHub con la actividad reciente del usuario (pull requests, pushes y ramas creadas). Utiliza la API de GitHub y un workflow de GitHub Actions para ejecutar el proceso periódicamente. Arquitectura modular basada en utilidades, constantes y plantillas personalizables, asegurando fácil mantenimiento y extensión.",
+    "technologies": [
+      "Node.js",
+      "GitHub API",
+      "GitHub Actions",
+      "JavaScript"
+    ],
+    "urls": {
+      "github": "https://github.com/fmarinoa/fmarinoa",
+      "image": "https://opengraph.githubassets.com/1/fmarinoa/fmarinoa"
+    }
+  },
+  {
     "title": "What is my public IP?",
     "description": "Aplicación web que muestra la dirección IP pública del usuario consumiendo la API de api.ipquery.io. Con esta información, además se obtiene el clima mediante la API de api.open-meteo.com y se muestra un pequeño mapa integrado desde Google Maps.",
     "technologies": ["Fetch API", "HTML", "CSS"],
@@ -35,48 +77,6 @@
       "github": "https://github.com/fmarinoa/fmarinoa-portfolio",
       "demo": "https://portfolio.francomarino.dev",
       "image": "https://portfolio.francomarino.dev/og-image.jpg"
-    }
-  },
-  {
-    "title": "GitHub README Auto-Updater",
-    "description": "Script automatizado en Node.js que actualiza dinámicamente el archivo README.md del perfil de GitHub con la actividad reciente del usuario (pull requests, pushes y ramas creadas). Utiliza la API de GitHub y un workflow de GitHub Actions para ejecutar el proceso periódicamente. Arquitectura modular basada en utilidades, constantes y plantillas personalizables, asegurando fácil mantenimiento y extensión.",
-    "technologies": [
-      "Node.js",
-      "GitHub API",
-      "GitHub Actions",
-      "JavaScript"
-    ],
-    "urls": {
-      "github": "https://github.com/fmarinoa/fmarinoa",
-      "image": "https://opengraph.githubassets.com/1/fmarinoa/fmarinoa"
-    }
-  },
-  {
-    "title": "Juego El Impostor",
-    "description": "Juego para descubrir quien es el impostor a raíz de una lista de palabras. Se crean salas, se escogen la cantidad de impostores, minimo y máximo de jugadores. Gestión de las salas, jugadores y votos en supabase.",
-    "technologies": [
-      "Vite",
-      "React",
-      "Vite",
-      "Supabase"
-    ],
-    "urls": {
-      "github": "https://github.com/fmarinoa/el-impostor-game",
-      "demo": "https://el-impostor.francomarino.dev",
-      "image": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/projects/el-impostor-game.webp"
-    }
-  },
-  {
-    "title": "AWS Amplify Deploy Action",
-    "description": "GitHub Action compuesta para desplegar artefactos estáticos (.zip) directamente a AWS Amplify utilizando AWS CLI, sin necesidad de gestionar un bucket S3 intermedio.",
-    "technologies": [
-      "Shell",
-      "GH Action"
-    ],
-    "urls": {
-      "github": "https://github.com/fmarinoa/amplify-deploy",
-      "demo": "https://github.com/marketplace/actions/deploy-to-amplify-aws-cli",
-      "image": "https://media.licdn.com/dms/image/v2/D4D22AQGerAtBwj0-Xw/feedshare-shrink_2048_1536/B4DZvx4kElIwAk-/0/1769289695884?e=1770854400&v=beta&t=qDGoR-YTps6L5-mR_rMtqyTU_iFK38YcTjxyNw-Mimo"
     }
   }
 ]
