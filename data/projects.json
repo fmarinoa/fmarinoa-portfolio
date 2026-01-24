@@ -65,5 +65,18 @@
       "demo": "https://el-impostor.francomarino.dev",
       "image": "https://raw.githubusercontent.com/fmarinoa/fmarinoa-portfolio/refs/heads/content/assets/projects/el-impostor-game.webp"
     }
+  },
+  {
+    "title": "AWS Amplify Deploy Action",
+    "description": "GitHub Action compuesta para desplegar artefactos estáticos (.zip) directamente a AWS Amplify utilizando AWS CLI, sin necesidad de gestionar un bucket S3 intermedio.",
+    "technologies": [
+      "Shell",
+      "GH Action"
+    ],
+    "urls": {
+      "github": "https://github.com/fmarinoa/amplify-deploy",
+      "demo": "https://github.com/marketplace/actions/deploy-to-amplify-aws-cli",
+      "image": "https://media.licdn.com/dms/image/v2/D4D22AQGerAtBwj0-Xw/feedshare-shrink_2048_1536/B4DZvx4kElIwAk-/0/1769289695884?e=1770854400&v=beta&t=qDGoR-YTps6L5-mR_rMtqyTU_iFK38YcTjxyNw-Mimo"
+    }
   }
 ]
