@@ -1,13 +1,12 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
+  "extends": "@tsconfig/node24/tsconfig.json",
   "include": ["**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
-      "@tests/*": ["tests/*"]
+      "@tests/*": ["./tests/*"]
     },
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "noEmit": true
   }

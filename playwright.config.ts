@@ -27,11 +27,11 @@ export default defineConfig({
   /* Reporter optimizado para tests */
   reporter: process.env.CI
     ? [
-        ['html', { outputFolder: 'playwright-report' }],
+        ['html', { outputFolder: 'playwright-report', open: 'never' }],
         ['junit', { outputFile: 'test-results/junit.xml' }],
         ['github'],
       ]
-    : [['html', { outputFolder: 'playwright-report' }]],
+    : [['html', { outputFolder: 'playwright-report', open: 'never' }]],
 
   /* Configuración global para todos los tests */
   use: {
