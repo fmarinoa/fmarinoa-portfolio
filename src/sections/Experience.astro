@@ -8,20 +8,21 @@ const jobList = await getJobs()
 ---
 
 <Section sectionId="experience" title="Experiencia laboral">
-  <div class="max-w-4xl mx-auto px-4">
-    <div class="relative border-l-4 border-indigo-500 pl-6 space-y-6">
-      {
-        jobList.map(
-          (job: {
-            title: string
-            company: string
-            linkCompany?: string
-            location: string
-            period: { start: string; end?: string }
-            details: string[]
-          }) => (
+  <div class="relative border-l-2 border-border pl-6 space-y-6">
+    {
+      jobList.map(
+        (job: {
+          title: string
+          company: string
+          linkCompany?: string
+          location: string
+          period: { start: string; end?: string }
+          details: string[]
+        }) => {
+          const isRunning = !job.period.end || job.period.end === 'present'
+          return (
             <div class="relative group transition-all duration-300">
-              <span class="absolute -left-3 top-6 w-5 h-5 rounded-3xl bg-indigo-500 border-2 shadow-md group-hover:scale-110 transition-transform" />
+              <span class="absolute -left-3 top-6 z-10 w-5 h-5 rounded-3xl bg-accent border-2 border-background shadow-md group-hover:scale-110 transition-transform" />
 
               <InfoCard
                 title={job.title}
@@ -30,11 +31,12 @@ const jobList = await getJobs()
                 location={job.location}
                 period={formatPeriod(job.period)}
                 details={job.details}
+                status={isRunning ? 'running' : 'passed'}
               />
             </div>
           )
-        )
-      }
-    </div>
+        }
+      )
+    }
   </div>
 </Section>

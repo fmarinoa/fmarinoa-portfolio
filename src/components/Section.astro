@@ -3,10 +3,24 @@ interface Props {
   sectionId: string
   title: string
 }
+
 const { sectionId, title } = Astro.props
 ---
 
-<section id={sectionId} data-section={sectionId} class="mb-12">
-  <h2 class="text-2xl font-bold mb-6 border-b pb-2">{title}</h2>
+<section
+  id={sectionId}
+  data-section={sectionId}
+  data-reveal
+  class="mb-16 md:mb-20"
+>
+  <h2
+    class="font-mono text-sm md:text-base text-accent tracking-wide mb-6 flex items-center gap-2 border-b border-border pb-3"
+  >
+    <span class="text-dim select-none" aria-hidden="true">{'//'}</span>
+    <span class="uppercase">{title}</span>
+    <span
+      class="flex-1 border-b border-dashed border-border/50 ml-2"
+      aria-hidden="true"></span>
+  </h2>
   <slot />
 </section>

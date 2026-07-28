@@ -4,25 +4,33 @@ import Alert from './Alert.astro'
 
 <div
   id="cv-modal"
-  class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50"
+  class="hidden fixed inset-0 items-center justify-center bg-black/60 z-50"
 >
   <div
-    class="bg-gradient-to-br from-gray-800 to-gray-900 border border-indigo-400 transition-all duration-300 p-5 rounded-lg shadow-md max-w-xs text-center"
+    class="bg-surface border border-border rounded-terminal transition-all duration-300 p-5 shadow-md max-w-xs text-center"
   >
+    <div
+      class="flex items-center gap-1.5 justify-center mb-3"
+      aria-hidden="true"
+    >
+      <span class="window-dot window-dot-fail"></span>
+      <span class="window-dot window-dot-warn"></span>
+      <span class="window-dot window-dot-pass"></span>
+    </div>
     <h2 id="modal-title" class="sr-only">Confirmación de descarga</h2>
-    <p id="modal-description" class="text-white font-medium mb-3">
+    <p id="modal-description" class="text-foreground font-medium mb-3">
       Será redirigido a la descarga de mi CV
     </p>
     <div class="flex justify-center gap-2">
       <button
         id="confirm-btn"
-        class="px-4 py-2 rounded transition-colors bg-indigo-500 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+        class="px-4 py-2 rounded-terminal transition-colors bg-accent text-background hover:bg-accent-hover disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer font-mono text-sm"
       >
         De acuerdo
       </button>
       <button
         id="cancel-btn"
-        class="px-4 py-2 rounded transition-colors bg-gray-300 text-gray-800 hover:bg-gray-400 hover:cursor-pointer"
+        class="px-4 py-2 rounded-terminal transition-colors border border-border text-foreground hover:border-accent hover:cursor-pointer font-mono text-sm"
       >
         Cancelar
       </button>
@@ -101,7 +109,7 @@ import Alert from './Alert.astro'
     const target = e.target as HTMLElement
     if (!target) return
 
-    if (target.closest(`#cv-btn`)) openModal()
+    if (target.closest(`[data-cv-trigger]`)) openModal()
     else if (target.closest('#cancel-btn')) closeModal()
     else if (target === cvModal) closeModal()
     else if (target === confirmBtn) handleConfirm()

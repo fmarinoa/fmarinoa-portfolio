@@ -28,15 +28,28 @@ jobs:
           ref: master
           fetch-depth: 1
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - name: Extract pnpm version
+        id: pnpm-version
+        run: |
+          PNPM_VERSION=$(jq -r .packageManager package.json | cut -d'@' -f2)
+          echo "version=$PNPM_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - name: Extract node version
+        id: node-version
+        run: |
+          NODE_VERSION=$(jq -r .engines.node package.json | cut -d'@' -f2)
+          echo "version=$NODE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6.0.9
         with:
-          version: 9
+          version: ${{ steps.pnpm-version.outputs.version }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ steps.node-version.outputs.version }}
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prod
