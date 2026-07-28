@@ -17,20 +17,18 @@ export class HomePage {
   }
 
   async goToSection(section: Section): Promise<void> {
-    await this.page.locator(`a[href="#${section}"]`).click()
+    await this.page.locator(`#nav-menu a[href="#${section}"]`).click()
     await expect(this.page).toHaveURL(new RegExp(`#${section}`))
     await expect(this.page.locator(`section[id="${section}"]`)).toBeInViewport()
     await this.page.mouse.click(0, 0)
   }
 
   async getExperienceGroups(): Promise<Locator> {
-    return this.page.locator('section#experience > div > div > div')
+    return this.page.locator('section#experience > div > div')
   }
 
   async getProjectsCards(): Promise<Locator> {
-    return this.page.locator(
-      'section#projects div#projects-carousel article.project-card'
-    )
+    return this.page.locator('section#projects article.project-window')
   }
 
   async getEducationCards(): Promise<Locator> {
@@ -45,7 +43,7 @@ export class HomePage {
   async getSectionTitle(section: Section): Promise<string> {
     return (
       (await this.page
-        .locator(`section[id="${section}"] > h2`)
+        .locator(`section[id="${section}"] > h2 span.uppercase`)
         .textContent()) || ''
     )
   }

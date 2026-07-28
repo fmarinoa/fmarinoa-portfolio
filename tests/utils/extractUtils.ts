@@ -8,17 +8,24 @@ export function formatPeriod(period: { start: string; end?: string }): string {
     year: 'numeric',
     month: 'long',
   } as const
-  const start = new Date(period.start).toLocaleDateString('es-PE', options)
+
+  const parseMonthYear = (dateStr: string): string =>
+    new Date(dateStr).toLocaleDateString('es-PE', {
+      ...options,
+      timeZone: 'UTC',
+    })
+
+  const start = parseMonthYear(period.start)
   const end =
     period.end === 'present' || !period.end
       ? capitalize(new Date().toLocaleDateString('es-PE', options))
-      : new Date(period.end).toLocaleDateString('es-PE', options)
+      : parseMonthYear(period.end)
 
   return `${capitalize(start)} - ${capitalize(end)}`
 }
 
 export async function extractLocation(locator: Locator): Promise<string> {
   const text = (await locator.textContent()) ?? ''
-  const match = /📍\s*(.+)$/.exec(text)
-  return match ? match[1].trim() : ''
+  const parts = text.split('>')
+  return parts[parts.length - 1].trim()
 }

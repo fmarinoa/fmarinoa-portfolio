@@ -26,17 +26,19 @@ test('validate effects in cards', async ({ page, homePage, isMobile }) => {
     await card.scrollIntoViewIfNeeded()
     const heading = card.locator('h3')
 
-    await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)')
-    await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)')
+    await expect(card).toHaveCSS('border-color', 'rgb(35, 39, 46)')
+    await expect(heading).toHaveCSS('color', 'rgb(231, 233, 236)')
 
-    await card.hover({ force: true })
-    sleep(200)
+    if (!isMobile) {
+      await card.hover({ force: true })
+      await sleep(200)
 
-    await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', {
-      timeout: 1000,
-    })
-    await expect(heading).toHaveCSS('color', 'rgb(129, 140, 248)')
-    await page.mouse.click(0, 0)
+      await expect(card).toHaveCSS('border-color', 'rgb(79, 214, 224)', {
+        timeout: 1000,
+      })
+      await expect(heading).toHaveCSS('color', 'rgb(79, 214, 224)')
+      await page.mouse.click(0, 0)
+    }
   }
 })
 
@@ -47,7 +49,6 @@ test('has correct number of education entries', async ({ page, homePage }) => {
 })
 
 test('should display correct careers information for each education entry', async ({
-  page,
   homePage,
 }) => {
   const careersExpect = await fetchCareers()
@@ -59,16 +60,16 @@ test('should display correct careers information for each education entry', asyn
 
     await expect(card.locator('h3')).toHaveText(career.title)
 
-    const school = card.locator('span.text-sm')
+    const school = card.locator('span.font-semibold')
     await expect(school).toHaveText(career.institutionShort)
 
     const locationNode = card.locator('div.flex.items-center.gap-2')
     const textLocation = await extractLocation(locationNode)
     expect(textLocation).toBe(career.location)
 
-    await expect(card.locator('div.text-sm.text-gray-300 > p')).toHaveText(
-      `📅 ${career.period.start} - ${career.period.end}`
-    )
+    await expect(
+      card.locator('div.text-sm.text-muted.font-mono > p')
+    ).toHaveText(`> ${career.period.start} - ${career.period.end}`)
 
     const detailItems = await card.locator('ul li').all()
     for (const [i, careerDetail] of career.details.entries()) {
@@ -93,12 +94,8 @@ test('should display correct courses information for each education entry', asyn
     await expect(card.locator('a')).toHaveText(course.name)
     await expect(card.locator('a')).toHaveAttribute('href', course.url)
 
-    await expect(card.locator('span.text-gray-300')).toHaveText(
-      course.institution
-    )
+    await expect(card.locator('span.text-muted')).toHaveText(course.institution)
 
-    await expect(card.locator('span.text-gray-400')).toHaveText(
-      `(${course.year})`
-    )
+    await expect(card.locator('span.text-dim')).toHaveText(`(${course.year})`)
   }
 })

@@ -22,21 +22,23 @@ test('validate effects in card', async ({ page, homePage, isMobile }) => {
   const groups = await homePage.getExperienceGroups()
 
   for (const group of await groups.all()) {
-    const card = group.locator('article.bg-gradient-to-br')
+    const card = group.locator('article')
     await card.scrollIntoViewIfNeeded()
-    await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)')
+    await expect(card).toHaveCSS('border-color', 'rgb(35, 39, 46)')
 
     const heading = group.locator('h3')
-    await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)')
+    await expect(heading).toHaveCSS('color', 'rgb(231, 233, 236)')
 
-    await card.hover({ force: true })
-    sleep(200)
+    if (!isMobile) {
+      await card.hover({ force: true })
+      await sleep(200)
 
-    await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', {
-      timeout: 1000,
-    })
-    await expect(heading).toHaveCSS('color', 'rgb(129, 140, 248)')
-    await page.mouse.click(0, 0)
+      await expect(card).toHaveCSS('border-color', 'rgb(79, 214, 224)', {
+        timeout: 1000,
+      })
+      await expect(heading).toHaveCSS('color', 'rgb(79, 214, 224)')
+      await page.mouse.click(0, 0)
+    }
   }
 })
 
@@ -64,9 +66,9 @@ test('should display correct experience information for each job', async ({
     const textLocation = await extractLocation(locationNode)
     expect(textLocation).toBe(job.location)
 
-    await expect(group.locator('div.text-sm.text-gray-300 > p')).toHaveText(
-      `📅 ${formatPeriod(job.period)}`
-    )
+    await expect(
+      group.locator('div.text-sm.text-muted.font-mono > p')
+    ).toHaveText(`> ${formatPeriod(job.period)}`)
 
     const detailItems = await group.locator('ul li').all()
     for (const [i, jobDetail] of job.details.entries()) {

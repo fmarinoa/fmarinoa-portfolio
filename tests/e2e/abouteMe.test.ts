@@ -15,9 +15,9 @@ test('interacts with icons in carousel', async ({ page }) => {
   const card = page.locator('div[role="listitem"]:visible').first()
 
   await card.hover({ force: true })
-  sleep(200)
+  await sleep(200)
 
-  await expect(card).toHaveCSS('border-color', 'rgb(60, 131, 246)', {
+  await expect(card).toHaveCSS('border-color', 'rgb(79, 214, 224)', {
     timeout: 1000,
   })
 

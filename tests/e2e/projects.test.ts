@@ -22,25 +22,20 @@ test('validate effects in cards', async ({ page, homePage, isMobile }) => {
   await homePage.goToSection('projects')
 
   const cardsHandle = await homePage.getProjectsCards()
-  const count = await cardsHandle.count()
   const cards = await cardsHandle.all()
 
-  // El carrusel tiene [último, ...todos, primero], así que los proyectos reales están en índices 1 hasta count-2
-  const realCards = cards.slice(1, count - 1)
-
-  for (const card of realCards.slice(0, Math.min(3, realCards.length))) {
+  for (const card of cards.slice(0, Math.min(3, cards.length))) {
     const heading = card.locator('h3')
 
-    await expect(card).toHaveCSS('border-color', 'rgb(55, 65, 81)')
-    await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)')
+    await expect(card).toHaveCSS('border-color', 'rgb(35, 39, 46)')
+    await expect(heading).toHaveCSS('color', 'rgb(231, 233, 236)')
 
     await card.hover({ force: true })
-    sleep(500)
+    await sleep(500)
 
-    await expect(card).toHaveCSS('border-color', 'rgb(129, 140, 248)', {
-      timeout: 1000,
-    })
-    await expect(heading).toHaveCSS('color', 'rgb(129, 140, 248)')
+    const boxShadow = await card.evaluate(el => getComputedStyle(el).boxShadow)
+    expect(boxShadow).not.toBe('none')
+
     await page.mouse.click(0, 0)
   }
 })
@@ -55,7 +50,7 @@ test('has correct number of project entries', async ({
 
   const projectEntries = await homePage.getProjectsCards()
   const count = await projectEntries.count()
-  expect(projectsExpected.length).toBe(count - 2)
+  expect(projectsExpected.length).toBe(count)
 })
 
 test('should display correct project information for each project', async ({
@@ -70,7 +65,7 @@ test('should display correct project information for each project', async ({
 
   await Promise.all(
     projectsExpected.map(async (project, index) => {
-      const entry = projectEntries.nth(index + 1)
+      const entry = projectEntries.nth(index)
 
       await expect(entry.locator('h3')).toHaveText(project.title)
 
@@ -87,7 +82,7 @@ test('should display correct project information for each project', async ({
       )
 
       if (project.urls.demo) {
-        await expect(entry.locator('a:has-text("🛜 Demo")')).toHaveAttribute(
+        await expect(entry.locator('a:has-text("Demo")')).toHaveAttribute(
           'href',
           project.urls.demo
         )

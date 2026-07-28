@@ -35,7 +35,7 @@ test('has copyright notice', async ({ page }) => {
   const footer = page.locator('footer')
   await footer.scrollIntoViewIfNeeded()
 
-  const copyright = footer.locator('span')
+  const copyright = footer.locator('span.text-muted')
 
   await expect(copyright).toHaveText(
     new RegExp(
