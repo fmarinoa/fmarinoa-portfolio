@@ -2,9 +2,15 @@
 import Footer from '@/components/Footer.astro'
 import BackToTop from '@/components/BackToTop.astro'
 import Navbar from '@/components/Navbar.astro'
+import ScrollReveal from '@/components/ScrollReveal.astro'
 
 import '@fontsource/bebas-neue'
 import bebasNeueWoff2 from '@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2?url'
+
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/500.css'
+import '@fontsource/jetbrains-mono/700.css'
+import jetbrainsMonoWoff2 from '@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url'
 
 import '@/global.css'
 
@@ -87,6 +93,13 @@ const structuredData = {
       type="font/woff2"
       crossorigin
     />
+    <link
+      rel="preload"
+      href={jetbrainsMonoWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://portfolio.francomarino.dev" />
@@ -101,10 +114,11 @@ const structuredData = {
   </head>
   <body>
     <Navbar />
-    <main class="pt-20 max-w-4xl mx-auto px-4 space-y-6">
+    <main class="pt-20 max-w-5xl mx-auto px-4 space-y-6">
       <slot />
       <BackToTop />
     </main>
     <Footer />
+    <ScrollReveal />
   </body>
 </html>

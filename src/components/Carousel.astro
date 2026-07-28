@@ -21,7 +21,7 @@ const { icons } = Astro.props as Props
           role="listitem"
           tabindex="0"
           aria-label={tool.alt}
-          class="tool-card flex-shrink-0 w-16 h-16 bg-card border border-gray-700 rounded-xl flex items-center justify-center p-3 transition-all duration-300"
+          class="tool-card flex-shrink-0 w-16 h-16 bg-foreground border border-border rounded-terminal flex items-center justify-center p-2.5 transition-all duration-300"
         >
           <Image
             src={tool.src}
@@ -44,10 +44,10 @@ const { icons } = Astro.props as Props
   .tool-card:hover,
   .tool-card:focus,
   .tool-card:focus-visible {
-    border-color: rgb(60, 131, 246); /* primary/indigo-400 */
+    border-color: var(--color-accent);
     box-shadow:
-      0 10px 25px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+      0 10px 25px -3px rgba(0, 0, 0, 0.3),
+      0 4px 6px -2px rgba(0, 0, 0, 0.15);
     transform: scale(1.1); /* scale-110 */
   }
 

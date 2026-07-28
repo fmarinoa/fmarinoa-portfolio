@@ -9,13 +9,13 @@
   <!-- Hero Section -->
   <div class="flex flex-col md:flex-row items-center gap-8 py-12">
     <div class="flex-1">
-      <h1 class="text-3xl md:text-5xl font-bold mb-4">
-        Welcome to Our Site
-      </h1>
+      <h1 class="text-3xl md:text-5xl font-bold mb-4">Welcome to Our Site</h1>
       <p class="text-lg text-gray-600 mb-6">
         Build amazing things with Tailwind CSS
       </p>
-      <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+      <button
+        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+      >
         Get Started
       </button>
     </div>
@@ -29,12 +29,20 @@
 ### Responsive Grid Gallery
 
 ```html
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"
+>
   <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-    <img src="image1.jpg" class="w-full h-full object-cover hover:scale-105 transition" />
+    <img
+      src="image1.jpg"
+      class="w-full h-full object-cover hover:scale-105 transition"
+    />
   </div>
   <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-    <img src="image2.jpg" class="w-full h-full object-cover hover:scale-105 transition" />
+    <img
+      src="image2.jpg"
+      class="w-full h-full object-cover hover:scale-105 transition"
+    />
   </div>
   <!-- More items... -->
 </div>
@@ -45,27 +53,27 @@
 ```tsx
 function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden
-                    sm:flex sm:max-w-2xl">
+    <div
+      className="bg-white rounded-lg shadow-lg overflow-hidden
+                    sm:flex sm:max-w-2xl"
+    >
       <img
         className="h-48 w-full object-cover sm:h-auto sm:w-48"
         src={product.image}
         alt={product.name}
       />
       <div className="p-6">
-        <h3 className="text-lg font-semibold text-gray-900">
-          {product.name}
-        </h3>
-        <p className="mt-2 text-gray-600">
-          {product.description}
-        </p>
-        <button className="mt-4 px-4 py-2 bg-indigo-600 text-white
-                          rounded-lg hover:bg-indigo-700 transition">
+        <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
+        <p className="mt-2 text-gray-600">{product.description}</p>
+        <button
+          className="mt-4 px-4 py-2 bg-indigo-600 text-white
+                          rounded-lg hover:bg-indigo-700 transition"
+        >
           Add to Cart
         </button>
       </div>
     </div>
-  );
+  )
 }
 ```
 
@@ -95,15 +103,15 @@ module.exports = {
 
 ```tsx
 function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('dark')
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove('dark')
     }
-  }, [darkMode]);
+  }, [darkMode])
 
   return (
     <button
@@ -112,7 +120,7 @@ function ThemeToggle() {
     >
       {darkMode ? '🌙' : '☀️'}
     </button>
-  );
+  )
 }
 ```
 
