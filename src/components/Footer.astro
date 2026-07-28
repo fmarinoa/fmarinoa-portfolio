@@ -4,8 +4,8 @@ import Link from '@/components/Link.astro'
 import { getFooterInfo } from '@/lib/content'
 
 const footerInfo = await getFooterInfo()
-const footerSocials = { ...footerInfo.socials }
-const footerLinks = { ...footerInfo.links }
+const footerSocials = footerInfo.socials
+const footerLinks = footerInfo.links
 const year = new Date().getFullYear()
 ---
 

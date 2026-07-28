@@ -1,6 +1,11 @@
 import neostandard from 'neostandard'
-import astroParser from 'astro-eslint-parser'
+import * as astroParser from 'astro-eslint-parser'
 import eslintPluginAstro from 'eslint-plugin-astro'
+
+const astroRecommendedRules = eslintPluginAstro.configs.recommended.reduce(
+  (rules, config) => ({ ...rules, ...(config.rules ?? {}) }),
+  {}
+)
 
 export default [
   ...neostandard({
@@ -22,7 +27,7 @@ export default [
     },
     rules: {
       // Reglas recomendadas para Astro
-      ...eslintPluginAstro.configs.recommended.rules,
+      ...astroRecommendedRules,
       // Ajustes específicos si es necesario
       'astro/no-conflict-set-directives': 'error',
       'astro/no-unused-define-vars-in-style': 'error',
