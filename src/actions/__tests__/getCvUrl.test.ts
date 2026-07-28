@@ -20,32 +20,35 @@ vi.mock('@/services/getCvUrl', () => ({
   getCvUrl: vi.fn(),
 }))
 
+const mockedGetCvUrl = vi.mocked(getCvUrl)
+
+// El mock de defineAction devuelve la config cruda (con `.handler`),
+// distinto al tipo real de ActionClient que expone Astro.
+const callHandler = () =>
+  (server.getCvUrl as unknown as { handler: () => Promise<string> }).handler()
+
 describe('server.getCvUrl action', () => {
   it('should return cvUrl when successful', async () => {
-    getCvUrl.mockResolvedValue({
+    mockedGetCvUrl.mockResolvedValue({
       success: true,
-      error: null,
       cvUrl: 'https://cv.com',
     })
-    const result = await server.getCvUrl.handler()
+    const result = await callHandler()
     expect(result).toBe('https://cv.com')
   })
 
   it('should throw ActionError when getCvUrl returns error', async () => {
-    getCvUrl.mockResolvedValue({
+    mockedGetCvUrl.mockResolvedValue({
       success: false,
       error: 'Network error',
-      cvUrl: null,
     })
-    await expect(server.getCvUrl.handler()).rejects.toThrow(ActionError)
-    await expect(server.getCvUrl.handler()).rejects.toThrow('Network error')
+    await expect(callHandler()).rejects.toThrow(ActionError)
+    await expect(callHandler()).rejects.toThrow('Network error')
   })
 
   it('should throw ActionError when getCvUrl returns success false or empty cvUrl', async () => {
-    getCvUrl.mockResolvedValue({ success: false, error: null, cvUrl: null })
-    await expect(server.getCvUrl.handler()).rejects.toThrow(ActionError)
-    await expect(server.getCvUrl.handler()).rejects.toThrow(
-      'Failed to retrieve CV URL'
-    )
+    mockedGetCvUrl.mockResolvedValue({ success: false })
+    await expect(callHandler()).rejects.toThrow(ActionError)
+    await expect(callHandler()).rejects.toThrow('Failed to retrieve CV URL')
   })
 })
