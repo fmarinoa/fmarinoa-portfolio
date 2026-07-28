@@ -11,16 +11,20 @@ const { message = '', state = 'success' } = Astro.props
 
 <div
   id="alert"
-  class={`hidden fixed top-16 right-4 px-4 py-2 rounded shadow-md duration-300 transition-all text-white ${state}`}
+  class={`hidden fixed top-16 right-4 px-4 py-2 rounded-terminal border shadow-md duration-300 transition-all font-mono text-sm ${state}`}
 >
   {message}
 </div>
 
 <style>
   .success {
-    background-color: var(--color-green-500);
+    background-color: var(--color-pass-dim);
+    border-color: var(--color-pass);
+    color: var(--color-pass);
   }
   .failed {
-    background-color: var(--color-red-500);
+    background-color: var(--color-fail-dim);
+    border-color: var(--color-fail);
+    color: var(--color-fail);
   }
 </style>

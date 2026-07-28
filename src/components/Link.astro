@@ -11,14 +11,7 @@ const { href, className } = Astro.props
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class={`text-blue-400 transition-colors ${className}`}
+  class={`text-accent underline-offset-4 hover:underline hover:text-accent-hover transition-colors ${className}`}
 >
   <slot />
 </a>
-
-<style>
-  a:hover {
-    --tw-text-opacity: 1;
-    color: rgb(129 140 248 / var(--tw-text-opacity, 1));
-  }
-</style>

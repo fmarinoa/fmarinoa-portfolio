@@ -1,0 +1,27 @@
+---
+interface Props {
+  status: 'passed' | 'running' | 'warn' | 'fail'
+  label?: string
+  class?: string
+}
+
+const defaults: Record<Props['status'], string> = {
+  passed: 'PASSED',
+  running: 'RUNNING',
+  warn: 'WARN',
+  fail: 'FAIL',
+}
+
+const { status, label, class: className } = Astro.props
+---
+
+<span
+  class:list={[
+    'status-badge',
+    `status-${status}`,
+    'font-mono text-[11px] tracking-wide uppercase px-2 py-0.5 rounded-full border inline-flex items-center gap-1.5',
+    className,
+  ]}
+>
+  <span class="dot" aria-hidden="true"></span>{label ?? defaults[status]}
+</span>

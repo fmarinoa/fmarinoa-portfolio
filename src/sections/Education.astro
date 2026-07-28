@@ -7,6 +7,9 @@ import type { Career, Course } from '@/types'
 
 const careers = await getCareers()
 const courses = await getCourses()
+const currentYear = new Date().getFullYear()
+const isCareerRunning = (career: Career) =>
+  !career.period.end || Number(career.period.end) >= currentYear
 ---
 
 <Section sectionId="education" title="Educación">
@@ -21,12 +24,17 @@ const courses = await getCourses()
           location={career.location}
           period={`${career.period.start} - ${career.period.end ?? 'Presente'}`}
           details={career.details}
+          status={isCareerRunning(career) ? 'running' : 'passed'}
         />
       ))
     }
   </div>
 
-  <h3 class="text-lg font-bold mt-6 mb-2">Algunas certificaciones:</h3>
+  <h3
+    class="text-lg font-bold mt-6 mb-2 font-mono text-sm text-dim uppercase tracking-wide"
+  >
+    Algunas certificaciones:
+  </h3>
   <ul class="pl-2">
     {
       courses.map((course: Course) => (
@@ -40,8 +48,8 @@ const courses = await getCourses()
             </Link>
           </span>
           <br />
-          <span class="text-gray-300">{course.institution}</span>
-          <span class="text-gray-400">({course.year})</span>
+          <span class="text-muted">{course.institution}</span>{' '}
+          <span class="text-dim">({course.year})</span>
         </li>
       ))
     }

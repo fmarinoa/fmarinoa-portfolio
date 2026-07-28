@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import Link from './Link.astro'
+import StatusBadge from './StatusBadge.astro'
 
 interface Props {
   readonly title: string
@@ -11,19 +12,35 @@ interface Props {
   readonly details: string[]
   readonly logo?: string
   readonly logoAlt?: string
+  readonly status?: 'passed' | 'running'
 }
 
-const { title, entity, linkEntity, location, period, details, logo, logoAlt } =
-  Astro.props
+const {
+  title,
+  entity,
+  linkEntity,
+  location,
+  period,
+  details,
+  logo,
+  logoAlt,
+  status,
+} = Astro.props
 ---
 
 <article
-  class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl shadow-xl border border-gray-700
-              hover:border-indigo-400 hover:shadow-2xl transition-all duration-300 flex flex-col gap-2 group"
+  class="relative bg-surface p-6 rounded-terminal border border-border hover:border-accent hover-glow transition-all duration-300 flex flex-col gap-2 group"
 >
   {
+    status && (
+      <div class="absolute top-4 right-4">
+        <StatusBadge status={status} />
+      </div>
+    )
+  }
+  {
     logo ? (
-      <div class="grid grid-cols-[auto_1fr] gap-4 items-center">
+      <div class="grid grid-cols-[auto_1fr] gap-4 items-center pr-20">
         <div class="flex-shrink-0">
           <Image
             src={logo}
@@ -34,62 +51,51 @@ const { title, entity, linkEntity, location, period, details, logo, logoAlt } =
           />
         </div>
         <div>
-          <h3 class="text-xl font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
+          <h3 class="text-xl font-bold text-foreground tracking-tight group-hover:text-accent transition-colors">
             {title}
           </h3>
-          <div class="text-sm text-gray-300">
-            <div class="flex items-center gap-2">
-              🏢
+          <div class="text-sm text-muted font-mono">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-dim">&gt;</span>
               {linkEntity ? (
                 <Link href={linkEntity}>{entity}</Link>
               ) : (
-                <span class="text-sm font-semibold text-gray-100">
-                  {entity}
-                </span>
+                <span class="font-semibold text-foreground">{entity}</span>
               )}
-              <span class="text-gray-500">|</span> 📍 {location}
+              <span class="text-dim">|</span>
+              <span class="text-dim">&gt;</span> {location}
             </div>
-            <p>📅 {period}</p>
+            <p>
+              <span class="text-dim">&gt;</span> {period}
+            </p>
           </div>
         </div>
       </div>
     ) : (
-      <div>
-        <h3 class="text-xl font-bold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
+      <div class="pr-20">
+        <h3 class="text-xl font-bold text-foreground tracking-tight group-hover:text-accent transition-colors">
           {title}
         </h3>
-        <div class="text-sm text-gray-300">
-          <div class="flex items-center gap-2">
-            🏢
+        <div class="text-sm text-muted font-mono">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-dim">&gt;</span>
             {linkEntity ? (
               <Link href={linkEntity}>{entity}</Link>
             ) : (
-              <span class="text-sm font-semibold text-gray-100">{entity}</span>
+              <span class="font-semibold text-foreground">{entity}</span>
             )}
-            <span class="text-gray-500">|</span> 📍 {location}
+            <span class="text-dim">|</span>
+            <span class="text-dim">&gt;</span> {location}
           </div>
-          <p>📅 {period}</p>
+          <p>
+            <span class="text-dim">&gt;</span> {period}
+          </p>
         </div>
       </div>
     )
   }
 
-  <ul class="list-disc pl-5 text-gray-200 space-y-1 marker:text-indigo-400">
+  <ul class="list-disc pl-5 text-foreground/90 space-y-1 marker:text-accent">
     {details.map(item => <li class="leading-relaxed">{item}</li>)}
   </ul>
 </article>
-
-<style>
-  article {
-    border-color: rgb(55, 65, 81);
-  }
-
-  article:hover {
-    border-color: rgb(129, 140, 248);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  }
-
-  article:hover h3 {
-    color: rgb(129, 140, 248);
-  }
-</style>
