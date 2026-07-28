@@ -1,6 +1,5 @@
-import { defineAction } from 'astro:actions'
+import { ActionError, defineAction } from 'astro:actions'
 import { getCvUrl } from '@/services/getCvUrl'
-import { ActionError } from 'astro/actions/runtime/virtual/shared.js'
 
 export const server = {
   getCvUrl: defineAction({

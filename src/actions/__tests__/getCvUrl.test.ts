@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { server } from '../index'
-import { ActionError } from 'astro/actions/runtime/virtual/shared.js'
+import { ActionError } from 'astro:actions'
 import { getCvUrl } from '@/services/getCvUrl'
 
 // Mock astro:actions
