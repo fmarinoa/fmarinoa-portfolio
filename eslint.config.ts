@@ -40,6 +40,6 @@ export default [
 
   // Ignores
   {
-    ignores: ['dist/**/*', '.astro/**/*', 'node_modules/**/*', '.vercel/**/*'],
+    ignores: ['dist/**/*', '.astro/**/*', 'node_modules/**/*'],
   },
 ]

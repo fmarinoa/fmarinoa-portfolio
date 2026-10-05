@@ -1,4 +1,5 @@
 # Ignore artifacts:
+.agents
 build
 coverage
 node_modules
