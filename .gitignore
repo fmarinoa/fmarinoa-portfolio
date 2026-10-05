@@ -37,8 +37,8 @@ yarn-error.log*
 .env.test
 .env.production
 
-# vercel
-.vercel
+# cloudflare
+.wrangler
 
 # typescript
 *.tsbuildinfo

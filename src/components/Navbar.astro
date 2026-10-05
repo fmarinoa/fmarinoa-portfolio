@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets'
 import DownloadIcon from '@/assets/icons/download.svg'
 import CvModal from '@/components/CvModal.astro'
 
@@ -29,8 +28,8 @@ const navItems: NavItem[] = [
         class="flex items-center gap-2 px-3 py-1 bg-accent hover:bg-accent-hover text-background rounded-terminal transition-colors duration-200 hover:cursor-pointer font-mono text-sm"
         title="Download CV"
       >
-        <Image
-          src={DownloadIcon}
+        <img
+          src={DownloadIcon.src}
           alt="Download CV"
           class="h-5 w-5 select-none"
         />

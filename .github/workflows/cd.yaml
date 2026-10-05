@@ -5,11 +5,12 @@ on:
     branches: [master]
 
 jobs:
-  deploy-vercel:
+  deploy-cloudflare:
     runs-on: ubuntu-latest
 
     env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       NODE_ENV: production
       CONTENT_BASE_URL: ${{ secrets.CONTENT_BASE_URL }}
 
@@ -60,8 +61,8 @@ jobs:
       - name: Build Astro
         run: pnpm run build
 
-      - name: Deploy to Vercel
-        run: pnpx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN --yes
+      - name: Deploy to Cloudflare
+        run: pnpm wrangler deploy
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
