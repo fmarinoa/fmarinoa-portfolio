@@ -62,12 +62,12 @@
   },
   {
     "title": "Portfolio Personal",
-    "description": "Portafolio web personal con animaciones fluidas y diseño responsivo, desplegado en Vercel y optimizado en SEO y rendimiento. Incluye pruebas automatizadas visibles y documentación desde el footer. Tres worflows: entorno de preview por PR, validación de código con resultados de tests por push a master, y despliegue a producción solo si las validaciones son exitosas.",
+    "description": "Portafolio web personal con animaciones fluidas y diseño responsivo, desplegado en Cloudflare y optimizado en SEO y rendimiento. Incluye pruebas automatizadas visibles y documentación desde el footer. Tres worflows: entorno de preview por PR, validación de código con resultados de tests por push a master, y despliegue a producción solo si las validaciones son exitosas.",
     "technologies": [
       "Astro",
       "TypeScript",
       "TailwindCSS",
-      "Vercel",
+      "Cloudflare",
       "Playwright",
       "ESLint",
       "Prettier",
