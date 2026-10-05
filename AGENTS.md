@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Single-page personal portfolio (Franco Mariño) built with Astro, TypeScript and Tailwind CSS v4, deployed to Vercel with SSR (`output: 'server'`, `@astrojs/vercel` adapter).
+Single-page personal portfolio (Franco Mariño) built with Astro, TypeScript and Tailwind CSS v4, deployed to Cloudflare Workers with SSR (`output: 'server'`, `@astrojs/cloudflare` adapter, config in `wrangler.jsonc`). `<Image>` is optimized by the Cloudflare Images binding (`IMAGES`), which does not support SVG output: render local SVGs with a plain `<img src={Icon.src}>`.
 
 ## Commands
 
@@ -58,9 +58,9 @@ Vitest with `environment: 'node'`. Tests live in `__tests__` folders next to the
 This repo's GitHub Actions (`.github/workflows/ci.yaml`, `cd.yaml`) reference multiple long-lived branches beyond `master`/`develop`:
 
 - `content` — the external content data consumed via `CONTENT_BASE_URL`.
-- `test` — holds Playwright end-to-end tests, run against the freshly deployed Vercel preview URL in the `execute-test` CI job (separate from the Vitest unit tests in this branch's `src/`).
+- `test` — holds Playwright end-to-end tests, run against the freshly uploaded Cloudflare preview URL (`wrangler versions upload --preview-alias pr-<n>`) in the `execute-test` CI job (separate from the Vitest unit tests in this branch's `src/`).
 
-Vercel auto-deployment is disabled for `master`, `content`, `development`, and `test` branches in `vercel.json`; deploys happen explicitly through the CI/CD workflows instead.
+Deploys happen only through the CI/CD workflows (`wrangler deploy` on push to `master`), which need the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets.
 
 ### Commits
 

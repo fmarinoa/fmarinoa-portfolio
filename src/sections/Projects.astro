@@ -75,12 +75,11 @@ const projects = await getProjects()
                 )}
                 {project.urls.github && (
                   <Link href={project.urls.github} className={styleLink}>
-                    <Image
-                      src={GithubIcon}
+                    <img
+                      src={GithubIcon.src}
                       alt="GitHub"
                       width={48}
                       height={48}
-                      format="svg"
                       class="size-5 select-none invert"
                     />
                     Código
