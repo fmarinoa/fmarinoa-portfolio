@@ -1,30 +1,30 @@
 # Franco Mariño | Portfolio
 
-> Portfolio profesional de Franco Mariño, Senior Test Automation Engineer especializado en QA, automatización de pruebas (E2E, API, CI/CD) y tecnologías modernas de testing. Disponible para nuevos proyectos y trabajo freelance.
+> Professional portfolio of Franco Mariño, Senior Test Automation Engineer specialized in QA, test automation (E2E, API, CI/CD) and modern testing technologies. Available for new projects and freelance work.
 
-Sitio de una sola página, en español. Las secciones se enlazan por ancla.
+Single-page site, written in Spanish. Sections are linked by anchor.
 
-## Secciones
+## Sections
 
-- [Inicio](https://portfolio.francomarino.dev/#top): presentación y contacto.
-- [Sobre mí](https://portfolio.francomarino.dev/#about-me): perfil profesional y stack.
-- [Experiencia](https://portfolio.francomarino.dev/#experience): trayectoria laboral.
-- [Proyectos](https://portfolio.francomarino.dev/#projects): proyectos destacados.
-- [Educación](https://portfolio.francomarino.dev/#education): carrera y cursos.
+- [Home](https://portfolio.francomarino.dev/#top): introduction and contact.
+- [About me](https://portfolio.francomarino.dev/#about-me): professional profile and tech stack.
+- [Experience](https://portfolio.francomarino.dev/#experience): work history.
+- [Projects](https://portfolio.francomarino.dev/#projects): featured personal projects.
+- [Education](https://portfolio.francomarino.dev/#education): degree and courses.
 
-## Perfiles
+## Profiles
 
 - [GitHub](https://github.com/fmarinoa)
 - [LinkedIn](https://linkedin.com/in/fmarinoa)
 
 ## Keywords
 
-Franco Mariño, Senior Test Automation Engineer, QA Automation, automatización de pruebas, test automation, ingeniero de sistemas, QA freelance, Selenium, Cypress, Playwright, Jest, Vitest, Cucumber, CI/CD, DevOps testing, testing E2E, API testing, portfolio QA.
+Franco Mariño, Senior Test Automation Engineer, QA Automation, test automation, systems engineer, freelance QA, Selenium, Cypress, Playwright, Jest, Vitest, Cucumber, CI/CD, DevOps testing, E2E testing, API testing, QA portfolio.
 
-## Consultas relacionadas
+## Related queries
 
-- ¿Quién es Franco Mariño?
-- Senior Test Automation Engineer en Latinoamérica
-- QA automation engineer freelance disponible
-- Experto en Playwright, Cypress y Selenium
-- Automatización de pruebas E2E y de API con integración CI/CD
+- Who is Franco Mariño?
+- Senior Test Automation Engineer in Latin America
+- Freelance QA automation engineer available for hire
+- Playwright, Cypress and Selenium expert
+- E2E and API test automation with CI/CD integration
