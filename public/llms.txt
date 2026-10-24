@@ -1,0 +1,30 @@
+# Franco Mariño | Portfolio
+
+> Professional portfolio of Franco Mariño, Senior Test Automation Engineer specialized in QA, test automation (E2E, API, CI/CD) and modern testing technologies. Available for new projects and freelance work.
+
+Single-page site, written in Spanish. Sections are linked by anchor.
+
+## Sections
+
+- [Home](https://portfolio.francomarino.dev/#top): introduction and contact.
+- [About me](https://portfolio.francomarino.dev/#about-me): professional profile and tech stack.
+- [Experience](https://portfolio.francomarino.dev/#experience): work history.
+- [Projects](https://portfolio.francomarino.dev/#projects): featured personal projects.
+- [Education](https://portfolio.francomarino.dev/#education): degree and courses.
+
+## Profiles
+
+- [GitHub](https://github.com/fmarinoa)
+- [LinkedIn](https://linkedin.com/in/fmarinoa)
+
+## Keywords
+
+Franco Mariño, Senior Test Automation Engineer, QA Automation, test automation, systems engineer, freelance QA, Selenium, Cypress, Playwright, Jest, Vitest, Cucumber, CI/CD, DevOps testing, E2E testing, API testing, QA portfolio.
+
+## Related queries
+
+- Who is Franco Mariño?
+- Senior Test Automation Engineer in Latin America
+- Freelance QA automation engineer available for hire
+- Playwright, Cypress and Selenium expert
+- E2E and API test automation with CI/CD integration
