@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# Crawlers de IA / LLM
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://portfolio.francomarino.dev/sitemap-index.xml
+# LLMs: https://portfolio.francomarino.dev/llms.txt
